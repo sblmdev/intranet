@@ -6,11 +6,13 @@ import { AssistsComponent } from './pages/assists/assists.component';
 import { EvaluationsComponent } from './pages/evaluations/evaluations.component';
 import { QuestionnaireComponent } from './pages/questionnaire/questionnaire.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
+import { NewsRegisterComponent } from './pages/news-register/news-register.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'news', component: NewsComponent },
   { path: 'news-detail', component: NewsDetailComponent },
+  { path: 'news-register', component: NewsRegisterComponent },
   { path: 'assists', component: AssistsComponent },
   { path: 'evaluations', component: EvaluationsComponent },
   { path: 'questionnaire', component: QuestionnaireComponent}

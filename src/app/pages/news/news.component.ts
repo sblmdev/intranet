@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,4 +9,11 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class NewsComponent {
   faChevronDown = faChevronDown;
+
+  constructor(private router: Router) {
+  }
+
+  goToNewsDetail(){
+    this.router.navigate(['/', 'news-detail'])
+  }
 }
