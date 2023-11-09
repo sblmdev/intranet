@@ -14,6 +14,7 @@ import { NewsRegisterComponent } from './pages/news-register/news-register.compo
 import { HeaderComponent } from './pages/all-components/header/header.component';
 import { NavbarComponent } from './pages/all-components/navbar/navbar.component';
 import { FooterComponent } from './pages/all-components/footer/footer.component';
+import { SidebarComponent } from './pages/all-components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FooterComponent } from './pages/all-components/footer/footer.component'
     NewsRegisterComponent,
     HeaderComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

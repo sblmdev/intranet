@@ -1,13 +1,16 @@
 <div class="w-full bg-indigo-900">
     <div class="flex items-center mx-20 py-4">
         <a class="cursor-pointer font-semibold" (click)="goToNews()">
-            <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4">Noticias</h1>
+            <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4" 
+            [class.decoration-red-500]="ruta==1">Noticias</h1>
         </a>
         <a class="cursor-pointer font-semibold ml-8" (click)="goToAssists()">
-            <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4">Asistencias</h1>
+            <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4" 
+            [class.decoration-red-500]="ruta==2">Asistencias</h1>
         </a>
         <a class="cursor-pointer font-semibold ml-8" (click)="goToEvaluations()">
-            <h1 class="font-montserrat text-white underline decoration-red-500 underline-offset-8 decoration-4">Evaluaciones</h1>
+            <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4" 
+            [class.decoration-red-500]="ruta==3">Evaluaciones</h1>
         </a>
     </div>
 </div>
