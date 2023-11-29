@@ -23,4 +23,8 @@ export class NavbarComponent {
     this.ruta = 3;
     this.router.navigate(['/', 'evaluations']);
   }
+  goToGraveyards() {
+    this.ruta = 4;
+    this.router.navigate(['/', 'graveyards']);
+  }
 }
