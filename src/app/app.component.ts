@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'intranet';
+  title: string = 'intranet';
+  isLoggedIn: boolean = false;
+
+  ngOnInit(){
+    let token = sessionStorage.getItem("Token");
+    if(token != null && token != undefined ){
+      this.isLoggedIn = true;
+    }
+  }
 }
