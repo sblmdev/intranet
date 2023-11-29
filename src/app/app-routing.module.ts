@@ -7,6 +7,11 @@ import { EvaluationsComponent } from './pages/evaluations/evaluations.component'
 import { QuestionnaireComponent } from './pages/questionnaire/questionnaire.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { NewsRegisterComponent } from './pages/news-register/news-register.component';
+import { GraveyardsComponent } from './pages/graveyards/graveyards/graveyards.component';
+import { ReservationsComponent } from './pages/graveyards/reservations/reservations.component';
+import { BurialsComponent } from './pages/graveyards/burials/burials.component';
+import { TreasuryComponent } from './pages/graveyards/treasury/treasury.component';
+import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -15,7 +20,12 @@ const routes: Routes = [
   { path: 'news-register', component: NewsRegisterComponent },
   { path: 'assists', component: AssistsComponent },
   { path: 'evaluations', component: EvaluationsComponent },
-  { path: 'questionnaire', component: QuestionnaireComponent}
+  { path: 'questionnaire', component: QuestionnaireComponent},
+  { path: 'graveyards', component: GraveyardsComponent},
+  { path: 'reservations', component: ReservationsComponent},
+  { path: 'burials', component: BurialsComponent},
+  { path: 'treasury', component: TreasuryComponent},
+  { path: 'transfers', component: TransfersComponent},
 ];
 
 @NgModule({

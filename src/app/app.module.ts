@@ -15,6 +15,11 @@ import { HeaderComponent } from './pages/all-components/header/header.component'
 import { NavbarComponent } from './pages/all-components/navbar/navbar.component';
 import { FooterComponent } from './pages/all-components/footer/footer.component';
 import { SidebarComponent } from './pages/all-components/sidebar/sidebar.component';
+import { GraveyardsComponent } from './pages/graveyards/graveyards/graveyards.component';
+import { ReservationsComponent } from './pages/graveyards/reservations/reservations.component';
+import { BurialsComponent } from './pages/graveyards/burials/burials.component';
+import { TreasuryComponent } from './pages/graveyards/treasury/treasury.component';
+import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,12 @@ import { SidebarComponent } from './pages/all-components/sidebar/sidebar.compone
     HeaderComponent,
     NavbarComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    GraveyardsComponent,
+    ReservationsComponent,
+    BurialsComponent,
+    TreasuryComponent,
+    TransfersComponent
   ],
   imports: [
     BrowserModule,
