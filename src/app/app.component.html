@@ -1,13 +1,13 @@
 <div *ngIf="isLoggedIn; else loggedOut">
     <app-header></app-header>
-    <app-navbar></app-navbar>
+    <div *ngIf="!mostrarNavbar()"><app-navbar></app-navbar></div>
     <div class="w-full bg-gray-200 py-4 ">
         <div class="mx-20 py-4">
             <div class="grid grid-cols-12">
                 <div class="col-span-9">
                     <router-outlet></router-outlet>
                 </div>
-                <div class="col-span-3">
+                <div class="col-span-3" *ngIf="!mostrarSidebar()">
                     <app-sidebar></app-sidebar>
                 </div>
             </div>

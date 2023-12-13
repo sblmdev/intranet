@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -10,6 +10,7 @@ export class SidebarComponent {
   visionFlag: boolean = false;
   orgFlag: boolean = false;
   valoresFlag: boolean = false;
+  constructor(private router: Router) {}
 
   fullscreen = false;
   toggleMision(): boolean{
@@ -29,5 +30,9 @@ export class SidebarComponent {
   toggleValores(): boolean{
     this.valoresFlag=!this.valoresFlag
   return this.valoresFlag
+  }
+
+  abrirPublicaciones():void{
+    this.router.navigate(['/publication']);
   }
 }

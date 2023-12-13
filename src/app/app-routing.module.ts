@@ -11,10 +11,11 @@ import { ReservationsComponent } from './pages/graveyards/reservations/reservati
 import { BurialsComponent } from './pages/graveyards/burials/burials.component';
 import { TreasuryComponent } from './pages/graveyards/treasury/treasury.component';
 import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
-
+import { PublicationComponent } from './pages/publication/publication.component';
 const routes: Routes = [
   { path: '', component: NewsComponent },
   { path: 'news', component: NewsComponent },
+  { path: 'publication', component: PublicationComponent },
   { path: 'news-detail', component: NewsDetailComponent },
   { path: 'news-register', component: NewsRegisterComponent },
   { path: 'assists', component: AssistsComponent },

@@ -22,7 +22,7 @@ import { ReservationsComponent } from './pages/graveyards/reservations/reservati
 import { BurialsComponent } from './pages/graveyards/burials/burials.component';
 import { TreasuryComponent } from './pages/graveyards/treasury/treasury.component';
 import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
-
+import { PublicationComponent } from './pages/publication/publication.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +41,8 @@ import { TransfersComponent } from './pages/graveyards/transfers/transfers.compo
     ReservationsComponent,
     BurialsComponent,
     TreasuryComponent,
-    TransfersComponent
+    TransfersComponent,
+    PublicationComponent
   ],
   imports: [
     BrowserModule,
