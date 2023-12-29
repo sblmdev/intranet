@@ -53,6 +53,12 @@ export class PublicationComponent {
     return this.nuevoFlag
   }
 
+  closetoggleNuevo(): boolean{
+    this.nuevoFlag=!this.nuevoFlag
+    //this.cdRef.detectChanges();
+    return this.nuevoFlag
+  }
+
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
 

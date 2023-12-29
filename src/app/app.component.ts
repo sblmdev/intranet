@@ -9,14 +9,12 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent {
   title: string = 'intranet';
   isLoggedIn: boolean = false;
+  show = true;
+
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        // Lógica para determinar si mostrar el sidebar según la ruta actual
-        // Puedes ajustar esta lógica según tus necesidades
-        // Aquí estoy usando una ruta de ejemplo ("/dashboard") como condición
-        this.mostrarSidebar();
-        this.mostrarNavbar();
+        this.mostrar();
       }
     });
   }
@@ -26,10 +24,7 @@ export class AppComponent {
       this.isLoggedIn = true;
     }
   }
-  mostrarSidebar():boolean{
-    return this.isLoggedIn && this.router.url === '/publication';
-  }
-  mostrarNavbar():boolean{
-    return this.isLoggedIn && this.router.url === '/publication';
+  mostrar(){
+    this.show = !(this.isLoggedIn && this.router.url == '/publication');
   }
 }
