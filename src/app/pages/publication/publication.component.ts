@@ -16,7 +16,7 @@ export class PublicationComponent {
   }
 
   ngOnInit() {
-    this.publicationService.getAllPublications().subscribe({
+    this.publicationService.getPublications().subscribe({
       next: (data) => {
         this.publications = data;
         console.log(this.publications);

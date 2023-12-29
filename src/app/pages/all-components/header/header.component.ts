@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(private router: Router) {}
+
+  cerrarSesion() {
+    this.router.navigate(['/']);
+
+    setTimeout(() => {
+      sessionStorage.setItem("Token", "");
+      window.location.reload();
+    }, 1000);
+  }
 }

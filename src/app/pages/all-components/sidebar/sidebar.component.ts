@@ -35,4 +35,8 @@ export class SidebarComponent {
   abrirPublicaciones():void{
     this.router.navigate(['/publication']);
   }
+
+  goDocuments(title: string) {
+    this.router.navigate(['/documents/'+title]);
+  }
 }

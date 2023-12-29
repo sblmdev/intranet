@@ -5,5 +5,6 @@ export class Publication {
     titulo?: string;
     contenido?: string;
     fechaPublicacion?: string;
+    fechaEvento?: string;
     urlImagen?: string;
 }

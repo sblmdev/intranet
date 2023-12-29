@@ -10,6 +10,8 @@ import { BurialsComponent } from './pages/graveyards/burials/burials.component';
 import { TreasuryComponent } from './pages/graveyards/treasury/treasury.component';
 import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
 import { PublicationComponent } from './pages/publication/publication.component';
+import { DocumentsComponent } from './pages/documents/documents.component';
+
 const routes: Routes = [
   { path: '', component: NewsComponent },
   { path: 'news', component: NewsComponent },
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'burials', component: BurialsComponent},
   { path: 'treasury', component: TreasuryComponent},
   { path: 'transfers', component: TransfersComponent},
+  { path: 'documents/:id', component: DocumentsComponent},
 ];
 
 @NgModule({

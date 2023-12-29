@@ -21,6 +21,7 @@ import { BurialsComponent } from './pages/graveyards/burials/burials.component';
 import { TreasuryComponent } from './pages/graveyards/treasury/treasury.component';
 import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
 import { PublicationComponent } from './pages/publication/publication.component';
+import { DocumentsComponent } from './pages/documents/documents.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { PublicationComponent } from './pages/publication/publication.component'
     BurialsComponent,
     TreasuryComponent,
     TransfersComponent,
-    PublicationComponent
+    PublicationComponent,
+    DocumentsComponent
   ],
   imports: [
     BrowserModule,

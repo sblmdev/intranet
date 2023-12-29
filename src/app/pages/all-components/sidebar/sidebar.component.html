@@ -7,7 +7,7 @@
         <ul class="px-4 py-2 list-disc list-inside">
             <li class="font-montserrat cursor-pointer" (click)="toggleMision()">Misión</li>
             <li class="font-montserrat cursor-pointer" (click)="toggleVision()">Visión</li>
-            <li class="font-montserrat cursor-pointer" (click)="toggleValores()">Valores institucionales</li>
+            <!--<li class="font-montserrat cursor-pointer" (click)="toggleValores()">Valores institucionales</li>-->
             <li><a class="font-montserrat cursor-pointer" href="
             http://192.168.1.204:5051/images/organigrama/organigrama.jpg" target="_blank">Organigrama</a> </li>
         </ul>
@@ -19,11 +19,11 @@
         <ul class="px-4 py-2 list-disc list-inside">
             <li class="font-montserrat cursor-pointer">R.O.F.</li>
             <li class="font-montserrat cursor-pointer">M.O.F.</li>
-            <li class="font-montserrat cursor-pointer">Leyes</li>
-            <li class="font-montserrat cursor-pointer">Resoluciones</li>
-            <li class="font-montserrat cursor-pointer">Reglamentos</li>
-            <li class="font-montserrat cursor-pointer">Directivas</li>
-            <li class="font-montserrat cursor-pointer">Acuerdos</li>
+            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Leyes')">Leyes</li>
+            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Resoluciones')">Resoluciones</li>
+            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Reglamentos')">Reglamentos</li>
+            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Directivas')">Directivas</li>
+            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Acuerdos')">Acuerdos</li>
         </ul>
     </div>
 
@@ -40,9 +40,6 @@
         </div>
         <ul class="px-4 py-2 list-disc list-inside">
             <li class="font-montserrat cursor-pointer"(click)="abrirPublicaciones()" >Publicaciones</li>
-        </ul>
-
-        <ul class="px-4 py-2 list-disc list-inside">
             <li class="font-montserrat cursor-pointer">Cementerios</li>
         </ul>
     </div>
@@ -86,18 +83,6 @@
         </div>
     </div>
 
-    <div class="w-80 mx-auto mt-5 p-7">
-        <p class="text-2xl font-medium text-gray-800">
-            Click here to open to the modal
-        </p>
-        <button
-            class="bg-green-500 text-white rounded-md px-8 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-            id="open-btn"
-        >
-            Open Modal
-        </button>
-    </div>
-
     <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="my-modal"></div>
 <!-- MODALES -->
 <div *ngIf="misionFlag" class="modal fixed inset-0 flex items-center justify-center">
@@ -128,7 +113,6 @@
         </div>
     </div>
 </div>
- CABEZA CLAVA
 
 <div *ngIf="valoresFlag" class="modal fixed inset-0 flex items-center justify-center">
     <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
