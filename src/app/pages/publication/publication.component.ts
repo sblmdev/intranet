@@ -78,7 +78,7 @@ export class PublicationComponent {
           });
         },
         error: (error1) => {
-          this.publicacion.urlDocumento = error1.error.text;
+          this.publicacion.urlDocumento = "\\192.168.1.6" + error1.error.text;
           this.publicationService.createPublication(this.publicacion).subscribe({
             next: (data2) => {
               console.log(data2);
