@@ -8,7 +8,7 @@ import { AssistTime } from '../models/assistantTime';
 })
 export class AssistsService {
 
-  private baseUrl = 'http://localhost:8088/api'; // Reemplaza con la URL de tu backend
+  private baseUrl = 'http://192.168.1.6:8088/api'; // Reemplaza con la URL de tu backend
 
   constructor(private http: HttpClient) { }
 
