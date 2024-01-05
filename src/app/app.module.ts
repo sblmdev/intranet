@@ -22,6 +22,8 @@ import { TreasuryComponent } from './pages/graveyards/treasury/treasury.componen
 import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
 import { PublicationComponent } from './pages/publication/publication.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
+import { DateFormatPipe } from './pipes/date-format.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { DocumentsComponent } from './pages/documents/documents.component';
     TreasuryComponent,
     TransfersComponent,
     PublicationComponent,
-    DocumentsComponent
+    DocumentsComponent,
+    DateFormatPipe,
   ],
   imports: [
     BrowserModule,

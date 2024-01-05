@@ -4,106 +4,53 @@
         <table class="w-full table-auto font-montserrat border mt-4">
             <thead class="text-center">
                 <tr>
-                    <th>Día</th>
+                    <!-- <th>Día</th> -->
                     <th>H. Ingreso</th>
                     <th>H. Salida</th>
-                    <th>Min. Tarde</th>
+                    <!-- <th>Min. Tarde</th>
                     <th>Permisos</th>
                     <th>Detalle</th>
-                    <th>Deducción</th>
+                    <th>Deducción</th> -->
                 </tr>
             </thead>
             <tbody class="text-center">
-                <tr class="even:bg-amber-100 odd:bg-blue-100">
-                    <td>Vie1</td>
-                    <td>8:15AM</td>
-                    <td>5:15AM</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>CSERV [8:15AM-5:15AM]</td>
-                    <td>0.00</td>
+                <tr *ngFor="let assistant of assistans" class="even:bg-amber-100 odd:bg-blue-100">
+                    <!-- <td>{{ assistant.day }}</td> -->
+                    <td>{{ assistant.dhoraingre | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td>{{ assistant.dfechaingre | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <!-- <td>{{ assistant.lateMinutes }}</td>
+                    <td>{{ assistant.permits }}</td>
+                    <td>{{ assistant.detail }}</td>
+                    <td>{{ assistant.deduction }}</td> -->
                 </tr>
-                <tr class="even:bg-amber-100 odd:bg-blue-100">
-                    <td>Vie1</td>
-                    <td>8:15AM</td>
-                    <td>5:15AM</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>CSERV [8:15AM-5:15AM]</td>
-                    <td>0.00</td>
-                </tr>
-                <tr class="even:bg-amber-100 odd:bg-blue-100">
-                    <td>Vie1</td>
-                    <td>8:15AM</td>
-                    <td>5:15AM</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>CSERV [8:15AM-5:15AM]</td>
-                    <td>0.00</td>
-                </tr>
-                <tr class="even:bg-amber-100 odd:bg-blue-100">
-                    <td>Vie1</td>
-                    <td>8:15AM</td>
-                    <td>5:15AM</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>CSERV [8:15AM-5:15AM]</td>
-                    <td>0.00</td>
-                </tr>
-                <tr class="even:bg-amber-100 odd:bg-blue-100">
-                    <td>Vie1</td>
-                    <td>8:15AM</td>
-                    <td>5:15AM</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>CSERV [8:15AM-5:15AM]</td>
-                    <td>0.00</td>
-                </tr>
-                <tr class="even:bg-amber-100 odd:bg-blue-100">
-                    <td>Vie1</td>
-                    <td>8:15AM</td>
-                    <td>5:15AM</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>CSERV [8:15AM-5:15AM]</td>
-                    <td>0.00</td>
-                </tr>
-                <tr class="even:bg-amber-100 odd:bg-blue-100">
-                    <td>Vie1</td>
-                    <td>8:15AM</td>
-                    <td>5:15AM</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>CSERV [8:15AM-5:15AM]</td>
-                    <td>0.00</td>
-                </tr>
+                
             </tbody>
         </table>
-        <table class="w-5/12 table-auto mt-12 ml-auto">
+        <!-- <table class="w-5/12 table-auto mt-12 ml-auto">
             <tr>
                 <td class="font-montserrat font-bold w-8/12">
                     <h1 class="text-right">Tardanzas (min.):</h1>
                 </td>
-                <td class="font-montserrat text-center">0</td>
+                <td class="font-montserrat text-center">{{ calculateTotal('lateMinutes') }}</td>
             </tr>
             <tr>
                 <td class="font-montserrat font-bold w-8/12">
                     <h1 class="text-right">Faltas:</h1>
                 </td>
-                <td class="font-montserrat text-center">0</td>
+                <td class="font-montserrat text-center">{{ calculateTotal('absences') }}</td>
             </tr>
             <tr>
                 <td class="font-montserrat font-bold w-8/12">
                     <h1 class="text-right">Permisos (min):</h1>
                 </td>
-                <td class="font-montserrat text-center">0</td>
+                <td class="font-montserrat text-center">{{ calculateTotal('permits') }}</td>
             </tr>
             <tr>
                 <td class="font-montserrat font-bold w-8/12">
                     <h1 class="text-right">Deducción (S/.):</h1>
                 </td>
-                <td class="font-montserrat text-center">S/.0</td>
+                <td class="font-montserrat text-center">{{ calculateTotal('deduction') }}</td>
             </tr>
-        </table>
+        </table> -->
     </div>
 </div>

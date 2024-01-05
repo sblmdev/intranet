@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Publication } from 'src/app/models/publications';
+import { PublicationService } from 'src/app/services/publicationService';
 
 @Component({
   selector: 'app-documents',
@@ -8,8 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DocumentsComponent {
   id: string;
+  publications: Publication[] = [];
+  publication: Publication =  new Publication();
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router, private publicationService: PublicationService) {
     this.id = '';
    }
 
@@ -18,6 +22,16 @@ export class DocumentsComponent {
     this.route.paramMap.subscribe((params) => {
       this.id = params.get('id') || '';
       console.log('ID actualizado:', this.id);
+      this.publicationService.obtenerPublicacionesPorTipo(this.id).subscribe({
+        next: (data) => {
+          this.publications = data;
+        },
+        error: (_error) => {
+          console.log(_error);
+        }
+      });
     });
   }
+
+  
 }

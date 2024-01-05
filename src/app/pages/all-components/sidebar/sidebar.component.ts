@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { Publication } from 'src/app/models/publications';
+import { PublicationService } from 'src/app/services/publicationService';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -10,7 +12,32 @@ export class SidebarComponent {
   visionFlag: boolean = false;
   orgFlag: boolean = false;
   valoresFlag: boolean = false;
-  constructor(private router: Router) {}
+
+  publicationsManuales: Publication[] =  [];
+  publicationsEventos: Publication[] =  [];
+
+  constructor(private router: Router, private publicationService: PublicationService) {
+  }
+
+  ngOnInit() {
+    this.publicationService.obtenerPublicacionesPorTipo("Manuales").subscribe({
+      next: (data) => {
+        this.publicationsManuales = data;
+      },
+      error: (_error) => {
+        console.log(_error);
+      }
+    });
+
+    this.publicationService.obtenerPublicacionesPorTipo("Eventos").subscribe({
+      next: (data) => {
+        this.publicationsEventos = data;
+      },
+      error: (_error) => {
+        console.log(_error);
+      }
+    });
+  }
 
   fullscreen = false;
   toggleMision(): boolean{
@@ -33,10 +60,12 @@ export class SidebarComponent {
   }
 
   abrirPublicaciones():void{
-    this.router.navigate(['/publication']);
+    const url = '/publication';
+    window.open(url, '_blank');
   }
 
   goDocuments(title: string) {
-    this.router.navigate(['/documents/'+title]);
+    const url = `/documents/${title}`;
+  window.open(url, '_blank');
   }
 }

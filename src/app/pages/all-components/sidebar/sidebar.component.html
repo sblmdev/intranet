@@ -17,8 +17,8 @@
         <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Documentos de trabajo
         </div>
         <ul class="px-4 py-2 list-disc list-inside">
-            <li class="font-montserrat cursor-pointer">R.O.F.</li>
-            <li class="font-montserrat cursor-pointer">M.O.F.</li>
+            <li class="font-montserrat cursor-pointer"><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/ROF.pdf">R.O.F.</a></li>
+            <li class="font-montserrat cursor-pointer"><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/PLAN_12672_MOF_2009.pdf">M.O.F.</a></li>
             <li class="font-montserrat cursor-pointer" (click)="goDocuments('Leyes')">Leyes</li>
             <li class="font-montserrat cursor-pointer" (click)="goDocuments('Resoluciones')">Resoluciones</li>
             <li class="font-montserrat cursor-pointer" (click)="goDocuments('Reglamentos')">Reglamentos</li>
@@ -31,7 +31,7 @@
         <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Manuales y políticas de uso
         </div>
         <ul class="px-4 py-2 list-disc list-inside">
-            <li class="font-montserrat cursor-pointer">Uso de internet</li>
+            <li class="font-montserrat cursor-pointer" *ngFor="let item of publicationsManuales; let i = index">{{item.titulo}}</li>
         </ul>
     </div>
 
@@ -46,40 +46,12 @@
 
     <div class="rounded-md border-2 mt-4">
         <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Próximos eventos</div>
-        <div class="flex items-center p-2 w-full">
+        <div class="flex items-center p-2 w-full" *ngFor="let item of publicationsEventos; let i = index">
             <div class="w-3/10 text-center font-montserrat font-bold bg-red-200 py-1 px-3 rounded-md">
-                <span class="text-md">15</span><br>
-                <span class="text-xs">Nov</span>
+                <span class="text-md">{{item.fechaPublicacion.substring(8,10)}}</span><br>
+                <span class="text-xs">{{item.fechaPublicacion.substring(5,7)}}</span>
             </div>
-            <div class="ml-2 text-xs font-montserrat">Marcha por la constitución política de 1542 contra
-                Gareca</div>
-        </div>
-
-        <div class="flex items-center p-2 w-full">
-            <div class="w-3/10 text-center font-montserrat font-bold bg-red-200 py-1 px-3 rounded-md">
-                <span class="text-md">15</span><br>
-                <span class="text-xs">Nov</span>
-            </div>
-            <div class="ml-2 text-xs font-montserrat">Marcha por la constitución política de 1542 contra
-                Gareca</div>
-        </div>
-
-        <div class="flex items-center p-2 w-full">
-            <div class="w-3/10 text-center font-montserrat font-bold bg-red-200 py-1 px-3 rounded-md">
-                <span class="text-md">15</span><br>
-                <span class="text-xs">Nov</span>
-            </div>
-            <div class="ml-2 text-xs font-montserrat">Marcha por la constitución política de 1542 contra
-                Gareca</div>
-        </div>
-
-        <div class="flex items-center p-2 w-full">
-            <div class="w-3/10 text-center font-montserrat font-bold bg-red-200 py-1 px-3 rounded-md">
-                <span class="text-md">15</span><br>
-                <span class="text-xs">Nov</span>
-            </div>
-            <div class="ml-2 text-xs font-montserrat">Marcha por la constitución política de 1542 contra
-                Gareca</div>
+            <div class="ml-2 text-xs font-montserrat">{{item.titulo}}</div>
         </div>
     </div>
 

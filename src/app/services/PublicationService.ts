@@ -8,38 +8,40 @@ import { Publication } from "../models/publications";
 })
 export class PublicationService {
 
-  private apiUrl = "http://localhost:8080/api/publicaciones";
+  private apiUrl = "http://localhost:8088/api/publicaciones";
 
   constructor(private http: HttpClient) { }
 
-  // Obtener todas las publicaciones
   getPublications(): Observable<Publication[]> {
-    return this.http.get<Publication[]>(`${this.apiUrl}/publications`);
+    return this.http.get<Publication[]>(`${this.apiUrl}`);
   }
 
-  // Obtener todas las publicaciones
+  getPublicationsByGerencia(gerencia: string): Observable<Publication[]> {
+    return this.http.get<Publication[]>(`${this.apiUrl}/all/${gerencia}`);
+  }
+
+  obtenerPublicacionesPorTipo(tipo: string): Observable<Publication[]> {
+    return this.http.get<Publication[]>(`${this.apiUrl}/all/por-tipo/${tipo}`);
+  }
+
   getPublicationsByTypePublication(typePublication: string): Observable<Publication[]> {
-    return this.http.get<Publication[]>(`${this.apiUrl}/publications/${typePublication}`);
+    return this.http.get<Publication[]>(`${this.apiUrl}/${typePublication}`);
   }
 
-  // Obtener una publicación por su ID
   getPublicationById(id: number): Observable<Publication> {
-    return this.http.get<Publication>(`${this.apiUrl}/publications/${id}`);
+    return this.http.get<Publication>(`${this.apiUrl}/${id}`);
   }
 
-  // Crear una nueva publicación
   createPublication(publication: Publication): Observable<Publication> {
-    return this.http.post<Publication>(`${this.apiUrl}/publications`, publication);
+    return this.http.post<Publication>(`${this.apiUrl}`, publication);
   }
 
-  // Actualizar una publicación existente
   updatePublication(id: number, publication: Publication): Observable<Publication> {
-    return this.http.put<Publication>(`${this.apiUrl}/publications/${id}`, publication);
+    return this.http.put<Publication>(`${this.apiUrl}/${id}`, publication);
   }
 
-  // Eliminar una publicación por su ID
   deletePublication(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/publications/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
 }

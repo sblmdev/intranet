@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +8,31 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  nombres: string = '';
+  dependencia: string = '';
+  usuario: Usuario = new Usuario();
 
   constructor(private router: Router) {}
+
+  ngOnInit(){
+    const usuarioString = sessionStorage.getItem("Usuario");
+    if (usuarioString !== null) {
+      try {
+        this.usuario = JSON.parse(usuarioString);
+      } catch (error) {
+        console.error("Error al parsear el objeto Usuario:", error);
+      }
+    } else {
+      console.warn("No se encontró la clave 'Usuario' en sessionStorage.");
+    }
+  }
 
   cerrarSesion() {
     this.router.navigate(['/']);
 
     setTimeout(() => {
       sessionStorage.setItem("Token", "");
+      sessionStorage.setItem("Usuario", "");
       window.location.reload();
     }, 1000);
   }

@@ -1,24 +1,19 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Usuario } from '../models/usuario';
+
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class LoginService {
-
-  private ChuckUrl = "https://api.chucknorris.io/jokes/random";
+  private baseUrl = 'http://localhost:8088/api/usuarios';
 
   constructor(private http: HttpClient) {}
 
-  public getFrase(): Observable<any> {
-    return this.http.get<any>(this.ChuckUrl);
-  }
-
-  public login(username: string, password: string): boolean {
-    if(username == "admin" && password == "admin"){
-      return true;
-    }
-    return false;
+  login(username: string, password: string): Observable<Usuario> {
+    const url = `${this.baseUrl}/buscarPorUsernameYContrasena/${username}/${password}`;
+    return this.http.get<Usuario>(url);
   }
 }

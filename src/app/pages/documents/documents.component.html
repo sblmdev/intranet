@@ -4,27 +4,15 @@
 
     <div class="my-4">
 
-        <!--ESTE ES EL DIV A ITERAR-->
-        <div class="flex items-center cursor-pointer bg-white rounded-md mt-2">
+        <div class="flex items-center cursor-pointer bg-white rounded-md mt-2" *ngFor="let item of publications; let i = index">
             <img src="../../../assets/documents.png"
                 class="h-auto w-20 rounded-l-md">
             <div class="mx-4">
-                <h1 class="text-xs text-gray-600 font-montserrat">26 Set. 2023</h1>
-                <h1 class="text-sm font-semibold font-montserrat mt-1">Título de la noticia</h1>
-                <h1 class="text-xs font-montserrat text-justify mt-1">Lorem Ipsum is simply dummy text of the printing
-                    and typesetting industry. Lorem Ips... </h1>
+                <h1 class="text-xs text-gray-600 font-montserrat">{{item.fechaPublicacion}}</h1>
+                <h1 class="text-sm font-semibold font-montserrat mt-1">{{item.titulo}}</h1>
+                <h1 class="text-xs font-montserrat text-justify mt-1">{{item.contenido}}</h1>
             </div>
         </div>
 
-        <div class="flex items-center cursor-pointer bg-white rounded-md mt-2">
-            <img src="../../../assets/documents.png"
-                class="h-auto w-20 rounded-l-md">
-            <div class="mx-4">
-                <h1 class="text-xs text-gray-600 font-montserrat">26 Set. 2023</h1>
-                <h1 class="text-sm font-semibold font-montserrat mt-1">Título de la noticia</h1>
-                <h1 class="text-xs font-montserrat text-justify mt-1">Lorem Ipsum is simply dummy text of the printing
-                    and typesetting industry. Lorem Ips... </h1>
-            </div>
-        </div>
     </div>
 </div>

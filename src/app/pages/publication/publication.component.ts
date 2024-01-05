@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Publication } from 'src/app/models/publications';
-import { PublicationService } from 'src/app/services/PublicationService';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { PublicationService } from 'src/app/services/publicationService';
+import { Usuario } from 'src/app/models/usuario';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-publication',
@@ -10,13 +11,16 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./publication.component.css']
 })
 export class PublicationComponent {
+[x: string]: any;
   nuevoFlag: boolean=false;
+  publicacion: Publication = new Publication();
   publications: Publication[];
   opcionSeleccionada: string="";
   mostrarCampoFecha: boolean = false;
   fechaSeleccionada: Date=  new Date();
+  file: File | undefined;
 
-  constructor(private publicationService: PublicationService,private cdRef: ChangeDetectorRef) {
+  constructor(private publicationService: PublicationService,private cdRef: ChangeDetectorRef, private fileService: FileService) {
     this.publications = [];
   }
   
@@ -30,26 +34,13 @@ export class PublicationComponent {
     "Acuerdos",
     "Manuales"
   ];
-  unidadesOrganicas = [
-    { id: 1, nombre: 'GTI', selected: false },
-    { id: 2, nombre: 'GNE', selected: false },
-    { id: 3, nombre: 'GPD', selected: false },
-  ];
+
   ngOnInit() {
-    this.publicationService.getPublications().subscribe({
-      next: (data) => {
-        this.publications = data;
-        console.log(this.publications);
-      },
-      error: (_error) => {
-        console.log(_error);
-      }
-    });
+    this.clearData();
   }
 
   toggleNuevo(): boolean{
     this.nuevoFlag=!this.nuevoFlag
-    //this.cdRef.detectChanges();
     return this.nuevoFlag
   }
 
@@ -61,14 +52,81 @@ export class PublicationComponent {
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-
     if (file) {
+      this.file = file;
       console.log('Archivo seleccionado:', file);
-
     }
   }
   onOpcionSeleccionadaChange(): void {
     this.mostrarCampoFecha = this.opcionSeleccionada === 'Eventos';
+  }
+
+  savePublication(){
+    if (this.file) {
+      this.publicacion.fechaPublicacion = new Date().toISOString().substring(0,10);
+      this.fileService.uploadFile(this.file).subscribe({
+        next: (data: string) => {
+          this.publicacion.urlDocumento = data;
+          this.publicationService.createPublication(this.publicacion).subscribe({
+            next: (data2) => {
+              console.log(data2);
+              this.clearData();
+            },
+            error: (error2) => {
+              console.log(error2);
+            }
+          });
+        },
+        error: (error1) => {
+          this.publicacion.urlDocumento = error1.error.text;
+          this.publicationService.createPublication(this.publicacion).subscribe({
+            next: (data2) => {
+              console.log(data2);
+              this.clearData();
+            },
+            error: (error2) => {
+              console.log(error2);
+            }
+          });
+        }
+      });
+    } else {
+      console.log('Error: El archivo es undefined');
+    }
+  }
+
+  clearData(){
+    this.nuevoFlag = false;
+    const usuarioString = sessionStorage.getItem("Usuario");
+    if (usuarioString !== null) {
+      try {
+        this.publicacion.gerencia = JSON.parse(usuarioString).dependencia;
+      } catch (error) {
+        console.error("Error al parsear el objeto Usuario:", error);
+      }
+    } else {
+      console.warn("No se encontró la clave 'Usuario' en sessionStorage.");
+    }
+    this.publicationService.getPublicationsByGerencia(this.publicacion.gerencia).subscribe({
+      next: (data) => {
+        this.publications = data;
+        console.log(this.publications);
+      },
+      error: (_error) => {
+        console.log(_error);
+      }
+    });
+  }
+
+  deletePublication(id: number) {
+    this.publicationService.deletePublication(id).subscribe({
+      next: (data) => {
+        this.clearData();
+      },
+      error: (_error) => {
+        console.log(_error);
+      }
+    });
   }
   
 }
