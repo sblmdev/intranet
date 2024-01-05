@@ -1,39 +1,53 @@
 <div class="bg-white p-4">
-    <h1 class="text-2xl text-center font-bold font-montserrat">Setiembre - 2023</h1>
+    <h1 class="text-2xl text-center font-bold font-montserrat">{{ months[selectedMonthNumber - 1].label }} - {{ selectedYearNumber }}</h1>
+
     <div class="w-full mx-auto">
+
+        <div class="flex mb-4">
+            <select name="months" id="months" [(ngModel)]="selectedMonth">
+                <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+            </select>
+
+            <select name="years" id="years" [(ngModel)]="selectedYear">
+                <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
+            </select>
+
+            <button (click)="searchAssistants()">Buscar</button>
+
+        </div>
+
         <table class="w-full table-auto font-montserrat border mt-4">
             <thead class="text-center">
                 <tr>
-                    <!-- <th>Día</th> -->
+                    <th>Día</th>
                     <th>H. Ingreso</th>
                     <th>H. Salida</th>
-                    <!-- <th>Min. Tarde</th>
-                    <th>Permisos</th>
+                    <th>Min. Tarde</th>
+                    <!-- <th>Permisos</th>
                     <th>Detalle</th>
                     <th>Deducción</th> -->
                 </tr>
             </thead>
             <tbody class="text-center">
                 <tr *ngFor="let assistant of assistans" class="even:bg-amber-100 odd:bg-blue-100">
-                    <!-- <td>{{ assistant.day }}</td> -->
-                    <td>{{ assistant.dhoraingre | date:'dd/MM/yyyy HH:mm' }}</td>
-                    <td>{{ assistant.dfechaingre | date:'dd/MM/yyyy HH:mm' }}</td>
-                    <!-- <td>{{ assistant.lateMinutes }}</td>
-                    <td>{{ assistant.permits }}</td>
+                    <td>{{ assistant.day }}</td>
+                    <td>{{ formatTimestamp(assistant.dhoraingre_entrada.timestamp) }}</td>
+                    <td>{{ formatTimestamp(assistant.dhoraingre_salida.timestamp) }}</td>
+                    <td>{{ calculateIndividualLateMinutes(assistant) }}</td>
+                    <!-- <td>{{ assistant.permits }}</td>
                     <td>{{ assistant.detail }}</td>
                     <td>{{ assistant.deduction }}</td> -->
                 </tr>
-                
             </tbody>
         </table>
-        <!-- <table class="w-5/12 table-auto mt-12 ml-auto">
+        <table class="w-5/12 table-auto mt-12 ml-auto">
             <tr>
                 <td class="font-montserrat font-bold w-8/12">
-                    <h1 class="text-right">Tardanzas (min.):</h1>
+                  <h1 class="text-right">Tardanzas (min.):</h1>
                 </td>
-                <td class="font-montserrat text-center">{{ calculateTotal('lateMinutes') }}</td>
-            </tr>
-            <tr>
+                <td class="font-montserrat text-center">{{ calculateTotalLateMinutes() }}</td>
+              </tr>
+            <!-- <tr>
                 <td class="font-montserrat font-bold w-8/12">
                     <h1 class="text-right">Faltas:</h1>
                 </td>
@@ -50,7 +64,7 @@
                     <h1 class="text-right">Deducción (S/.):</h1>
                 </td>
                 <td class="font-montserrat text-center">{{ calculateTotal('deduction') }}</td>
-            </tr>
-        </table> -->
+            </tr> -->
+        </table>
     </div>
 </div>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Assist } from '../models/assistant';
+import { AssistTime } from '../models/assistantTime';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,9 @@ export class AssistsService {
 
   constructor(private http: HttpClient) { }
 
-  searchAsistant(dni: string, month: string, year: string): Observable<Assist[]> {
+  searchAsistant(dni: string, month: string, year: string): Observable<AssistTime[]> {
     const url = `${this.baseUrl}/asistencias/${dni}/${month}/${year}`;
-    return this.http.get<Assist[]>(url);
+    return this.http.get<AssistTime[]>(url);
   }
 
 }
