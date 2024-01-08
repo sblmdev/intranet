@@ -10,10 +10,10 @@ export class FileService {
 
   constructor(private http: HttpClient) { }
 
-  uploadFile(file: File): Observable<string> {
+  uploadFile(file: File, tipo: string): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
     const headers = new HttpHeaders();
-    return this.http.post<string>(`${this.baseUrl}/api/files`, formData, { headers });
+    return this.http.post<string>(`${this.baseUrl}/api/files/${tipo}`, formData, { headers });
   }
 }

@@ -17,7 +17,9 @@ export class AppComponent {
         this.mostrar();
       }
     });
+  
   }
+
   ngOnInit(){
     let token = sessionStorage.getItem("Token");
     if(token != null && token != undefined && token!=""){

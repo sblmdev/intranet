@@ -63,10 +63,9 @@ export class PublicationComponent {
   }
 
   savePublication(){
-    console.log(this.publicacion);
     if (this.file) {
       //this.publicacion.fechaPublicacion = new Date().toISOString().substring(0,10);
-      this.fileService.uploadFile(this.file).subscribe({
+      this.fileService.uploadFile(this.file, this.publicacion.tipoPublicacion).subscribe({
         next: (data: string) => {
           this.publicacion.urlDocumento = data;
           this.publicationService.createPublication(this.publicacion).subscribe({
