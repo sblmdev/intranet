@@ -40,7 +40,7 @@ export class AssistsComponent {
   selectedMonth: string = '01';
   selectedYear: string = '2024';
 
-  selectedMonthNumber: number = 1;
+  selectedMonthNumber: number = 0o1;
   selectedYearNumber: number = 2024;
 
   constructor(private assistantService: AssistsService) { }
