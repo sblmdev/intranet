@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileService {
-  private baseUrl = 'http://192.168.1.6:8088'; // Reemplaza con la URL de tu backend
+  private baseUrl = 'http://localhost:8088'; // Reemplaza con la URL de tu backend
 
   constructor(private http: HttpClient) { }
 

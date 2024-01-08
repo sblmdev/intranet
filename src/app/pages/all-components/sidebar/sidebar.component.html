@@ -39,9 +39,9 @@
         <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Administración
         </div>
         <ul class="px-4 py-2 list-disc list-inside">
-            <li class="font-montserrat cursor-pointer"(click)="abrirPublicaciones()" *ngIf="usuario.tipo == 1 || usuario.tipo == 2">Publicaciones</li>
-            <li class="font-montserrat cursor-pointer" *ngIf="usuario.tipo == 1 || usuario.tipo == 3">Cementerios</li>
-            <li class="font-montserrat cursor-pointer" *ngIf="usuario.tipo == 1 || usuario.tipo == 4">Cementerios</li>
+            <li class="font-montserrat cursor-pointer"(click)="abrirPublicaciones()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2)">Publicaciones</li>
+            <li class="font-montserrat cursor-pointer" *ngIf="(usuario.tipo == 1 || usuario.tipo == 3)">Cementerios</li>
+            <li class="font-montserrat cursor-pointer" *ngIf="(usuario.tipo == 1 || usuario.tipo == 4)">Planes de acción</li>
         </ul>
     </div>
 

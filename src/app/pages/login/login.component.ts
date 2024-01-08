@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
-import { LoginService } from 'src/app/services/LoginService';
+import { LoginService } from 'src/app/services/loginService';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,6 @@ export class LoginComponent {
   constructor(private loginService: LoginService) {}
 
   ngOnInit(){
-    
   }
 
   sendUsernamePassword() {
