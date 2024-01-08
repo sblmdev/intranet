@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Publication } from 'src/app/models/publications';
+import { Usuario } from 'src/app/models/usuario';
 import { PublicationService } from 'src/app/services/publicationService';
 @Component({
   selector: 'app-sidebar',
@@ -15,6 +16,8 @@ export class SidebarComponent {
 
   publicationsManuales: Publication[] =  [];
   publicationsEventos: Publication[] =  [];
+
+  usuario: Usuario = new Usuario();
 
   constructor(private router: Router, private publicationService: PublicationService) {
   }
@@ -37,6 +40,8 @@ export class SidebarComponent {
         console.log(_error);
       }
     });
+
+    this.usuario = JSON.parse(JSON.stringify(sessionStorage.getItem('Usuario')));
   }
 
   fullscreen = false;
