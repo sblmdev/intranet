@@ -41,6 +41,7 @@ export class PublicationComponent {
 
   toggleNuevo(): boolean{
     this.nuevoFlag=!this.nuevoFlag
+    this.publicacion.fechaPublicacion = new Date().toISOString().substring(0,10);
     return this.nuevoFlag
   }
 
@@ -63,8 +64,8 @@ export class PublicationComponent {
 
   savePublication(){
     if (this.file) {
-      this.publicacion.fechaPublicacion = new Date().toISOString().substring(0,10);
-      this.fileService.uploadFile(this.file).subscribe({
+      //this.publicacion.fechaPublicacion = new Date().toISOString().substring(0,10);
+      this.fileService.uploadFile(this.file, this.publicacion.tipoPublicacion).subscribe({
         next: (data: string) => {
           this.publicacion.urlDocumento = data;
           this.publicationService.createPublication(this.publicacion).subscribe({
@@ -78,7 +79,7 @@ export class PublicationComponent {
           });
         },
         error: (error1) => {
-          this.publicacion.urlDocumento = "\\192.168.1.6" + error1.error.text;
+          this.publicacion.urlDocumento = "\\localhost" + error1.error.text;
           this.publicationService.createPublication(this.publicacion).subscribe({
             next: (data2) => {
               console.log(data2);

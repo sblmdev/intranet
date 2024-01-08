@@ -41,7 +41,16 @@ export class SidebarComponent {
       }
     });
 
-    this.usuario = JSON.parse(JSON.stringify(sessionStorage.getItem('Usuario')));
+    const usuarioString = sessionStorage.getItem("Usuario");
+    if (usuarioString !== null) {
+      try {
+        this.usuario = JSON.parse(usuarioString);
+      } catch (error) {
+        console.error("Error al parsear el objeto Usuario:", error);
+      }
+    } else {
+      console.warn("No se encontró la clave 'Usuario' en sessionStorage.");
+    }
   }
 
   fullscreen = false;
