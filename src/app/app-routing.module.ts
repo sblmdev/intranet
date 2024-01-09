@@ -11,6 +11,7 @@ import { TreasuryComponent } from './pages/graveyards/treasury/treasury.componen
 import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
 import { PublicationComponent } from './pages/publication/publication.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
+import { PlansComponent } from './pages/plans/plans.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'treasury', component: TreasuryComponent},
   { path: 'transfers', component: TransfersComponent},
   { path: 'documents/:id', component: DocumentsComponent},
+  { path: 'plans', component: PlansComponent },
 ];
 
 @NgModule({
