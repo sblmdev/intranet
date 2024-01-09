@@ -1,145 +1,166 @@
+<div class="rounded-md bg-white ml-4 p-4">
 
-    
+  <div class="rounded-md border-2">
+    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Administración</div>
+    <ul class="px-4 py-2 list-disc list-inside">
+      <li class="font-montserrat cursor-pointer" (click)="abrirPublicaciones()"
+        *ngIf="(usuario.tipo == 1 || usuario.tipo == 2)">Publicaciones</li>
+      <li class="font-montserrat cursor-pointer" *ngIf="(usuario.tipo == 1 || usuario.tipo == 3)">Cementerios</li>
+      <li class="font-montserrat cursor-pointer" *ngIf="(usuario.tipo == 1 || usuario.tipo == 4)">Planes de acción</li>
+    </ul>
+  </div>
 
-<div class="rounded-md bg-white ml-4 p-4" >
-    <div class="rounded-md border-2">
-        <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Acerca de la SBLM</div>
-        <ul class="px-4 py-2 list-disc list-inside">
-            <li class="font-montserrat cursor-pointer" (click)="toggleMision()">Misión</li>
-            <li class="font-montserrat cursor-pointer" (click)="toggleVision()">Visión</li>
-            <!--<li class="font-montserrat cursor-pointer" (click)="toggleValores()">Valores institucionales</li>-->
-            <li><a class="font-montserrat cursor-pointer" href="
+  <div class="rounded-md border-2 mt-4">
+    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Acerca de la SBLM</div>
+    <ul class="px-4 py-2 list-disc list-inside">
+      <li class="font-montserrat cursor-pointer" (click)="toggleMision()">Misión</li>
+      <li class="font-montserrat cursor-pointer" (click)="toggleVision()">Visión</li>
+      <!--<li class="font-montserrat cursor-pointer" (click)="toggleValores()">Valores institucionales</li>-->
+      <li><a class="font-montserrat cursor-pointer" href="
             http://192.168.1.204:5051/images/organigrama/organigrama.jpg" target="_blank">Organigrama</a> </li>
-        </ul>
-    </div>
+    </ul>
+  </div>
 
-    <div class="rounded-md border-2 mt-4">
-        <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Documentos de trabajo
-        </div>
-        <ul class="px-4 py-2 list-disc list-inside">
-            <li class="font-montserrat cursor-pointer"><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/ROF.pdf">R.O.F.</a></li>
-            <li class="font-montserrat cursor-pointer"><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/PLAN_12672_MOF_2009.pdf">M.O.F.</a></li>
-            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Leyes')">Leyes</li>
-            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Resoluciones')">Resoluciones</li>
-            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Reglamentos')">Reglamentos</li>
-            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Directivas')">Directivas</li>
-            <li class="font-montserrat cursor-pointer" (click)="goDocuments('Acuerdos')">Acuerdos</li>
-        </ul>
-    </div>
+  <div class="rounded-md border-2 mt-4">
+    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Documentos de trabajo</div>
+    <ul class="px-4 py-2 list-disc list-inside">
+      <li class="font-montserrat cursor-pointer"><a
+          href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/ROF.pdf"
+          target="_blank">R.O.F.</a></li>
+      <li class="font-montserrat cursor-pointer"><a
+          href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/PLAN_12672_MOF_2009.pdf"
+          target="_blank">M.O.F.</a></li>
+      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Leyes')">Leyes</li>
+      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Resoluciones')">Resoluciones</li>
+      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Reglamentos')">Reglamentos</li>
+      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Directivas')">Directivas</li>
+      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Acuerdos')">Acuerdos</li>
+    </ul>
+  </div>
 
-    <div class="rounded-md border-2 mt-4">
-        <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Manuales y políticas de uso
-        </div>
-        <ul class="px-4 py-2 list-disc list-inside">
-            <li class="font-montserrat cursor-pointer" *ngFor="let item of publicationsManuales; let i = index">{{item.titulo}}</li>
-        </ul>
-    </div>
+  <div class="rounded-md border-2 mt-4">
+    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Manuales y políticas de uso</div>
+    <ul class="px-4 py-2 list-disc list-inside">
+      <li class="font-montserrat cursor-pointer" *ngFor="let item of publicationsManuales; let i = index">
+        {{item.titulo}}</li>
+    </ul>
+  </div>
 
-    <div class="rounded-md border-2 mt-4">
-        <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Administración
-        </div>
-        <ul class="px-4 py-2 list-disc list-inside">
-            <li class="font-montserrat cursor-pointer"(click)="abrirPublicaciones()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2)">Publicaciones</li>
-            <li class="font-montserrat cursor-pointer" *ngIf="(usuario.tipo == 1 || usuario.tipo == 3)">Cementerios</li>
-            <li class="font-montserrat cursor-pointer" *ngIf="(usuario.tipo == 1 || usuario.tipo == 4)">Planes de acción</li>
-        </ul>
+  <div class="rounded-md border-2 mt-4">
+    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Próximos eventos</div>
+    <div class="flex items-center p-2 w-full" *ngFor="let item of publicationsEventos; let i = index">
+      <div class="w-3/10 text-center font-montserrat font-bold bg-red-200 py-1 px-3 rounded-md">
+        <span class="text-md">{{item.fechaPublicacion.substring(8,10)}}</span><br>
+        <span class="text-xs">{{item.fechaPublicacion.substring(5,7)}}</span>
+      </div>
+      <div class="ml-2 text-xs font-montserrat">{{item.titulo}}</div>
     </div>
+  </div>
 
-    <div class="rounded-md border-2 mt-4">
-        <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Próximos eventos</div>
-        <div class="flex items-center p-2 w-full" *ngFor="let item of publicationsEventos; let i = index">
-            <div class="w-3/10 text-center font-montserrat font-bold bg-red-200 py-1 px-3 rounded-md">
-                <span class="text-md">{{item.fechaPublicacion.substring(8,10)}}</span><br>
-                <span class="text-xs">{{item.fechaPublicacion.substring(5,7)}}</span>
-            </div>
-            <div class="ml-2 text-xs font-montserrat">{{item.titulo}}</div>
-        </div>
-    </div>
-
-    <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="my-modal"></div>
-<!-- MODALES -->
-<div *ngIf="misionFlag" class="modal fixed inset-0 flex items-center justify-center">
+  <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="my-modal"></div>
+  <!-- MODALES -->
+  <div *ngIf="misionFlag" class="modal fixed inset-0 flex items-center justify-center">
     <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
-      <div class="modal-container font-montserrat bg-white w-3/5 h-1/2 p-4 rounded-xl shadow-lg text-center pointer-events-auto items-center relative">
+      <div
+        class="modal-container font-montserrat bg-white w-3/5 h-1/2 p-4 rounded-xl shadow-lg text-center pointer-events-auto items-center relative">
         <!-- Contenido del modal -->
-          <div class="absolute top-0 right-0 p-2">
-            <button class="bg-red-500 text-white rounded-md p-2 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300" (click)="toggleMision()">X</button>
-          </div>
-          <h2 class="text-4xl font-montserrat mb-4 underline font-bold">MISIÓN</h2>
-          <div class="text-3xl font-montserrat  mx-8 mt-16">Brindar atención integral a los niños, niñas, adolescentes, madres gestantes, adultos y adultos mayores, en abandono, riesgo social y/o situación de extrema pobreza con calidad, calidez y eficacia.
-          </div>
-          </div>
+        <div class="absolute top-0 right-0 p-2">
+          <button
+            class="bg-red-500 text-white rounded-md p-2 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+            (click)="toggleMision()">X</button>
+        </div>
+        <h2 class="text-4xl font-montserrat mb-4 underline font-bold">MISIÓN</h2>
+        <div class="text-3xl font-montserrat  mx-8 mt-16">Brindar atención integral a los niños, niñas, adolescentes,
+          madres gestantes, adultos y adultos mayores, en abandono, riesgo social y/o situación de extrema pobreza con
+          calidad, calidez y eficacia.
+        </div>
       </div>
     </div>
   </div>
-  
+</div>
 
-  <div *ngIf="visionFlag" class="modal fixed inset-0 flex items-center justify-center">
-    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
-      <div class="modal-container font-montserrat bg-white w-3/5 h-1/2 p-4 rounded-xl shadow-lg text-center pointer-events-auto items-center relative">
-        <!-- Contenido del modal -->
-          <div class="absolute top-0 right-0 p-2">
-            <button class="bg-red-500 text-white rounded-md p-2 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300" (click)="toggleVision()">X</button>
-          </div>
-          <h2 class="text-4xl font-montserrat mb-4 underline font-bold">VISIÓN</h2>
-          <div class="text-3xl font-montserrat  mt-16 mx-8">Ser una institucion lider en la calidad de atención a los niños, niñas, adolescentes, madres gestantes, adultos y adultos mayores, en abandono, riesgo social y/o situación de extrema pobreza.</div>
 
-        </div>
+<div *ngIf="visionFlag" class="modal fixed inset-0 flex items-center justify-center">
+  <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+    <div
+      class="modal-container font-montserrat bg-white w-3/5 h-1/2 p-4 rounded-xl shadow-lg text-center pointer-events-auto items-center relative">
+      <!-- Contenido del modal -->
+      <div class="absolute top-0 right-0 p-2">
+        <button
+          class="bg-red-500 text-white rounded-md p-2 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+          (click)="toggleVision()">X</button>
       </div>
+      <h2 class="text-4xl font-montserrat mb-4 underline font-bold">VISIÓN</h2>
+      <div class="text-3xl font-montserrat  mt-16 mx-8">Ser una institucion lider en la calidad de atención a los niños,
+        niñas, adolescentes, madres gestantes, adultos y adultos mayores, en abandono, riesgo social y/o situación de
+        extrema pobreza.</div>
+
     </div>
+  </div>
+</div>
 
 
 
 <div *ngIf="valoresFlag" class="modal fixed inset-0 flex items-center justify-center">
-    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
-        <div class="modal-container font-montserrat bg-white w-3/5 h-5/6 p-4 rounded-xl shadow-lg text-center pointer-events-auto items-center ">
-            <div class="text-4xl font-montserrat mb-4 ">VALORES INSTITUCIONALES</div>  
-            <div class="modal-container font-montserrat bg-white w-auto h-auto  rounded-xl shadow-lg text-center pointer-events-auto grid grid-cols-3 gap-4">
-                
-                
-                <div >
-                    <h1 class="text-lg font-bold">Vocación de servicio</h1>
-                    <body class="text-sm">Poseemos elevada sensibilidad social y espíritu generoso, dispuestos a ayudar a 
-                        los beneficiarios de nuestros servicios y centros residenciales; mostrando para ello 
-                        una actitud empática con el albergado y/o beneficiario, esforzándonos por lograr 
-                        un alto grado de satisfacción de los mismos.</body>
-                </div>  
+  <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+    <div
+      class="modal-container font-montserrat bg-white w-3/5 h-5/6 p-4 rounded-xl shadow-lg text-center pointer-events-auto items-center ">
+      <div class="text-4xl font-montserrat mb-4 ">VALORES INSTITUCIONALES</div>
+      <div
+        class="modal-container font-montserrat bg-white w-auto h-auto  rounded-xl shadow-lg text-center pointer-events-auto grid grid-cols-3 gap-4">
 
-                <div >
-                    <h1 class="text-lg font-bold">Honestidad y Transparencia</h1>
-                    <body class="text-sm">Comprendemos y practicamos la honestidad como el respeto a la verdad en 
-                        relación con los hechos y las personas que nos rodean y la transparencia como el 
-                        reflejo de la honestidad.</body>
-                </div>  
 
-                <div >
-                    <h1 class="text-lg font-bold">Tolerancia</h1>
-                    <body class="text-sm">Somos tolerantes con las ideas, costumbres, creencias y acciones de todos los 
-                        que nos rodean; sean éstas iguales, parecidas o diferentes a las nuestras.</body>
-                </div>  
-                <div >
-                    <h1 class="text-lg font-bold">Compromiso</h1>
-                    <body class="text-sm">Nuestro compromiso e identificación es con nuestra institución, hacia la búsqueda 
-                        de la mejora de la calidad de vida de los beneficiarios de los servicios sociales.</body>
-                </div>  
-                <div >
-                    <h1 class="text-lg font-bold">Responsabilidad</h1>
-                    <body class="text-sm">La responsabilidad la practicamos en cumplimiento de nuestras funciones, con un
-                        trato adecuado a nuestros beneficiarios y trabajadores, asumiendo las 
-                        consecuencias de nuestros actos.</body>
-                </div>  
+        <div>
+          <h1 class="text-lg font-bold">Vocación de servicio</h1>
 
-                <div >
-                    <h1 class="text-lg font-bold">Excelencia</h1>
-                    <body class="text-sm">Perseguimos la calidad en el cumplimiento de nuestra misión institucional. 
-                        Buscamos la mejora continua en la prestación de nuestros servicios.</body>
-                </div> 
-            <button class="mt-4 bg-green-500 text-white rounded-md px-4 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300" (click)="toggleValores()">Aceptar</button>
+          <body class="text-sm">Poseemos elevada sensibilidad social y espíritu generoso, dispuestos a ayudar a
+            los beneficiarios de nuestros servicios y centros residenciales; mostrando para ello
+            una actitud empática con el albergado y/o beneficiario, esforzándonos por lograr
+            un alto grado de satisfacción de los mismos.</body>
         </div>
-    </div>
-</div>
 
- 
+        <div>
+          <h1 class="text-lg font-bold">Honestidad y Transparencia</h1>
+
+          <body class="text-sm">Comprendemos y practicamos la honestidad como el respeto a la verdad en
+            relación con los hechos y las personas que nos rodean y la transparencia como el
+            reflejo de la honestidad.</body>
+        </div>
+
+        <div>
+          <h1 class="text-lg font-bold">Tolerancia</h1>
+
+          <body class="text-sm">Somos tolerantes con las ideas, costumbres, creencias y acciones de todos los
+            que nos rodean; sean éstas iguales, parecidas o diferentes a las nuestras.</body>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold">Compromiso</h1>
+
+          <body class="text-sm">Nuestro compromiso e identificación es con nuestra institución, hacia la búsqueda
+            de la mejora de la calidad de vida de los beneficiarios de los servicios sociales.</body>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold">Responsabilidad</h1>
+
+          <body class="text-sm">La responsabilidad la practicamos en cumplimiento de nuestras funciones, con un
+            trato adecuado a nuestros beneficiarios y trabajadores, asumiendo las
+            consecuencias de nuestros actos.</body>
+        </div>
+
+        <div>
+          <h1 class="text-lg font-bold">Excelencia</h1>
+
+          <body class="text-sm">Perseguimos la calidad en el cumplimiento de nuestra misión institucional.
+            Buscamos la mejora continua en la prestación de nuestros servicios.</body>
+        </div>
+        <button
+          class="mt-4 bg-green-500 text-white rounded-md px-4 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+          (click)="toggleValores()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+
   <!-- <div *ngIf="orgFlag" class="modal fixed inset-0 flex items-center justify-center">
     <div class="fixed overflow-y-auto overflow-x-hidden left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none flex over">
       <div class="modal-container mb-16 font-montserrat bg-white w-auto mx-8 h-full mt-8 p-4 rounded-xl shadow-lg text-center pointer-events-auto relative">
