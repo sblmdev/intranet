@@ -8,11 +8,7 @@ import { Publication } from "../models/publications";
 })
 export class PublicationService {
 
-<<<<<<< HEAD
   private apiUrl = "http://192.168.1.6:8080/intranet-api/api/publicaciones";
-=======
-  private apiUrl = "http://localhost:8088/api/publicaciones";
->>>>>>> 943b5ff94b4f8bd05f654175e0b27e169e9205d2
 
   constructor(private http: HttpClient) { }
 

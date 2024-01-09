@@ -14,8 +14,8 @@ export class SidebarComponent {
   orgFlag: boolean = false;
   valoresFlag: boolean = false;
 
-  publicationsManuales: Publication[] =  [];
-  publicationsEventos: Publication[] =  [];
+  publicationsManuales: Publication[] = [];
+  publicationsEventos: Publication[] = [];
 
   usuario: Usuario = new Usuario();
 
@@ -54,32 +54,31 @@ export class SidebarComponent {
   }
 
   fullscreen = false;
-  toggleMision(): boolean{
-    this.misionFlag=!this.misionFlag
-  return this.misionFlag
+  toggleMision(): boolean {
+    this.misionFlag = !this.misionFlag
+    return this.misionFlag
   }
-  toggleVision(): boolean{
-    this.visionFlag=!this.visionFlag
-  return this.visionFlag
-  }
-
-  toggleOrg(): boolean{
-    this.orgFlag=!this.orgFlag
-  return this.orgFlag
-  
-  }
-  toggleValores(): boolean{
-    this.valoresFlag=!this.valoresFlag
-  return this.valoresFlag
+  toggleVision(): boolean {
+    this.visionFlag = !this.visionFlag
+    return this.visionFlag
   }
 
-  abrirPublicaciones():void{
-    const url = '/publication';
-    window.open(url, '_blank');
+  toggleOrg(): boolean {
+    this.orgFlag = !this.orgFlag
+    return this.orgFlag
+
+  }
+  toggleValores(): boolean {
+    this.valoresFlag = !this.valoresFlag
+    return this.valoresFlag
+  }
+
+  abrirPublicaciones(): void {
+    this.router.navigate(['/publication']);
   }
 
   goDocuments(title: string) {
-    const url = `/documents/${title}`;
-  window.open(url, '_blank');
+    this.router.navigate(['/documents', title]);
   }
+
 }
