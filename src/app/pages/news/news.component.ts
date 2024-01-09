@@ -12,9 +12,10 @@ import { PublicationService } from 'src/app/services/publicationService';
 export class NewsComponent {
   faChevronDown = faChevronDown;
   publications: Publication[] = [];
-  publication: Publication =  new Publication();
+  publication: Publication = new Publication();
 
   constructor(private router: Router, private publicationService: PublicationService) {
+
   }
 
   ngOnInit() {
@@ -22,6 +23,9 @@ export class NewsComponent {
       next: (data) => {
         this.publications = data;
         this.publication = this.publications[0];
+        if(this.publication == undefined){
+          this.publication = new Publication();
+        }
       },
       error: (_error) => {
         console.log(_error);
