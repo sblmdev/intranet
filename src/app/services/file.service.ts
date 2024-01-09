@@ -6,14 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileService {
+<<<<<<< HEAD
   private baseUrl = 'http://192.168.1.6:8080'; // Reemplaza con la URL de tu backend
+=======
+  private baseUrl = 'http://localhost:8088'; // Reemplaza con la URL de tu backend
+>>>>>>> 943b5ff94b4f8bd05f654175e0b27e169e9205d2
 
   constructor(private http: HttpClient) { }
 
-  uploadFile(file: File): Observable<string> {
+  uploadFile(file: File, tipo: string): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
     const headers = new HttpHeaders();
-    return this.http.post<string>(`${this.baseUrl}/api/files`, formData, { headers });
+    return this.http.post<string>(`${this.baseUrl}/api/files/${tipo}`, formData, { headers });
   }
 }
