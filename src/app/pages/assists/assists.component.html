@@ -4,6 +4,12 @@
     <div class="w-full mx-auto">
 
         <div class="flex mb-4">
+
+            <select *ngIf="(usuario.tipo == 1 || usuario.tipo == 2)" name="personale" id="personale" [(ngModel)]="selectedPersonal">
+                <option value="">Seleccionar personal</option>
+                <option *ngFor="let per of personal" [value]="per.dni">{{ per.nombres }}</option>
+            </select>
+
             <select name="months" id="months" [(ngModel)]="selectedMonth">
                 <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
             </select>

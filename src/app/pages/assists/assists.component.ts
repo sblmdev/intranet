@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
 import { AssistTime } from 'src/app/models/assistantTime';
+import { Usuario } from 'src/app/models/usuario';
 import { AssistsService } from 'src/app/services/assists.service';
 
 @Component({
@@ -9,7 +10,11 @@ import { AssistsService } from 'src/app/services/assists.service';
   styleUrls: ['./assists.component.css']
 })
 export class AssistsComponent {
+
+  usuario: Usuario = new Usuario();
+
   dni: string = "";
+  dependencia: string = "";
 
   months = [
     { label: 'Enero', value: '1' },
@@ -36,37 +41,73 @@ export class AssistsComponent {
     { label: '2024', value: '2024' },
   ];
 
+  personal: Usuario[] = [];
+
   assistans: AssistTime[] = [];
-  selectedMonth: string = '01';
+  selectedMonth: string = '1';
   selectedYear: string = '2024';
 
-  selectedMonthNumber: number = 0o1;
+  selectedMonthNumber: number = 1;
   selectedYearNumber: number = 2024;
+
+  selectedPersonal: string = '';
 
   constructor(private assistantService: AssistsService) { }
 
   ngOnInit() {
     const usuarioString = sessionStorage.getItem("Usuario");
+    console.log(usuarioString);
     if (usuarioString) {
-      const usuario = JSON.parse(usuarioString);
-      this.dni = usuario.dni;
+      this.usuario = JSON.parse(usuarioString);
+      this.dni = this.usuario.dni;
+      this.dependencia = this.usuario.dependencia;
     }
+    this.getPersonalByOficina();
   }
 
-  searchAssistants() {
-    this.assistantService.searchAsistant(this.dni, this.selectedMonth, this.selectedYear).subscribe({
+  getPersonalByOficina(){
+    this.assistantService.getPersonalByDependencia(this.dependencia).subscribe({
       next: (data) => {
-        this.assistans = data.map((assistant: any) => {
-          const fecha = new Date(assistant.fecha);
-          assistant.day = this.obtenerNombreDia(fecha.getDay());
-          return assistant;
-        });
-        this.updateHeader();
+        this.personal = data;
       },
       error: (_error) => {
         console.log(_error);
       }
     });
+  }
+
+  searchAssistants() {
+    if(this.selectedPersonal.length == 0) {
+      this.assistantService.searchAsistant(this.dni, this.selectedMonth, this.selectedYear).subscribe({
+        next: (data) => {
+          this.assistans = data.map((assistant: any) => {
+            const fecha = new Date(assistant.fecha);
+            assistant.day = this.obtenerNombreDia(fecha.getDay());
+            return assistant;
+          });
+          this.updateHeader();
+        },
+        error: (_error) => {
+          console.log(_error);
+        }
+      });
+    } else {
+      this.assistantService.searchAsistant(this.selectedPersonal, this.selectedMonth, this.selectedYear).subscribe({
+        next: (data) => {
+          this.assistans = data.map((assistant: any) => {
+            const fecha = new Date(assistant.fecha);
+            assistant.day = this.obtenerNombreDia(fecha.getDay());
+            return assistant;
+          });
+          this.updateHeader();
+        },
+        error: (_error) => {
+          console.log(_error);
+        }
+      });
+    }
+
+    
   }
   calculateIndividualLateMinutes(assistant: any): number {
     const entradaPlaneada = moment('08:20', 'HH:mm');

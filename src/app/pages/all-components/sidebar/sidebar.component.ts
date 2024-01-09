@@ -81,4 +81,8 @@ export class SidebarComponent {
     this.router.navigate(['/documents', title]);
   }
 
+  goPhoneBook() {
+    this.router.navigate(['/phonebook']);
+  }
+
 }

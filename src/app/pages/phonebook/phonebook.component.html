@@ -1,0 +1,377 @@
+<div class="bg-white p-4">
+    <h1 class="text-2xl text-center font-bold font-montserrat">Directorio Telefónico</h1>
+
+    <div class="w-full mx-auto">
+
+        <div class="flex mb-4">
+            <input type="text" [(ngModel)]="terminoBusqueda" placeholder="Buscar por Ubicación del anexo" class="p-2 border rounded-l">
+            <button (click)="buscar()">Buscar</button>
+        </div>
+
+        <table class="w-full table-auto font-montserrat border mt-4">
+            <thead class="text-center">
+                <tr>
+                    <th>N°</th>
+                    <th>Dirección</th>
+                    <th>Línea Directa</th>
+                    <th>Anexo</th>
+                    <th>Ubicación del anexo</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>1</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td>4277218</td>
+                    <td>1011</td>
+                    <td>PRESIDENCIA SBLM</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>2</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1012</td>
+                    <td>SECRETARIA PRESIDENCIA</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>3</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td>7418932</td>
+                    <td>1021</td>
+                    <td>GERENCIA GENERAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>4</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1022</td>
+                    <td>SECRETARIA GERENCIA GENERAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>5</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1031</td>
+                    <td>SECRETARIA GENERAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>6</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1032</td>
+                    <td>TRAMITE DOCUMENTARIO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>7</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1041</td>
+                    <td>OFICINA DE CONTROL INTERNO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>8</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1042</td>
+                    <td>SECRETARIA OFICINA DE CONTROL INTERNO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>9</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1051</td>
+                    <td>GERENCIA DE ASESORIA LEGAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>10</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1052</td>
+                    <td>SUB GERENCIA DE ASUNTOS PROCESALES</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>11</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1053</td>
+                    <td>SUB GERENCIA DE ASUNTOS ADMINISTRATIVOS</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>12</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1061</td>
+                    <td>GERENCIA DE RELACIONES INSTITUCIONALES</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>13</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1062</td>
+                    <td>OFICINA DE IMAGEN Y COMUNICACIONES</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>14</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1063</td>
+                    <td>SUB GERENCIA DE DONACIONES</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>15</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1071</td>
+                    <td>GERENCIA DE PLANEAMIENTO Y DESARROLLO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>16</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1072</td>
+                    <td>SECRETARIA GERENCIA DE PLANEAMIENTO Y DESARROLLO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>17</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td>4276526</td>
+                    <td>1081</td>
+                    <td>GERENCIA DE TECNOLOGIA DE LA INFORMACION</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>18</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1082</td>
+                    <td>SECRETARIA GERENCIA DE TECNOLOGIA DE LA INFORMACION</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>19</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1083</td>
+                    <td>SOPORTE GERENCIA DE TECNOLOGIA DE LA INFORMACION</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>20</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td>4276527</td>
+                    <td>1091</td>
+                    <td>GERENCIA DE PROTECCION SOCIAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>21</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1092</td>
+                    <td>SECRETARIA GERENCIA DE PROTECCION SOCIAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>22</td>
+                    <td>JR PUNO N° 206</td>
+                    <td>7418931</td>
+                    <td>1101</td>
+                    <td>GERENCIA DE ADMINISTRACION</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>23</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1102</td>
+                    <td>SECRETARIA GERENCIA DE ADMINISTRACION</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>24</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1103</td>
+                    <td>CONTROL DE PERSONAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>25</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1104</td>
+                    <td>SUBGERENCIA DE TESORERIA</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>26</td>
+                    <td>JR PUNO N° 206</td>
+                    <td>4276528</td>
+                    <td>1111</td>
+                    <td>GERENCIA DE OPERACIONES</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>27</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1112</td>
+                    <td>SECRETARIA GERENCIA DE OPERACIONES</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>28</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1113</td>
+                    <td>SUB GERENCIA DE ABASTECIMIENTO, ALMACEN Y CONTROL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>29</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1114</td>
+                    <td>OFICINA DE SEGURIDAD</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>30</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td>4276520</td>
+                    <td>1115</td>
+                    <td>PUERTA INGRESO JIRON CARABAYA</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>31</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1116</td>
+                    <td>PUERTA INGRESO JIRON PUNO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>32</td>
+                    <td>AV. EMANCIPACION N°955</td>
+                    <td>4276525</td>
+                    <td>1117</td>
+                    <td>JEFATURA ALMACEN CENTRAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>33</td>
+                    <td>AV. EMANCIPACION N°955</td>
+                    <td></td>
+                    <td>1118</td>
+                    <td>ALMACEN CENTRAL</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>34</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1121</td>
+                    <td>GERENCIA DE NEGOCIOS</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>35</td>
+                    <td>JR PUNO N° 206</td>
+                    <td></td>
+                    <td>1122</td>
+                    <td>SECRETARIA GERENCIA DE NEGOCIOS</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>36</td>
+                    <td>JR CARABAYA N°641 LIMA</td>
+                    <td></td>
+                    <td>1123</td>
+                    <td>SUBGERENCIA DE RECUPERACIONES Y COBRANZAS</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>37</td>
+                    <td>JR. ANCASH N° 1611</td>
+                    <td>7418949</td>
+                    <td>1124</td>
+                    <td>SUBGERENCIA DE NEGOCIOS Y CEMENTERIOS</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>38</td>
+                    <td>JR. ANCASH N° 1611</td>
+                    <td></td>
+                    <td>1125</td>
+                    <td>SECRETARIA SUBGERENCIA DE NEGOCIOS Y CEMENTERIOS</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>39</td>
+                    <td>JR. MADERA N° 399</td>
+                    <td>7418934</td>
+                    <td>2011</td>
+                    <td>SEDE CANEVARO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>40</td>
+                    <td>JR. MADERA N° 399</td>
+                    <td></td>
+                    <td>2012</td>
+                    <td>SEDE CANEVARO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>41</td>
+                    <td>AV. FRANCISCO PIZARRO N°551</td>
+                    <td>4276523</td>
+                    <td>3011</td>
+                    <td>SEDE CENTRO GERONTOLOGICO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>42</td>
+                    <td>AV. FRANCISCO PIZARRO N°551</td>
+                    <td></td>
+                    <td>3012</td>
+                    <td>SEDE CENTRO GERONTOLOGICO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>43</td>
+                    <td>JR. APURIMAC N°421</td>
+                    <td>7418948</td>
+                    <td>4011</td>
+                    <td>SEDE COMEDOR SANTA TERESITA</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>44</td>
+                    <td>JR. APURIMAC N°421</td>
+                    <td></td>
+                    <td>4012</td>
+                    <td>SEDE COMEDOR SANTA TERESITA</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>45</td>
+                    <td>AV. EMANCIPACION N°955</td>
+                    <td>4276522</td>
+                    <td>5011</td>
+                    <td>SEDE COMEDOR SANTA ROSITA</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>46</td>
+                    <td>AV. EMANCIPACION N°955</td>
+                    <td></td>
+                    <td>5012</td>
+                    <td>SEDE COMEDOR SANTA ROSITA </td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>47</td>
+                    <td>AV. DEL EJÉRCITO N°650</td>
+                    <td>4276524</td>
+                    <td>6011</td>
+                    <td>SEDE CENTRO PUERICULTORIO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>48</td>
+                    <td>AV. DEL EJÉRCITO N°650</td>
+                    <td></td>
+                    <td>6012</td>
+                    <td>SEDE CENTRO PUERICULTORIO</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>49</td>
+                    <td>JR. PATROCINIO N° 110-154</td>
+                    <td>7418935</td>
+                    <td>7011</td>
+                    <td>SEDE INSTITUTO SEVILLA</td>
+                </tr>
+                <tr class="even:bg-amber-100 odd:bg-blue-100">
+                    <td>50</td>
+                    <td>JR. PATROCINIO N° 110-154</td>
+                    <td></td>
+                    <td>7012</td>
+                    <td>SEDE INSTITUTO SEVILLA</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

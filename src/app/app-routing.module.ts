@@ -12,21 +12,23 @@ import { TransfersComponent } from './pages/graveyards/transfers/transfers.compo
 import { PublicationComponent } from './pages/publication/publication.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { PlansComponent } from './pages/plans/plans.component';
+import { PhonebookComponent } from './pages/phonebook/phonebook.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
   { path: 'news', component: NewsComponent },
-  { path: 'publication', component: PublicationComponent },
-  { path: 'assists', component: AssistsComponent },
-  { path: 'evaluations', component: EvaluationsComponent },
-  { path: 'questionnaire', component: QuestionnaireComponent},
-  { path: 'graveyards', component: GraveyardsComponent},
-  { path: 'reservations', component: ReservationsComponent},
+  { path: 'plans', component: PlansComponent },
   { path: 'burials', component: BurialsComponent},
+  { path: 'assists', component: AssistsComponent },
   { path: 'treasury', component: TreasuryComponent},
   { path: 'transfers', component: TransfersComponent},
+  { path: 'phonebook', component: PhonebookComponent },
+  { path: 'graveyards', component: GraveyardsComponent},
   { path: 'documents/:id', component: DocumentsComponent},
-  { path: 'plans', component: PlansComponent },
+  { path: 'evaluations', component: EvaluationsComponent },
+  { path: 'publication', component: PublicationComponent },
+  { path: 'reservations', component: ReservationsComponent},
+  { path: 'questionnaire', component: QuestionnaireComponent},
 ];
 
 @NgModule({

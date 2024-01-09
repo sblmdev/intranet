@@ -7,7 +7,7 @@ import { Plan } from '../models/plan';
   providedIn: 'root',
 })
 export class PlanService {
-  private apiUrl = 'http://localhost:8088/api/plans'; 
+  private apiUrl = 'http://localhost:8088/intranet-api/api/plans'; 
 
   constructor(private http: HttpClient) {}
 
