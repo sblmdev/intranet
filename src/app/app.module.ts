@@ -22,7 +22,7 @@ import { TreasuryComponent } from './pages/graveyards/treasury/treasury.componen
 import { TransfersComponent } from './pages/graveyards/transfers/transfers.component';
 import { PublicationComponent } from './pages/publication/publication.component';
 import { DocumentsComponent } from './pages/documents/documents.component';
-import { DateFormatPipe } from './pipes/date-format.pipe';
+import { PlansComponent } from './pages/plans/plans.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     TransfersComponent,
     PublicationComponent,
     DocumentsComponent,
-    DateFormatPipe,
+    PlansComponent,
   ],
   imports: [
     BrowserModule,
