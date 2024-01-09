@@ -25,6 +25,7 @@ export class DocumentsComponent {
       this.publicationService.obtenerPublicacionesPorTipo(this.id).subscribe({
         next: (data) => {
           this.publications = data;
+          console.log("this.publications", this.publications)
         },
         error: (_error) => {
           console.log(_error);
@@ -32,6 +33,14 @@ export class DocumentsComponent {
       });
     });
   }
+
+  getSharedFolderURL(folderName: string): string {
+    console.log("Recibiendi", folderName);
+    // const ipAddress = '192.168.1.6'; // Reemplaza con la dirección IP de tu servidor
+
+    // return `//${ipAddress}${folderName}`;
+    return folderName;
+}
 
   
 }

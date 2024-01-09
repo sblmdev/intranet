@@ -79,7 +79,7 @@ export class PublicationComponent {
           });
         },
         error: (error1) => {
-          this.publicacion.urlDocumento = "\\localhost" + error1.error.text;
+          this.publicacion.urlDocumento = error1.error.text;
           this.publicationService.createPublication(this.publicacion).subscribe({
             next: (data2) => {
               console.log(data2);
