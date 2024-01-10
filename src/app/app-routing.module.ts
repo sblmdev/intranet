@@ -13,6 +13,7 @@ import { PublicationComponent } from './pages/publication/publication.component'
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { PlansComponent } from './pages/plans/plans.component';
 import { PhonebookComponent } from './pages/phonebook/phonebook.component';
+import { DirectorateMembersComponent } from './pages/directorate-members/directorate-members.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'publication', component: PublicationComponent },
   { path: 'reservations', component: ReservationsComponent},
   { path: 'questionnaire', component: QuestionnaireComponent},
+  { path: 'directorate', component: DirectorateMembersComponent},
 ];
 
 @NgModule({

@@ -85,4 +85,8 @@ export class SidebarComponent {
     this.router.navigate(['/phonebook']);
   }
 
+  goDirectorateMembers() {
+    this.router.navigate(['/directorate']);
+  }
+
 }

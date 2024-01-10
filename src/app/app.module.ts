@@ -24,6 +24,7 @@ import { PublicationComponent } from './pages/publication/publication.component'
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { PlansComponent } from './pages/plans/plans.component';
 import { PhonebookComponent } from './pages/phonebook/phonebook.component';
+import { DirectorateMembersComponent } from './pages/directorate-members/directorate-members.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PhonebookComponent } from './pages/phonebook/phonebook.component';
     DocumentsComponent,
     PlansComponent,
     PhonebookComponent,
+    DirectorateMembersComponent,
   ],
   imports: [
     BrowserModule,
