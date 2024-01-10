@@ -56,7 +56,6 @@ export class AssistsComponent {
 
   ngOnInit() {
     const usuarioString = sessionStorage.getItem("Usuario");
-    console.log(usuarioString);
     if (usuarioString) {
       this.usuario = JSON.parse(usuarioString);
       this.dni = this.usuario.dni;

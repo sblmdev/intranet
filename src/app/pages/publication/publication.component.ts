@@ -70,7 +70,6 @@ export class PublicationComponent {
           this.publicacion.urlDocumento = data;
           this.publicationService.createPublication(this.publicacion).subscribe({
             next: (data2) => {
-              console.log(data2);
               this.clearData();
             },
             error: (error2) => {
@@ -82,7 +81,6 @@ export class PublicationComponent {
           this.publicacion.urlDocumento = error1.error.text;
           this.publicationService.createPublication(this.publicacion).subscribe({
             next: (data2) => {
-              console.log(data2);
               this.clearData();
             },
             error: (error2) => {
@@ -111,7 +109,6 @@ export class PublicationComponent {
     this.publicationService.getPublicationsByGerencia(this.publicacion.gerencia).subscribe({
       next: (data) => {
         this.publications = data;
-        console.log(this.publications);
       },
       error: (_error) => {
         console.log(_error);
