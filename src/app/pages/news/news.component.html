@@ -7,8 +7,8 @@
     </div>
 
     <div class="my-4">
-        <div class="flex items-center cursor-pointer bg-white rounded-md" *ngFor="let item of publications; let i = index">
-            <img src="{{publication.urlDocumento}}"
+        <div class="flex items-center cursor-pointer bg-white rounded-md mt-2" *ngFor="let item of publications; let i = index">
+            <img src="{{item.urlDocumento}}"
                 class="h-auto w-32 rounded-l-md">
             <div class="mx-4">
                 <h1 class="text-xs text-gray-600 font-montserrat">{{ item.fechaPublicacion.substring(8,10) }}-{{ item.fechaPublicacion.substring(5,7) }}-{{item.fechaPublicacion.substring(0,4) }}</h1>
