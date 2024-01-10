@@ -148,7 +148,7 @@ export class AssistsComponent {
   }
 
   obtenerNombreDia(numeroDia: number): string {
-    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     return diasSemana[numeroDia];
   }
 
