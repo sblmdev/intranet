@@ -56,7 +56,6 @@ export class AssistsComponent {
 
   ngOnInit() {
     const usuarioString = sessionStorage.getItem("Usuario");
-    console.log(usuarioString);
     if (usuarioString) {
       this.usuario = JSON.parse(usuarioString);
       this.dni = this.usuario.dni;
@@ -148,7 +147,7 @@ export class AssistsComponent {
   }
 
   obtenerNombreDia(numeroDia: number): string {
-    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     return diasSemana[numeroDia];
   }
 
