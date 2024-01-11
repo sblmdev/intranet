@@ -89,4 +89,8 @@ export class SidebarComponent {
     this.router.navigate(['/directorate']);
   }
 
+  goPlans() {
+    this.router.navigate(['/plans']);
+  }
+
 }
