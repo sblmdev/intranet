@@ -19,7 +19,7 @@ export class PublicationComponent {
   mostrarCampoFecha: boolean = false;
   fechaSeleccionada: Date=  new Date();
   file: File | undefined;
-
+  p:any;
   constructor(private publicationService: PublicationService,private cdRef: ChangeDetectorRef, private fileService: FileService) {
     this.publications = [];
   }
@@ -29,7 +29,7 @@ export class PublicationComponent {
     "Eventos",
     "Leyes",
     "Resoluciones",
-    "Reglamento",
+    "Reglamentos",
     "Directivas",
     "Acuerdos",
     "Manuales"
