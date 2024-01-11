@@ -5,7 +5,7 @@
     <div class="my-4">
 
         <div class="flex items-center cursor-pointer bg-white rounded-md mt-2"
-            *ngFor="let item of publications; let i = index">
+        *ngFor="let item of publications | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
             <a href="{{ item.urlDocumento }}" target="_blank" class="flex items-center">
                 <img src="/assets/documents.png" class="h-auto w-20 rounded-l-md">
                 <div class="mx-4">
@@ -16,6 +16,8 @@
                 </div>
             </a>
         </div>
-
+        <div  class="flex justify-center font-bold mt-4 font-montserrat ">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
     </div>
 </div>

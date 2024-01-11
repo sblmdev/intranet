@@ -12,7 +12,7 @@ export class DocumentsComponent {
   id: string;
   publications: Publication[] = [];
   publication: Publication = new Publication();
-
+  p:any;
   constructor(private route: ActivatedRoute, private router: Router, private publicationService: PublicationService) {
     this.id = '';
   }
