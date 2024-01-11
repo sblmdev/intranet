@@ -27,6 +27,6 @@ export class AppComponent {
     }
   }
   mostrar(){
-    this.show = !(this.isLoggedIn && this.router.url == '/publication');
+    this.show = !(this.isLoggedIn && (this.router.url == '/publication' || this.router.url == '/plans'));
   }
 }
