@@ -1,7 +1,7 @@
 <div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
   <div class="flex items-center">
     <div class="font-montserrat text-2xl font-bold">Publicaciones</div>
-    <button class="ml-auto my-4 bg-indigo-800 text-white font-bold py-2 px-4 rounded float-right hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
+    <button class="ml-auto my-4 bg-indigo-800 text-white font-bold py-2 px-4  float-right hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
       (click)="toggleNuevo()">
       Nueva Publicación
     </button>
@@ -37,14 +37,7 @@
     </tbody>
   </table>
   
-  <div [ngClass]="{'h-96': publications.length >= 0 && publications.length <= 2,
-    'h-80': publications.length >= 3 && publications.length <= 4,
-    'h-60': publications.length >= 5 && publications.length <= 6,
-    'h-40': publications.length >= 7 && publications.length <= 8,
-    'h-0': publications.length === 9 || publications.length > 9}">
-  </div>
-
-  <div>
+  <!-- <div>
     <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
       <a href="#" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
         <span class="sr-only">Previous</span>
@@ -52,7 +45,7 @@
           <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
         </svg>
       </a>
-      <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
+     
       <a href="#" aria-current="page" class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">1</a>
       <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
       <a href="#" class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
@@ -67,7 +60,7 @@
         </svg>
       </a>
     </nav>
-  </div>
+  </div> -->
 </div>
 
 <div *ngIf="nuevoFlag" class="modal fixed inset-0 flex items-center justify-center z-10">

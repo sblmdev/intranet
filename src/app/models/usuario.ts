@@ -5,7 +5,7 @@ export class Usuario {
   dni: string;
   usuario: string;
   contrasena: string;
-  tipo: number;
+  tipo: number; //1 ADMIN, 2 PUBLICACIONES, 3 CEMENTERIO, 4 PLANES, 5 PUEBLO, 6 GERENTES
   dependencia: string;
   dependenciaHijo: string;
   sede: string;

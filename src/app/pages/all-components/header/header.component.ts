@@ -27,6 +27,10 @@ export class HeaderComponent {
     }
   }
 
+  goHome() {
+    this.router.navigate(['/']);
+  }
+
   cerrarSesion() {
     this.router.navigate(['/']);
 
