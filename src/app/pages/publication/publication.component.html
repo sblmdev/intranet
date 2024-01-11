@@ -1,7 +1,7 @@
 <div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
   <div class="flex items-center">
     <div class="font-montserrat text-2xl font-bold">Publicaciones</div>
-    <button class="ml-auto my-4 bg-indigo-800 text-white font-bold py-2 px-4 rounded float-right"
+    <button class="ml-auto my-4 bg-indigo-800 text-white font-bold py-2 px-4 rounded float-right hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
       (click)="toggleNuevo()">
       Nueva Publicación
     </button>
@@ -73,17 +73,21 @@
 <div *ngIf="nuevoFlag" class="modal fixed inset-0 flex items-center justify-center z-10">
   <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
     <div
-      class="modal-container font-montserrat bg-white w-3/5 h-5/6 p-4 rounded-xl shadow-lg pointer-events-auto overflow-auto">
-
-      <div class="flex justify-end mb-2">
-        <button class="text-xl font-bold" (click)="toggleNuevo()">X</button>
+      class="modal-container font-montserrat bg-white w-3/5 h-auto p-4 rounded-xl shadow-lg "> 
+      <!-- pointer-events-auto overflow-auto -->
+      <div class="flex ">
+        <button class="ml-auto bg-red-500 text-white rounded-md p-2 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300" (click)="toggleNuevo()">X</button>
       </div>
-
-      <div>
-        <h2 class="text-2xl font-montserrat font-bold mb-4 text-center">Nueva Publicacion</h2>
+      
+      
+      <div class="mx-8 mb-4">
+        <div class="flex mb-8">
+          <div class="text-2xl mx-auto font-montserrat font-bold text-center underline">Nueva Publicación</div>
+          
+        </div>
         <form>
           <div class="mb-4">
-            <label for="titulo" class="text-lg font-montserrat block">Título:</label>
+            <label for="titulo" class="text-lg font-montserrat block font-bold">Título:</label>
             <input type="text" id="titulo" name="titulo" class="mt-1 p-2 h-10 border rounded-md w-full"
               [(ngModel)]="publicacion.titulo">
           </div>
@@ -95,7 +99,7 @@
 
           <div class="mb-4 flex items-center">
             <div class="w-1/2 pr-2">
-              <label for="tipoPublicacion" class="text-lg font-montserrat block">Tipo de Publicación:</label>
+              <label for="tipoPublicacion" class="text-lg font-montserrat block font-bold">Tipo de Publicación:</label>
               <select name="listaTipos"
                 class="w-full h-10 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500"
                 [(ngModel)]="publicacion.tipoPublicacion">
@@ -105,7 +109,7 @@
             </div>
 
             <div class="w-1/2 pl-2">
-              <label for="gerencia" class="text-lg font-montserrat block">Gerencia a publicar:</label>
+              <label for="gerencia" class="text-lg font-montserrat block font-bold">Gerencia a publicar:</label>
               <input type="text" id="gerencia" name="gerencia" class="mt-1 p-2 h-10 border rounded-md w-full"
                 [(ngModel)]="publicacion.gerencia" [disabled]="true">
             </div>
@@ -113,13 +117,13 @@
 
           <div class="mb-4 flex items-center">
             <div class="w-1/2 pr-2">
-              <label for="fechaEvento" class="text-lg font-montserrat block">Fecha de Publicación:</label>
+              <label for="fechaEvento" class="text-lg font-montserrat block font-bold">Fecha de Publicación:</label>
               <input type="date" id="fechaPublicacion" name="fechaPublicacion"
                 [(ngModel)]="publicacion.fechaPublicacion" class="p-2 border border-gray-300 rounded-md w-full h-10">
             </div>
 
             <div class="w-1/2 pl-2">
-              <label for="fechaEvento" class="text-lg font-montserrat block">Fecha de Evento:</label>
+              <label for="fechaEvento" class="text-lg font-montserrat block font-bold">Fecha de Evento:</label>
               <input type="date" id="fechaEvento" name="fechaEvento" [(ngModel)]="publicacion.fechaEvento"
                 class="p-2 border border-gray-300 rounded-md w-full h-10"
                 [disabled]="publicacion.tipoPublicacion != 'Eventos'">
@@ -127,7 +131,7 @@
           </div>
 
           <div class="mb-4">
-            <label for="descripcion" class="text-lg font-montserrat block">Descripción:</label>
+            <label for="descripcion" class="text-lg font-montserrat block font-bold">Descripción:</label>
             <textarea id="descripcion" name="descripcion" rows="4"
               class="mt-1 pt-2 pl-2 border border-gray-300 rounded-md w-full overflow-y-auto"
               [(ngModel)]="publicacion.contenido">
@@ -136,13 +140,13 @@
 
           <div class="mb-8"
             *ngIf="publicacion.tipoPublicacion=='Comunicaciones' ||  publicacion.tipoPublicacion=='Eventos'">
-            <label for="imagen" class="text-lg font-montserrat block">Imagen (JPG o PNG):</label>
+            <label for="imagen" class="text-lg font-montserrat block font-bold">Imagen (JPG o PNG):</label>
             <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/jpeg, image/png">
           </div>
 
-          <div class="mb-8"
+          <!-- <div class="mb-8"
             *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
-            <label for="documento" class="text-lg font-montserrat block">Documento (PDF):</label>
+            <label for="documento" class="text-lg font-montserrat block font-bold">Documento (PDF):</label>
             <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="application/pdf">
           </div>
 
@@ -153,7 +157,22 @@
               [disabled]="publicacion.titulo.length == 0 || publicacion.tipoPublicacion.length == 0 || file == undefined">
               Guardar
             </button>
+          </div> -->
+          <div class=" flex mt-12"
+            *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
+            <div>
+            <label for="documento" class="text-lg font-montserrat block font-bold">Documento (PDF):</label>
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="application/pdf">
+            </div>
+
+            <button
+              class="bg-indigo-900 text-white rounded-md ml-auto px-12 py-2 text-base font-medium hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
+              (click)="savePublication()"
+              [disabled]="publicacion.titulo.length == 0 || publicacion.tipoPublicacion.length == 0 || file == undefined">
+              Guardar
+            </button>
           </div>
+
         </form>
       </div>
     </div>
