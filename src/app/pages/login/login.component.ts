@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/models/usuario';
 import { LoginService } from 'src/app/services/loginService';
 
@@ -11,7 +12,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private toastr: ToastrService) {}
 
   ngOnInit(){
   }
@@ -21,9 +22,11 @@ export class LoginComponent {
       next: (usuario: Usuario) => {
         sessionStorage.setItem("Token", "tokenNew");
         sessionStorage.setItem("Usuario", JSON.stringify(usuario));
+        this.toastr.success(usuario.usuario + ', bienvenido a la INTRANET', 'Ingreso correcto');
         window.location.reload();
       },
       error:(e) => {
+        this.toastr.error('El usuario y/o contraseña son incorrectos', 'Error');
         console.error("Error durante la autenticación:", JSON.stringify(e));
       }
     });

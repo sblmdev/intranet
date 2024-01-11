@@ -33,7 +33,7 @@ export class NewsComponent {
     });
   }
 
-  goToNewsDetail(){
-    this.router.navigate(['/', 'news-detail'])
+  goToNewsDetail(id: number) {
+    this.router.navigate([`/new/${id}`]);
   }
 }

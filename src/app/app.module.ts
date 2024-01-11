@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +27,8 @@ import { DocumentsComponent } from './pages/documents/documents.component';
 import { PlansComponent } from './pages/plans/plans.component';
 import { PhonebookComponent } from './pages/phonebook/phonebook.component';
 import { DirectorateMembersComponent } from './pages/directorate-members/directorate-members.component';
+import { CommonModule } from '@angular/common';
+import { NewComponent } from './pages/new/new.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +52,12 @@ import { DirectorateMembersComponent } from './pages/directorate-members/directo
     PlansComponent,
     PhonebookComponent,
     DirectorateMembersComponent,
+    NewComponent,
   ],
   imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     BrowserModule,
     FormsModule,
     AppRoutingModule,
