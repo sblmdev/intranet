@@ -95,6 +95,8 @@ export class PublicationComponent {
   }
 
   clearData(){
+    this.publicacion = new Publication();
+    this.file = undefined;
     this.nuevoFlag = false;
     const usuarioString = sessionStorage.getItem("Usuario");
     if (usuarioString !== null) {

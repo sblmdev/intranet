@@ -29,7 +29,7 @@ import { PhonebookComponent } from './pages/phonebook/phonebook.component';
 import { DirectorateMembersComponent } from './pages/directorate-members/directorate-members.component';
 import { CommonModule } from '@angular/common';
 import { NewComponent } from './pages/new/new.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +62,8 @@ import { NewComponent } from './pages/new/new.component';
     FormsModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule 
+    HttpClientModule ,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

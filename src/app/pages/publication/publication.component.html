@@ -138,11 +138,7 @@
             </textarea>
           </div>
 
-          <div class="mb-8"
-            *ngIf="publicacion.tipoPublicacion=='Comunicaciones' ||  publicacion.tipoPublicacion=='Eventos'">
-            <label for="imagen" class="text-lg font-montserrat block font-bold">Imagen (JPG o PNG):</label>
-            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/jpeg, image/png">
-          </div>
+          
 
           <!-- <div class="mb-8"
             *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
@@ -158,11 +154,17 @@
               Guardar
             </button>
           </div> -->
-          <div class=" flex mt-12"
-            *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
-            <div>
-            <label for="documento" class="text-lg font-montserrat block font-bold">Documento (PDF):</label>
-            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="application/pdf">
+          <div class=" flex mt-12">
+            
+            <div *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
+              <label for="documento" class="text-lg font-montserrat block font-bold">Documento (PDF):</label>
+              <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="application/pdf">
+            </div>
+            
+            <div 
+            *ngIf="publicacion.tipoPublicacion=='Comunicaciones' ||  publicacion.tipoPublicacion=='Eventos'">
+            <label for="imagen" class="text-lg font-montserrat block font-bold">Imagen (JPG o PNG):</label>
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/jpeg, image/png">
             </div>
 
             <button
