@@ -11,6 +11,7 @@ export class PlansComponent {
   nuevoFlag: boolean=false;
   plan: Plan = new Plan();
   plans: Plan[] = [];
+  p:any;
 
   constructor(private planService: PlanService) {
   
@@ -20,14 +21,14 @@ export class PlansComponent {
     this.clearData();
   }
 
-  toggleNuevo(): boolean{
-    this.nuevoFlag=!this.nuevoFlag
-    return this.nuevoFlag
+  toggleNuevo() {
+    this.nuevoFlag=true;
+    this.plan = new Plan();
+    this.plan.entidad = "Sociedad de Beneficencia de Lima Metropolitana";
   }
 
-  closetoggleNuevo(): boolean{
-    this.nuevoFlag=!this.nuevoFlag
-    return this.nuevoFlag
+  closetoggleNuevo() {
+    this.clearData();
   }
 
   savePublication(){
