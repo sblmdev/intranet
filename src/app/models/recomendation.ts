@@ -15,20 +15,20 @@ export class Recomendation {
     observacionRiesgos: string;
   
     constructor(
-      id: number,
-      idPlan: number,
-      numero: number,
-      observacion: string,
-      nivelRiesgo: number,
-      recomendacion: string,
-      acciones: string,
-      medio: string,
-      fechaFinal: string,
-      unidadResponsable: string,
-      documentoUnidadResponsable: string,
-      dniResponsable: string,
-      nombresResponsable: string,
-      observacionRiesgos: string
+      id: number = 0,
+      idPlan: number = 0,
+      numero: number = 0,
+      observacion: string = '',
+      nivelRiesgo: number = 0,
+      recomendacion: string = '',
+      acciones: string = '',
+      medio: string = '',
+      fechaFinal: string = '',
+      unidadResponsable: string = '',
+      documentoUnidadResponsable: string = '',
+      dniResponsable: string = '',
+      nombresResponsable: string = '',
+      observacionRiesgos: string = ''
     ) {
       this.id = id;
       this.idPlan = idPlan;

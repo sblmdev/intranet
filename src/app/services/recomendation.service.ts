@@ -7,12 +7,16 @@ import { Recomendation } from '../models/recomendation';
   providedIn: 'root',
 })
 export class RecomendationService {
-  private apiUrl = 'http://localhost:8088/api/recomendaciones';
+  private apiUrl = 'http://192.168.1.6:8080/intranet-api/api/recomendaciones';
 
   constructor(private http: HttpClient) {}
 
   getRecomendationes(): Observable<Recomendation[]> {
     return this.http.get<Recomendation[]>(this.apiUrl);
+  }
+
+  getRecomendationesByIdPlan(idPlan: number): Observable<Recomendation[]> {
+    return this.http.get<Recomendation[]>(`${this.apiUrl}/getByPlan/${idPlan}`);
   }
 
   getRecomendationById(id: number): Observable<Recomendation> {

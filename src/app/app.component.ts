@@ -13,6 +13,7 @@ export class AppComponent {
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
+      console.log(event);
       if (event instanceof NavigationEnd) {
         this.mostrar();
       }
@@ -27,6 +28,6 @@ export class AppComponent {
     }
   }
   mostrar(){
-    this.show = !(this.isLoggedIn && (this.router.url == '/publication' || this.router.url == '/plans'));
+    this.show = !(this.isLoggedIn && (this.router.url == '/publication' || this.router.url == '/plans' || this.router.url.startsWith('/recomendations/')));
   }
 }

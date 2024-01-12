@@ -30,6 +30,9 @@ import { DirectorateMembersComponent } from './pages/directorate-members/directo
 import { CommonModule } from '@angular/common';
 import { NewComponent } from './pages/new/new.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +56,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     PhonebookComponent,
     DirectorateMembersComponent,
     NewComponent,
+    RecomendationsComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +68,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FontAwesomeModule,
     HttpClientModule ,
     NgxPaginationModule,
+    CanvasJSAngularChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

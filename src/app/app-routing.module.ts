@@ -15,12 +15,14 @@ import { PlansComponent } from './pages/plans/plans.component';
 import { PhonebookComponent } from './pages/phonebook/phonebook.component';
 import { DirectorateMembersComponent } from './pages/directorate-members/directorate-members.component';
 import { NewComponent } from './pages/new/new.component';
+import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
   { path: 'news', component: NewsComponent },
   { path: 'new/:id', component: NewComponent },
   { path: 'plans', component: PlansComponent },
+  { path: 'recomendations/:id', component: RecomendationsComponent},
   { path: 'burials', component: BurialsComponent},
   { path: 'assists', component: AssistsComponent },
   { path: 'treasury', component: TreasuryComponent},

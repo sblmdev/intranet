@@ -4,6 +4,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { PublicationService } from 'src/app/services/publicationService';
 import { Usuario } from 'src/app/models/usuario';
 import { FileService } from 'src/app/services/file.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-publication',
@@ -20,7 +21,7 @@ export class PublicationComponent {
   fechaSeleccionada: Date=  new Date();
   file: File | undefined;
   p:any;
-  constructor(private publicationService: PublicationService,private cdRef: ChangeDetectorRef, private fileService: FileService) {
+  constructor(private publicationService: PublicationService,private cdRef: ChangeDetectorRef, private fileService: FileService, private toastr: ToastrService) {
     this.publications = [];
   }
   
@@ -70,9 +71,11 @@ export class PublicationComponent {
           this.publicacion.urlDocumento = data;
           this.publicationService.createPublication(this.publicacion).subscribe({
             next: (data2) => {
+              this.toastr.success('La Publicación se guardó correctamente', 'Éxito');
               this.clearData();
             },
             error: (error2) => {
+              this.toastr.success('La Publicación no se guardó correctamente', 'Error');
               console.log(error2);
             }
           });
@@ -81,9 +84,11 @@ export class PublicationComponent {
           this.publicacion.urlDocumento = error1.error.text;
           this.publicationService.createPublication(this.publicacion).subscribe({
             next: (data2) => {
+              this.toastr.success('La Publicación se guardó correctamente', 'Éxito');
               this.clearData();
             },
             error: (error2) => {
+              this.toastr.success('La Publicación no se guardó correctamente', 'Error');
               console.log(error2);
             }
           });

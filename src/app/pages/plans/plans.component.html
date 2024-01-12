@@ -1,102 +1,127 @@
 <div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
-    <div class="flex items-center">
-      <div class="font-montserrat text-2xl font-bold">Planes de Acción</div>
-      <button class="ml-auto my-4 bg-indigo-800 text-white font-bold py-2 px-8  float-right hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
-        (click)="toggleNuevo()">
-        Nuevo Plan
-      </button>
-    </div>
-  
-    <table class="w-full table-auto font-montserrat border mt-4">
-      <thead class="bg-indigo-800">
-        <tr class="text-white">
-          <th class="text-center">#</th>
-          <th class="text-left">Nombre</th>
-          <th class="text-center">Informe</th>
-          <th class="text-center">Fecha Informe</th>
-          <th class="text-center">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of plans | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-          <td class="text-center">{{ i + 1 }}</td>
-          <td class="text-center">{{item.nombre}}</td>
-          <td>{{ item.informe }}</td>
-          <td class="text-center">{{ item.fechaInforme }}</td>
-          <td class="text-center">
-            <button class="px-2 py-2 bg-red-300 ml-2"> <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
-                viewBox="0 0 448 512" (click)="deletePublication(item.id)">
-                <path
-                  d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-              </svg>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div  class="flex justify-center font-bold mt-6 font-montserrat ">
-        <pagination-controls 
-            class="my-pagination"
-            (pageChange)="p = $event"
-            previousLabel="Anterior"
-            nextLabel="Siguiente">
-        </pagination-controls>
-    </div>
+  <div class="flex items-center">
+    <div class="font-montserrat text-2xl font-bold">Planes de Acción</div>
+    <button
+      class="ml-auto my-4 bg-indigo-800 text-white font-bold py-2 px-8  float-right hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
+      (click)="toggleNuevo()">
+      Nuevo Plan
+    </button>
   </div>
-  
-  <div *ngIf="nuevoFlag" class="modal fixed inset-0 flex items-center justify-center z-10">
-    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
-      <div
-        class="modal-container font-montserrat bg-white w-3/5 h-auto p-4 rounded-xl shadow-lg "> 
-        <!-- pointer-events-auto overflow-auto -->
-        <div class="flex ">
-          <button class="ml-auto bg-red-500 text-white rounded-md py-1 px-3 font-bold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300" (click)="closetoggleNuevo()">X</button>
+
+  <table class="w-full table-auto font-montserrat border mt-4">
+    <thead class="bg-indigo-800">
+      <tr class="text-white">
+        <th width="5%" class="text-center">#</th>
+        <th class="text-left">Nombre</th>
+        <th width="15%" class="text-center">Informe</th>
+        <th width="10%" class="text-center">Fecha Informe</th>
+        <th width="10%" class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of plans | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+        <td width="5%" class="text-center">{{ i + 1 }}</td>
+        <td class="text-left">{{item.nombre}}</td>
+        <td width="20%" class="text-center">{{ item.informe }}</td>
+        <td width="10%" class="text-center">{{ item.fechaInforme }}</td>
+        <td width="10%" class="text-center">
+          <button class="px-2 py-2 bg-lime-300 ml-2" title="Ver / Editar recomendaciones"
+            (click)="getRecomendations(item.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+              <path
+                d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" />
+            </svg>
+          </button>
+
+          <button class="px-2 py-2 bg-red-300 ml-2" title="Eliminar Plan de acción"
+            (click)="deletePublication(item.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+              <path
+                d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="flex justify-center font-bold mt-6 font-montserrat ">
+    <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+    </pagination-controls>
+  </div>
+</div>
+
+<div *ngIf="nuevoFlag" class="modal fixed inset-0 flex items-center justify-center z-10">
+  <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+    <div class="modal-container font-montserrat bg-white w-3/5 h-auto p-4 rounded-xl shadow-lg ">
+      <!-- pointer-events-auto overflow-auto -->
+      <div class="flex ">
+        <button
+          class="ml-auto bg-red-500 text-white rounded-md py-1 px-3 font-bold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+          (click)="closetoggleNuevo()">X</button>
+      </div>
+
+
+      <div class="mx-8 mb-4">
+        <div class="flex mb-8">
+          <div class="text-2xl mx-auto font-montserrat font-bold text-center underline">Nuevo Plan</div>
+
         </div>
-        
-        
-        <div class="mx-8 mb-4">
-          <div class="flex mb-8">
-            <div class="text-2xl mx-auto font-montserrat font-bold text-center underline">Nuevo Plan</div>
-            
+        <form>
+          <div class="mb-4">
+            <label for="titulo" class="text-lg font-montserrat block font-bold">Nombre:</label>
+            <input type="text" id="titulo" name="titulo" class="mt-1 p-2 h-10 border rounded-md w-full"
+              [(ngModel)]="plan.nombre">
           </div>
-          <form>
-            <div class="mb-4">
-              <label for="titulo" class="text-lg font-montserrat block font-bold">Nombre:</label>
-              <input type="text" id="titulo" name="titulo" class="mt-1 p-2 h-10 border rounded-md w-full"
-                [(ngModel)]="plan.nombre">
+
+          <div class="mb-4">
+            <label for="titulo" class="text-lg font-montserrat block font-bold">Entidad:</label>
+            <input type="text" id="entidad" name="entidad" class="mt-1 p-2 h-10 border rounded-md w-full"
+              [(ngModel)]="plan.entidad" [disabled]="true">
+          </div>
+
+          <div class="mb-4 flex items-center">
+            <div class="w-1/2 pr-2">
+              <label for="titulo" class="text-lg font-montserrat block font-bold">Informe:</label>
+              <input type="text" id="informe" name="informe" class="mt-1 p-2 h-10 border rounded-md w-full"
+                [(ngModel)]="plan.informe">
             </div>
 
-            <div class="mb-4">
-                <label for="titulo" class="text-lg font-montserrat block font-bold">Entidad:</label>
-                <input type="text" id="entidad" name="entidad" class="mt-1 p-2 h-10 border rounded-md w-full"
-                  [(ngModel)]="plan.entidad" [disabled]="true">
-              </div>
-  
-            <div class="mb-4 flex items-center">
-              <div class="w-1/2 pr-2">
-                <label for="titulo" class="text-lg font-montserrat block font-bold">Informe:</label>
-                <input type="text" id="informe" name="informe" class="mt-1 p-2 h-10 border rounded-md w-full"
-                  [(ngModel)]="plan.informe">
-              </div>
-  
-              <div class="w-1/2 pl-2">
-                <label for="fechaEvento" class="text-lg font-montserrat block font-bold">Fecha de Informe:</label>
-                <input type="date" id="fecha" name="fecha" [(ngModel)]="plan.fechaInforme"
-                  class="p-2 border border-gray-300 rounded-md w-full h-10">
-              </div>
+            <div class="w-1/2 pl-2">
+              <label for="fechaEvento" class="text-lg font-montserrat block font-bold">Fecha de Informe:</label>
+              <input type="date" id="fecha" name="fecha" [(ngModel)]="plan.fechaInforme"
+                class="p-2 border border-gray-300 rounded-md w-full h-10">
             </div>
-  
-            <div class=" flex mt-12">
-              <button
-                class="bg-indigo-900 text-white rounded-md ml-auto px-12 py-2 text-base font-medium hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
-                (click)="savePublication()"
-                [disabled]="plan.nombre.length == 0 || plan.informe.length == 0 || plan.fechaInforme.length == 0">
-                Guardar
-              </button>
+          </div>
+
+          <div class="mb-4 flex items-center">
+            <div class="w-1/2 pr-2">
+              <label for="tipoPublicacion" class="text-lg font-montserrat block font-bold">Tipo de Auditoria:</label>
+              <select name="listaTipos"
+                class="w-full h-10 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+                [(ngModel)]="plan.tipoAuditoria">
+                <option value="">Seleccionar Tipo de auditoria</option>
+                <option *ngFor="let opcion of opciones" [value]="opcion">{{ opcion }}</option>
+              </select>
             </div>
-  
-          </form>
-        </div>
+
+            <div class="w-1/2 pl-2">
+              <label for="gerencia" class="text-lg font-montserrat block font-bold">Entidad auditora:</label>
+              <input type="text" id="entidadAuditora" name="entidadAuditora"
+                class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="plan.entidadAuditora">
+            </div>
+          </div>
+
+          <div class=" flex mt-12">
+            <button
+              class="bg-indigo-900 text-white rounded-md ml-auto px-12 py-2 text-base font-medium hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
+              (click)="savePublication()"
+              [disabled]="plan.nombre.length == 0 || plan.informe.length == 0 || plan.fechaInforme.length == 0 || plan.tipoAuditoria.length == 0 || plan.entidadAuditora.length == 0">
+              Guardar
+            </button>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
+</div>

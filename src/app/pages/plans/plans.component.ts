@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Plan } from 'src/app/models/plan';
 import { PlanService } from 'src/app/services/plan.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plans',
@@ -13,7 +15,16 @@ export class PlansComponent {
   plans: Plan[] = [];
   p:any;
 
-  constructor(private planService: PlanService) {
+  opciones: string[] = [
+    "TIPO DE AUDITORIA 1",
+    "TIPO DE AUDITORIA 2",
+    "TIPO DE AUDITORIA 3",
+    "TIPO DE AUDITORIA 4"
+  ];
+
+  constructor(private router: Router, 
+    private planService: PlanService, 
+    private toastr: ToastrService) {
   
   }
 
@@ -24,7 +35,7 @@ export class PlansComponent {
   toggleNuevo() {
     this.nuevoFlag=true;
     this.plan = new Plan();
-    this.plan.entidad = "Sociedad de Beneficencia de Lima Metropolitana";
+    this.plan.entidad = "SOCIEDAD DE BENEFICENCIA DE LIMA METROPOLITANA";
   }
 
   closetoggleNuevo() {
@@ -34,9 +45,11 @@ export class PlansComponent {
   savePublication(){
     this.planService.addPlan(this.plan).subscribe({
       next: (data2) => {
+        this.toastr.success('El Plan de acción se guardó correctamente', 'Éxito');
         this.clearData();
       },
       error: (error2) => {
+        this.toastr.success('El Plan de acción no se guardó correctamente', 'Error');
         console.log(error2);
       }
     });
@@ -45,6 +58,14 @@ export class PlansComponent {
   clearData(){
     this.plan = new Plan();
     this.nuevoFlag = false;
+    this.planService.getPlanes().subscribe({
+      next: (data) => {
+        this.plans = data;
+      },
+      error: (_error) => {
+        console.log(_error);
+      }
+    });
   }
 
   deletePublication(id: number) {
@@ -56,6 +77,10 @@ export class PlansComponent {
         console.log(_error);
       }
     });
+  }
+
+  getRecomendations(idPlan: number) {
+    this.router.navigate(['/recomendations', idPlan]);
   }
 
 }
