@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  ruta = this.router.url;
-  constructor(private router: Router) {
-  }
+  ruta: string = '';
+  constructor(private router: Router) {}
+
   ngOnInit() {
-    setTimeout(() => {
-      this.ruta = this.router.url;
-      console.log(this.ruta);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.ruta = event.url;
+      }
     });
   }
 
