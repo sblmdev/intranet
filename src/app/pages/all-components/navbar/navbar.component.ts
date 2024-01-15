@@ -7,24 +7,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  ruta = 1;
+  ruta = this.router.url;
   constructor(private router: Router) {
+  }
+  ngOnInit() {
+    setTimeout(() => {
+      this.ruta = this.router.url;
+      console.log(this.ruta);
+    });
   }
 
   goToNews() {
-    this.ruta = 1;
+    console.log(this.router.url)
+    this.ruta = '/news';
     this.router.navigate(['/', 'news']);
   }
   goToAssists() {
-    this.ruta = 2;
+    this.ruta = '/assists';
     this.router.navigate(['/', 'assists']);
   }
   goToEvaluations() {
-    this.ruta = 3;
+    this.ruta = '/evaluations';
     this.router.navigate(['/', 'evaluations']);
   }
   goToGraveyards() {
-    this.ruta = 4;
+    this.ruta = '/graveyards';
     this.router.navigate(['/', 'graveyards']);
   }
 }

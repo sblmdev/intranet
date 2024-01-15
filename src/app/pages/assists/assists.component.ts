@@ -3,7 +3,6 @@ import * as moment from 'moment';
 import { AssistTime } from 'src/app/models/assistantTime';
 import { Usuario } from 'src/app/models/usuario';
 import { AssistsService } from 'src/app/services/assists.service';
-
 @Component({
   selector: 'app-assists',
   templateUrl: './assists.component.html',

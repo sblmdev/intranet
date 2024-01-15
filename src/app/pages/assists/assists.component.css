@@ -1,0 +1,8 @@
+.transition-max-height {
+    max-height: 200px;
+    overflow: hidden;
+  }
+
+  .transition-max-height:focus {
+    max-height: 500px; /* Ajusta el valor según sea necesario */
+  }
