@@ -3,34 +3,34 @@
   <div class="rounded-md border-2" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.tipo == 4)">
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Administración</div>
     <ul class="px-4 py-2 list-disc list-inside">
-      <li class="font-montserrat cursor-pointer" (click)="abrirPublicaciones()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2)">Publicaciones</li>
-      <li class="font-montserrat cursor-pointer" *ngIf="(usuario.tipo == 1 || usuario.tipo == 3)">Cementerios</li>
-      <li class="font-montserrat cursor-pointer" (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 4)">Planes de acción</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100 " (click)="abrirPublicaciones()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2)">Publicaciones</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  " *ngIf="(usuario.tipo == 1 || usuario.tipo == 3)">Cementerios</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  " (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 4)">Planes de acción</li>
     </ul>
   </div>
 
   <div class="rounded-md border-2" [ngClass]="{'mt-4': (usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.tipo == 4)}">
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Acerca de la SBLM</div>
     <ul class="px-4 py-2 list-disc list-inside">
-      <li class="font-montserrat cursor-pointer" (click)="toggleMision()">Misión</li>
-      <li class="font-montserrat cursor-pointer" (click)="toggleVision()">Visión</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  " (click)="toggleMision()">Misión</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  " (click)="toggleVision()">Visión</li>
       <!--<li class="font-montserrat cursor-pointer" (click)="toggleValores()">Valores institucionales</li>-->
-      <li><a class="font-montserrat cursor-pointer" href="http://192.168.1.204:5051/images/organigrama/organigrama.jpg" target="_blank">Organigrama</a> </li>
-      <li class="font-montserrat cursor-pointer" (click)="goPhoneBook()">Directorio Telefónico</li>
-      <li class="font-montserrat cursor-pointer" (click)="goDirectorateMembers()">Miembros del directorio</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  "><a  href="http://192.168.1.204:5051/images/organigrama/organigrama.jpg" target="_blank">Organigrama</a> </li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  " (click)="goPhoneBook()">Directorio Telefónico</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  " (click)="goDirectorateMembers()">Miembros del directorio</li>
     </ul>
   </div>
 
   <div class="rounded-md border-2 mt-4">
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Documentos de trabajo</div>
     <ul class="px-4 py-2 list-disc list-inside">
-      <li class="font-montserrat cursor-pointer"><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/ROF.pdf" target="_blank">R.O.F.</a></li>
-      <li class="font-montserrat cursor-pointer"><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/PLAN_12672_MOF_2009.pdf" target="_blank">M.O.F.</a></li>
-      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Leyes')">Leyes</li>
-      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Resoluciones')">Resoluciones</li>
-      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Reglamentos')">Reglamentos</li>
-      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Directivas')">Directivas</li>
-      <li class="font-montserrat cursor-pointer" (click)="goDocuments('Acuerdos')">Acuerdos</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500  hover:bg-blue-100  "><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/ROF.pdf" target="_blank">R.O.F.</a></li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  "><a href="http://192.168.1.204:5051/components/com_documentos/includes/informacion/SBLM/PLAN_12672_MOF_2009.pdf" target="_blank">M.O.F.</a></li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500  hover:bg-blue-100  " (click)="goDocuments('Leyes')">Leyes</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500  hover:bg-blue-100  " (click)="goDocuments('Resoluciones')">Resoluciones</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500  hover:bg-blue-100  " (click)="goDocuments('Reglamentos')">Reglamentos</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500 hover:bg-blue-100  " (click)="goDocuments('Directivas')">Directivas</li>
+      <li class="font-montserrat cursor-pointer transition duration-250 ease-in-out hover:text-blue-500  hover:bg-blue-100  " (click)="goDocuments('Acuerdos')">Acuerdos</li>
     </ul>
   </div>
 
