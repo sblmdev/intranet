@@ -33,7 +33,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ProfileComponent } from './pages/profile/profile.component';
-
 @NgModule({
   declarations: [
     AppComponent,
