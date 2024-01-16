@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,24 +7,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  ruta = 1;
-  constructor(private router: Router) {
+  ruta: string = '/news';
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.ruta = event.url;
+      }
+    });
   }
 
   goToNews() {
-    this.ruta = 1;
+    this.ruta = '/news';
     this.router.navigate(['/', 'news']);
   }
   goToAssists() {
-    this.ruta = 2;
+    this.ruta = '/assists';
     this.router.navigate(['/', 'assists']);
   }
   goToEvaluations() {
-    this.ruta = 3;
+    this.ruta = '/evaluations';
     this.router.navigate(['/', 'evaluations']);
   }
   goToGraveyards() {
-    this.ruta = 4;
+    this.ruta = '/graveyards';
     this.router.navigate(['/', 'graveyards']);
   }
 }

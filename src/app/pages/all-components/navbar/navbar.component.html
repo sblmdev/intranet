@@ -1,13 +1,28 @@
+
 <div class="w-full bg-indigo-900">
-    <div class="flex items-center mx-20 py-4">
-        <a class="cursor-pointer font-semibold" (click)="goToNews()">
+    <div class="flex items-center mx-20 ">
+
+        <!-- <a class="cursor-pointer font-semibold my-4 " (click)="goToNews()">
             <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4" 
-            [class.decoration-red-500]="ruta==1">Publicaciones</h1>
-        </a>
-        <a class="cursor-pointer font-semibold ml-8" (click)="goToAssists()">
+                [class.decoration-red-500]="ruta==1">
+                Publicaciones
+            </h1>
+        </a> -->
+       
+            <button class="transition duration-300 ease-in-out hover:underline hover:text-yellow-300 font-montserrat font-semibold text-white underline decoration-indigo-900 underline-offset-8 decoration-4 py-4 mx-4" 
+            [class.decoration-red-500]="ruta === '/news' || ruta === '/'"(click)="goToNews()">
+                Publicaciones
+            </button>
+
+            <button class="transition duration-300 ease-in-out hover:underline hover:text-yellow-300 font-montserrat font-semibold text-white underline decoration-indigo-900 underline-offset-8 decoration-4 py-4 mx-4" 
+                [class.decoration-red-500]="ruta=='/assists'" (click)="goToAssists()">
+                Recursos Humanos
+            </button>
+
+        <!-- <a class="cursor-pointer font-semibold ml-8" (click)="goToAssists()">
             <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4" 
             [class.decoration-red-500]="ruta==2">Recursos Humanos</h1>
-        </a>
+        </a> -->
         <!--<a class="cursor-pointer font-semibold ml-8" (click)="goToEvaluations()">
             <h1 class="font-montserrat text-white underline decoration-indigo-900 underline-offset-8 decoration-4" 
             [class.decoration-red-500]="ruta==3">Evaluaciones</h1>
@@ -17,4 +32,5 @@
             [class.decoration-red-500]="ruta==4">Cementerios</h1>
         </a>-->
     </div>
+    
 </div>

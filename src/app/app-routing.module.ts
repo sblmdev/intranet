@@ -16,6 +16,7 @@ import { PhonebookComponent } from './pages/phonebook/phonebook.component';
 import { DirectorateMembersComponent } from './pages/directorate-members/directorate-members.component';
 import { NewComponent } from './pages/new/new.component';
 import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'reservations', component: ReservationsComponent},
   { path: 'questionnaire', component: QuestionnaireComponent},
   { path: 'directorate', component: DirectorateMembersComponent},
+  { path: 'profile', component: ProfileComponent},
 ];
 
 @NgModule({

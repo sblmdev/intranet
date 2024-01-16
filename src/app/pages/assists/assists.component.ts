@@ -3,11 +3,15 @@ import * as moment from 'moment';
 import { AssistTime } from 'src/app/models/assistantTime';
 import { Usuario } from 'src/app/models/usuario';
 import { AssistsService } from 'src/app/services/assists.service';
-
+import { ToastrService } from 'ngx-toastr';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-assists',
   templateUrl: './assists.component.html',
-  styleUrls: ['./assists.component.css']
+  styleUrls: ['./assists.component.css'],
+  template: `
+    <app-profile [dato]="dni" (evento)="manejarEvento($event)"></app-profile>
+  `,
 })
 export class AssistsComponent {
 
@@ -52,8 +56,7 @@ export class AssistsComponent {
 
   selectedPersonal: string = '';
 
-  constructor(private assistantService: AssistsService) { }
-
+  constructor(private assistantService: AssistsService,private toastr: ToastrService,private router: Router) { }
   ngOnInit() {
     const usuarioString = sessionStorage.getItem("Usuario");
     if (usuarioString) {
@@ -63,7 +66,10 @@ export class AssistsComponent {
     }
     this.getPersonalByOficina();
   }
-
+  errorConsulta() {
+    this.toastr.error('Seleccione un usuario', 'Usuario no seleccionado');
+  }
+  
   getPersonalByOficina(){
     this.assistantService.getPersonalByDependencia(this.dependencia).subscribe({
       next: (data) => {
@@ -77,19 +83,7 @@ export class AssistsComponent {
 
   searchAssistants() {
     if(this.selectedPersonal.length == 0) {
-      this.assistantService.searchAsistant(this.dni, this.selectedMonth, this.selectedYear).subscribe({
-        next: (data) => {
-          this.assistans = data.map((assistant: any) => {
-            const fecha = new Date(assistant.fecha);
-            assistant.day = this.obtenerNombreDia(fecha.getDay());
-            return assistant;
-          });
-          this.updateHeader();
-        },
-        error: (_error) => {
-          console.log(_error);
-        }
-      });
+      this.errorConsulta()
     } else {
       this.assistantService.searchAsistant(this.selectedPersonal, this.selectedMonth, this.selectedYear).subscribe({
         next: (data) => {
@@ -149,6 +143,11 @@ export class AssistsComponent {
   obtenerNombreDia(numeroDia: number): string {
     const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     return diasSemana[numeroDia];
+  }
+
+  goToProfile(dni:string) {
+
+    this.router.navigate(['/', 'profile']);
   }
 
 }

@@ -28,7 +28,12 @@ export class HeaderComponent {
   }
 
   goHome() {
-    this.router.navigate(['/']);
+    
+    this.router.navigate(['/','news']);
+    setTimeout(() => {
+      window.location.reload();
+    });
+    
   }
 
   cerrarSesion() {

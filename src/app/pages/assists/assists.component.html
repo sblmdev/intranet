@@ -1,27 +1,36 @@
+
 <div class="bg-white p-4">
-    <h1 class="text-2xl text-center font-bold font-montserrat">{{ months[selectedMonthNumber - 1].label }} - {{ selectedYearNumber }}</h1>
+    <h1 class="text-2xl text-center font-bold font-montserrat select-none">{{ months[selectedMonthNumber - 1].label }} - {{ selectedYearNumber }}</h1>
 
     <div class="w-full mx-auto">
-
+        
         <div class="flex items-center mb-4">
+            
+            
 
-            <select class="h-10 px-4 border border-gray-300 shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+             <select class="cursor-pointer transition duration-200 ease-in-out h-10 px-4 border border-gray-300 shadow-sm focus:outline-none hover:ring focus:border-blue-500"
                  *ngIf="(usuario.tipo == 1 || usuario.tipo == 6)" name="personale" id="personale" [(ngModel)]="selectedPersonal">
                 <option value="">Seleccionar personal</option>
                 <option *ngFor="let per of personal" [value]="per.dni">{{ per.nombres }}</option>
-            </select>
+            </select> 
 
-            <select class="h-10 px-4 border border-gray-300 shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+            <!-- <select class="cursor-pointer transition duration-200 ease-in-out h-10 px-4 border border-gray-300 shadow-sm focus:outline-none hover:ring focus:border-blue-500"
                 name="months" id="months" [(ngModel)]="selectedMonth" [ngClass]="{'ml-2': (usuario.tipo == 1 || usuario.tipo == 2)}">
                 <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+            </select> -->
+            <select class="cursor-pointer transition-max-height duration-200 ease-in-out h-10 px-4 border border-gray-300 shadow-sm focus:outline-none hover:ring focus:border-blue-500"
+            name="months" id="months" [(ngModel)]="selectedMonth" [ngClass]="{'ml-2': (usuario.tipo == 1 || usuario.tipo == 2)}">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
             </select>
 
-            <select class="h-10 px-4 border border-gray-300 shadow-sm focus:outline-none focus:ring focus:border-blue-500 ml-2"
+            <select class="cursor-pointer transition duration-200 ease-in-out h-10 px-4 border border-gray-300 shadow-sm focus:outline-none hover:ring focus:border-blue-500 ml-2"
                 name="years" id="years" [(ngModel)]="selectedYear">
                 <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
             </select>
-
-            <button class="my-4 bg-indigo-800 text-white font-bold py-2 px-8 ml-2" (click)="searchAssistants()">Buscar</button>
+            <button class="my-4 bg-indigo-800 text-white font-bold py-2 px-8 ml-2 transition transform active:scale-90 duration-250 ease-in-out hover:text-yellow-300 " (click)="searchAssistants()">Consultar</button>
+        
+              
+            <button class= "rounded-3xl my-4 ml-auto bg-indigo-800 text-white font-bold py-2 px-6 ml-2 transition transform active:scale-90 duration-250 ease-in-out hover:text-yellow-300 " (click)="goToProfile(dni)">Ver perfil</button>
 
         </div>
 
