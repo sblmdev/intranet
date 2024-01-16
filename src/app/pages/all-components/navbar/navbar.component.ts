@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  ruta: string = '';
+  ruta: string = '/news';
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -19,7 +19,6 @@ export class NavbarComponent {
   }
 
   goToNews() {
-    console.log(this.router.url)
     this.ruta = '/news';
     this.router.navigate(['/', 'news']);
   }

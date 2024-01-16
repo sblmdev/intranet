@@ -4,10 +4,14 @@ import { AssistTime } from 'src/app/models/assistantTime';
 import { Usuario } from 'src/app/models/usuario';
 import { AssistsService } from 'src/app/services/assists.service';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-assists',
   templateUrl: './assists.component.html',
-  styleUrls: ['./assists.component.css']
+  styleUrls: ['./assists.component.css'],
+  template: `
+    <app-profile [dato]="dni" (evento)="manejarEvento($event)"></app-profile>
+  `,
 })
 export class AssistsComponent {
 
@@ -52,8 +56,7 @@ export class AssistsComponent {
 
   selectedPersonal: string = '';
 
-  constructor(private assistantService: AssistsService,private toastr: ToastrService) { }
-
+  constructor(private assistantService: AssistsService,private toastr: ToastrService,private router: Router) { }
   ngOnInit() {
     const usuarioString = sessionStorage.getItem("Usuario");
     if (usuarioString) {
@@ -140,6 +143,11 @@ export class AssistsComponent {
   obtenerNombreDia(numeroDia: number): string {
     const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     return diasSemana[numeroDia];
+  }
+
+  goToProfile(dni:string) {
+
+    this.router.navigate(['/', 'profile']);
   }
 
 }
