@@ -152,21 +152,27 @@
           </div> -->
           <div class=" flex mt-12">
             
-            <div *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
+            <div *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos' && publicacion.tipoPublicacion!='Galería'">
               <label for="documento" class="text-lg font-montserrat block font-bold">Documento (PDF):</label>
               <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="application/pdf">
             </div>
             
             <div 
-            *ngIf="publicacion.tipoPublicacion=='Comunicaciones' ||  publicacion.tipoPublicacion=='Eventos'">
-            <label for="imagen" class="text-lg font-montserrat block font-bold">Imagen (JPG o PNG):</label>
-            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/jpeg, image/png">
+              *ngIf="publicacion.tipoPublicacion=='Comunicaciones' ||  publicacion.tipoPublicacion=='Eventos'">
+              <label for="imagen" class="text-lg font-montserrat block font-bold">Imagen (JPG o PNG):</label>
+              <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/jpeg, image/png">
+            </div>
+
+            <div 
+              *ngIf="publicacion.tipoPublicacion=='Galería'">
+              <label for="imagen" class="text-lg font-montserrat block font-bold">Imagen (JPG o PNG)*:</label>
+              <input type="file" multiple id="fileInput" (change)="onFileSelected($event)" accept="image/jpeg, image/png">
             </div>
 
             <button
               class="bg-indigo-900 text-white rounded-md ml-auto px-12 py-2 text-base font-medium hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
               (click)="savePublication()"
-              [disabled]="publicacion.titulo.length == 0 || publicacion.tipoPublicacion.length == 0 || file == undefined">
+              [disabled]="publicacion.titulo.length == 0 || publicacion.tipoPublicacion.length == 0 || files.length == 0">
               Guardar
             </button>
           </div>
