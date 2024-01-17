@@ -1,4 +1,4 @@
-export class Documento {
+export class Document {
     id: number;
 	idPublicacion: number;
     urlDocumento: string;

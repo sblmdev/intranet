@@ -29,10 +29,12 @@ import { PhonebookComponent } from './pages/phonebook/phonebook.component';
 import { DirectorateMembersComponent } from './pages/directorate-members/directorate-members.component';
 import { CommonModule } from '@angular/common';
 import { NewComponent } from './pages/new/new.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { GalleryComponent } from '@daelmaak/ngx-gallery';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +72,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HttpClientModule ,
     NgxPaginationModule,
     CanvasJSAngularChartsModule,
+    GalleryComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
