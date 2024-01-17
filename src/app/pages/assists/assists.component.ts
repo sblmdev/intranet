@@ -16,7 +16,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AssistsComponent {
 
   usuario: Usuario = new Usuario();
-
+  perfilFlag:boolean=false;
   dni: string = "";
   dependencia: string = "";
 
@@ -149,5 +149,8 @@ export class AssistsComponent {
 
     this.router.navigate(['/', 'profile']);
   }
-
+  togglePerfil(dni:string): boolean {
+    this.perfilFlag = !this.perfilFlag
+    return this.perfilFlag
+  }
 }
