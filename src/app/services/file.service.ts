@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileService {
-  private baseUrl = 'http://192.168.1.6:8080/intranet-api';
+  private baseUrl = 'http://localhost:8080/intranet-api';
 
   constructor(private http: HttpClient) { }
 

@@ -33,10 +33,12 @@ export class NewComponent {
               for(let i=0; i<documents.length; i++) {
                 let image = {
                   src: documents[i].urlDocumento,
-                  thumbSrc: documents[i].urlDocumento,
+                 
                 }
                 this.items.push(image);
               }
+              console.log(this.items);
+              console.log(this.items.length);
             },
             error: (_error2) => {
               console.log(_error2);

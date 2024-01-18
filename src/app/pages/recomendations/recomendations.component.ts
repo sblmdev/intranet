@@ -196,7 +196,7 @@ export class RecomendationsComponent {
         this.chartOptions4 = {
           animationEnabled: true,
           title: {
-          text: "Estado de fechas - " + this.recomendations.length + " Recomendaciones"
+          text: "Estado de fechas - " + this.fechas + " Recomendaciones"
           },
           data: [{
           type: "pie",

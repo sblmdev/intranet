@@ -64,6 +64,10 @@ export class SidebarComponent {
     return this.valoresFlag
   }
 
+  abrirPublicaciones(): void {
+    this.router.navigate(['/publication']);
+  }
+
   goDocuments(title: string) {
     this.router.navigate(['/documents', title]);
   }
@@ -74,6 +78,10 @@ export class SidebarComponent {
 
   goDirectorateMembers() {
     this.router.navigate(['/directorate']);
+  }
+
+  goPlans() {
+    this.router.navigate(['/plans']);
   }
 
 }
