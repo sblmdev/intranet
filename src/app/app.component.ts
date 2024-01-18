@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    let token = sessionStorage.getItem("Token");
+    let token = localStorage.getItem("Token");
     if(token != null && token != undefined && token!=""){
       this.isLoggedIn = true;
     }

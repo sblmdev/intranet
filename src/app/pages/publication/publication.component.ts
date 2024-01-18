@@ -33,24 +33,24 @@ export class PublicationComponent {
 
   ngOnInit() {
     this.clearData();
-    const usuarioString = sessionStorage.getItem("Usuario");
+    const usuarioString = localStorage.getItem("Usuario");
     if (usuarioString !== null) {
       try {
         let usuario: Usuario = JSON.parse(usuarioString);
         if(usuario.tipo == 1){
-          this.opciones = ["Comunicaciones","Galería","Eventos","Leyes","Resoluciones","Reglamentos","Directivas","Acuerdos","Manuales"];
+          this.opciones = ["Comunicaciones", "Eventos", "Galería","Acuerdos", "Códigos", "Directivas", "Leyes", "Lineamientos", "Manuales", "Planes", "Políticas", "Procedimientos", "Reglamentos", "Resoluciones"];
         }
         else{
           switch(usuario.dependencia) {
-            case 'GAF': this.opciones = ["Comunicaciones", "Galería", "Eventos"]; break;
-            case 'GPD': this.opciones = ["Leyes", "Resoluciones", "Reglamentos", "Directivas", "Acuerdos", "Manuales"];break;
+            case 'GAF': this.opciones = ["Comunicaciones", "Eventos", "Galería"]; break;
+            case 'GPD': this.opciones = ["Acuerdos", "Códigos", "Directivas", "Leyes", "Lineamientos", "Manuales", "Planes", "Políticas", "Procedimientos", "Reglamentos", "Resoluciones"];break;
           }
         }
       } catch (error) {
         console.error("Error al parsear el objeto Usuario:", error);
       }
     } else {
-      console.warn("No se encontró la clave 'Usuario' en sessionStorage.");
+      console.warn("No se encontró la clave 'Usuario' en localStorage.");
     }
 
   }
@@ -124,7 +124,7 @@ export class PublicationComponent {
     this.publicacion = new Publication();
     this.files = [];
     this.nuevoFlag = false;
-    const usuarioString = sessionStorage.getItem("Usuario");
+    const usuarioString = localStorage.getItem("Usuario");
     if (usuarioString !== null) {
       try {
         this.publicacion.gerencia = JSON.parse(usuarioString).dependencia;
@@ -140,7 +140,7 @@ export class PublicationComponent {
         console.error("Error al parsear el objeto Usuario:", error);
       }
     } else {
-      console.warn("No se encontró la clave 'Usuario' en sessionStorage.");
+      console.warn("No se encontró la clave 'Usuario' en localStorage.");
     }
   }
 

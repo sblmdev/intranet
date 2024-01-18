@@ -15,7 +15,7 @@ export class HeaderComponent {
   constructor(private router: Router) {}
 
   ngOnInit(){
-    const usuarioString = sessionStorage.getItem("Usuario");
+    const usuarioString = localStorage.getItem("Usuario");
     if (usuarioString !== null) {
       try {
         this.usuario = JSON.parse(usuarioString);
@@ -23,7 +23,7 @@ export class HeaderComponent {
         console.error("Error al parsear el objeto Usuario:", error);
       }
     } else {
-      console.warn("No se encontró la clave 'Usuario' en sessionStorage.");
+      console.warn("No se encontró la clave 'Usuario' en localStorage.");
     }
   }
 
@@ -40,8 +40,8 @@ export class HeaderComponent {
     this.router.navigate(['/']);
 
     setTimeout(() => {
-      sessionStorage.setItem("Token", "");
-      sessionStorage.setItem("Usuario", "");
+      localStorage.setItem("Token", "");
+      localStorage.setItem("Usuario", "");
       window.location.reload();
     }, 1000);
   }

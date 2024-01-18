@@ -58,7 +58,7 @@ export class AssistsComponent {
 
   constructor(private assistantService: AssistsService,private toastr: ToastrService,private router: Router) { }
   ngOnInit() {
-    const usuarioString = sessionStorage.getItem("Usuario");
+    const usuarioString = localStorage.getItem("Usuario");
     if (usuarioString) {
       this.usuario = JSON.parse(usuarioString);
       this.dni = this.usuario.dni;

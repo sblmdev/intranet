@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of publications | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+      <tr *ngFor="let item of publications | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" class="odd:bg-white even:bg-blue-50">
         <td class="text-center">{{ i + 1 }}</td>
         <td class="text-center">{{ item.fechaPublicacion.substring(8,10) }}-{{ item.fechaPublicacion.substring(5,7) }}-{{item.fechaPublicacion.substring(0,4) }}</td>
         <td>{{ item.titulo }}</td>

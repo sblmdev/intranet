@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/models/usuario';
-import { LoginService } from 'src/app/services/loginService';
+import { LoginService } from 'src/app/services/LoginService';
 
 @Component({
   selector: 'app-login',
@@ -19,14 +19,14 @@ export class LoginComponent {
 
   sendUsernamePassword() {
     /*let usuario = new Usuario(1,"Jeferson Santos", "Cayo Ortega", "45608935", "jcayo", "123456", 1, "GTI", "SGDS", "Jr. Puno 228");
-    sessionStorage.setItem("Token", "tokenNew");
-    sessionStorage.setItem("Usuario", JSON.stringify(usuario));
+    localStorage.setItem("Token", "tokenNew");
+    localStorage.setItem("Usuario", JSON.stringify(usuario));
     this.toastr.success(usuario.usuario + ', bienvenido a la INTRANET', 'Ingreso correcto');
     window.location.reload();*/
     this.loginService.login(this.username, this.password).subscribe({
       next: (usuario: Usuario) => {
-        sessionStorage.setItem("Token", "tokenNew");
-        sessionStorage.setItem("Usuario", JSON.stringify(usuario));
+        localStorage.setItem("Token", "tokenNew");
+        localStorage.setItem("Usuario", JSON.stringify(usuario));
         this.toastr.success(usuario.usuario + ', bienvenido a la INTRANET', 'Ingreso correcto');
         window.location.reload();
       },

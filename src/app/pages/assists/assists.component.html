@@ -35,7 +35,7 @@
         </div>
 
         <table class="w-full table-auto font-montserrat border mt-4">
-            <thead class="text-center">
+            <thead class="text-center bg-indigo-800 text-white">
                 <tr>
                     <th>Día</th>
                     <th>H. Ingreso</th>
@@ -47,7 +47,7 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-                <tr *ngFor="let assistant of assistans" class="even:bg-amber-100 odd:bg-blue-100">
+                <tr *ngFor="let assistant of assistans" class="odd:bg-white even:bg-blue-50">
                     <td>{{ assistant.day }}</td>
                     <td>{{ formatTimestamp(assistant.dhoraingre_entrada.timestamp) }}</td>
                     <td>{{ formatTimestamp(assistant.dhoraingre_salida.timestamp) }}</td>

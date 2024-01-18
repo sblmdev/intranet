@@ -23,15 +23,6 @@ export class SidebarComponent {
   }
 
   ngOnInit() {
-    this.publicationService.obtenerPublicacionesPorTipo("Manuales").subscribe({
-      next: (data) => {
-        this.publicationsManuales = data;
-      },
-      error: (_error) => {
-        console.log(_error);
-      }
-    });
-
     this.publicationService.obtenerPublicacionesPorTipo("Eventos").subscribe({
       next: (data) => {
         this.publicationsEventos = data;
@@ -41,7 +32,7 @@ export class SidebarComponent {
       }
     });
 
-    const usuarioString = sessionStorage.getItem("Usuario");
+    const usuarioString = localStorage.getItem("Usuario");
     if (usuarioString !== null) {
       try {
         this.usuario = JSON.parse(usuarioString);
@@ -49,7 +40,7 @@ export class SidebarComponent {
         console.error("Error al parsear el objeto Usuario:", error);
       }
     } else {
-      console.warn("No se encontró la clave 'Usuario' en sessionStorage.");
+      console.warn("No se encontró la clave 'Usuario' en localStorage.");
     }
   }
 
@@ -73,10 +64,6 @@ export class SidebarComponent {
     return this.valoresFlag
   }
 
-  abrirPublicaciones(): void {
-    this.router.navigate(['/publication']);
-  }
-
   goDocuments(title: string) {
     this.router.navigate(['/documents', title]);
   }
@@ -87,10 +74,6 @@ export class SidebarComponent {
 
   goDirectorateMembers() {
     this.router.navigate(['/directorate']);
-  }
-
-  goPlans() {
-    this.router.navigate(['/plans']);
   }
 
 }

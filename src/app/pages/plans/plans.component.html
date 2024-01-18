@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of plans | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+      <tr *ngFor="let item of plans | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" class="odd:bg-white even:bg-blue-50">
         <td width="5%" class="text-center">{{ i + 1 }}</td>
         <td class="text-left">{{item.nombre}}</td>
         <td width="20%" class="text-center">{{ item.informe }}</td>
