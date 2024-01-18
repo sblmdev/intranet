@@ -18,12 +18,12 @@ export class LoginComponent {
   }
 
   sendUsernamePassword() {
-    let usuario = new Usuario(1,"Jeferson Santos", "Cayo Ortega", "45608935", "jcayo", "123456", 1, "GTI", "SGDS", "Jr. Puno 228");
-    sessionStorage.setItem("Token", "tokenNew");
-    sessionStorage.setItem("Usuario", JSON.stringify(usuario));
-    this.toastr.success(usuario.usuario + ', bienvenido a la INTRANET', 'Ingreso correcto');
-    window.location.reload();
-    /*this.loginService.login(this.username, this.password).subscribe({
+    // let usuario = new Usuario(1,"Jeferson Santos", "Cayo Ortega", "45608935", "jcayo", "123456", 1, "GTI", "SGDS", "Jr. Puno 228");
+    // sessionStorage.setItem("Token", "tokenNew");
+    // sessionStorage.setItem("Usuario", JSON.stringify(usuario));
+    // this.toastr.success(usuario.usuario + ', bienvenido a la INTRANET', 'Ingreso correcto');
+    // window.location.reload();
+    this.loginService.login(this.username, this.password).subscribe({
       next: (usuario: Usuario) => {
         sessionStorage.setItem("Token", "tokenNew");
         sessionStorage.setItem("Usuario", JSON.stringify(usuario));
@@ -34,6 +34,6 @@ export class LoginComponent {
         this.toastr.error('El usuario y/o contraseña son incorrectos', 'Error');
         console.error("Error durante la autenticación:", JSON.stringify(e));
       }
-    });*/
+    });
   }
 }
