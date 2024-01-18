@@ -30,9 +30,9 @@ export class HeaderComponent {
   goHome() {
     
     this.router.navigate(['/','news']);
-    setTimeout(() => {
-      window.location.reload();
-    });
+    // setTimeout(() => {
+    //   window.location.reload();
+    // });
     
   }
 

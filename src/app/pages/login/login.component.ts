@@ -18,11 +18,6 @@ export class LoginComponent {
   }
 
   sendUsernamePassword() {
-    /*let usuario = new Usuario(1,"Jeferson Santos", "Cayo Ortega", "45608935", "jcayo", "123456", 1, "GTI", "SGDS", "Jr. Puno 228");
-    localStorage.setItem("Token", "tokenNew");
-    localStorage.setItem("Usuario", JSON.stringify(usuario));
-    this.toastr.success(usuario.usuario + ', bienvenido a la INTRANET', 'Ingreso correcto');
-    window.location.reload();*/
     this.loginService.login(this.username, this.password).subscribe({
       next: (usuario: Usuario) => {
         localStorage.setItem("Token", "tokenNew");
