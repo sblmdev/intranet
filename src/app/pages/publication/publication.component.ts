@@ -22,6 +22,7 @@ export class PublicationComponent {
   files: File[] = [];
   contador: number = 0;
   p:any;
+  submit:boolean=false;
   constructor(private publicationService: PublicationService,private cdRef: ChangeDetectorRef, private fileService: FileService, private toastr: ToastrService) {
 
     
@@ -57,12 +58,14 @@ export class PublicationComponent {
   toggleNuevo(): boolean{
     this.nuevoFlag=!this.nuevoFlag
     this.publicacion.fechaPublicacion = new Date().toISOString().substring(0,10);
+    this.submit=false
     return this.nuevoFlag
   }
 
   closetoggleNuevo(): boolean{
     this.nuevoFlag=!this.nuevoFlag
     //this.cdRef.detectChanges();
+    this.clearData()
     return this.nuevoFlag
   }
 
@@ -74,6 +77,12 @@ export class PublicationComponent {
   }
 
   savePublication(){
+    this.submit=true
+    console.log(this.publicacion.fechaEvento)
+    if (this.files.length==0 || this.publicacion.titulo.length==0 || this.publicacion.contenido.length==0 || this.publicacion.fechaPublicacion.length==0
+       || this.publicacion.tipoPublicacion.length==0 || (this.publicacion.fechaEvento.length==0 && this.publicacion.tipoPublicacion=='Eventos'))
+       {this.toastr.error('Complete los campos faltantes', 'Error');}
+    else {
     this.contador = 0;
     this.publicationService.createPublication(this.publicacion).subscribe({
       next: (data2) => {
@@ -103,13 +112,15 @@ export class PublicationComponent {
         this.clearData();
       },
       error: (error2) => {
-        this.toastr.success('La Publicación no se guardó correctamente', 'Error');
+        this.toastr.error('La Publicación no se guardó correctamente', 'Error');
         console.log(error2);
       }
     });
   }
+  }
 
   clearData(){
+    this.submit=false
     this.publicacion = new Publication();
     this.files = [];
     this.nuevoFlag = false;
