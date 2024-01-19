@@ -26,19 +26,17 @@ export class NewComponent {
       next: (data) => {
         this.publication = data;
         if(this.publication.tipoPublicacion == 'Galería'){
-          this.items = [];
           this.documentService.getDocumentsByIdPublication(this.publication.id).subscribe({
             next: (data2) => {
+              this.items = [];
               let documents = data2;
               for(let i=0; i<documents.length; i++) {
                 let image = {
-                  src: documents[i].urlDocumento,
-                 
+                  src: documents[i].urlDocumento.toString(),
+                  thumbSrc: documents[i].urlDocumento.toString(),
                 }
                 this.items.push(image);
               }
-              console.log(this.items);
-              console.log(this.items.length);
             },
             error: (_error2) => {
               console.log(_error2);

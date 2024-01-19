@@ -8,8 +8,8 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root',
 })
 export class LoginService {
-  private baseUrl = 'http://localhost:8080/intranet-api/api/usuarios';
-  private baseUrlAuth = 'http://localhost:8080/intranet-api/api/auth';
+  private baseUrl = 'http://192.168.1.6:8080/intranet-api/api/usuarios';
+  private baseUrlAuth = 'http://192.168.1.6:8080/intranet-api/api/auth';
 
   constructor(private http: HttpClient) { }
 
