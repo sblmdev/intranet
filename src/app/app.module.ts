@@ -72,7 +72,7 @@ import { GalleryComponent } from '@daelmaak/ngx-gallery';
     HttpClientModule ,
     NgxPaginationModule,
     CanvasJSAngularChartsModule,
-    GalleryComponent
+    GalleryComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
