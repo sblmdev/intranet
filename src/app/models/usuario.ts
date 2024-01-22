@@ -9,6 +9,7 @@ export class Usuario {
   dependencia: string;
   dependenciaHijo: string;
   sede: string;
+  fechaIngreso:string;
 
   constructor(
     id: number = 0,
@@ -21,6 +22,7 @@ export class Usuario {
     dependencia: string = '',
     dependenciaHijo: string = '',
     sede: string = '',
+    fechaIngreso:string=''
   ) {
     this.id = id;
     this.nombres = nombres;
@@ -32,6 +34,7 @@ export class Usuario {
     this.dependencia = dependencia;
     this.dependenciaHijo = dependenciaHijo;
     this.sede = sede;
+    this.fechaIngreso=fechaIngreso
   }
 
 }

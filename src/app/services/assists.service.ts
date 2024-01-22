@@ -22,6 +22,10 @@ export class AssistsService {
     const url = `${this.baseUrl}/usuarios/getByDependencia/${dependencia}`;
     return this.http.get<Usuario[]>(url);
   }
+  getPersonalByDNI(dni: string): Observable<any>{
+    const url = `${this.baseUrl}/trabajador/${dni}`;
+    return this.http.get<Usuario>(url);
+  }
   
 
 }
