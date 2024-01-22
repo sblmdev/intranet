@@ -32,8 +32,8 @@ import { NewComponent } from './pages/new/new.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { GalleryComponent } from '@daelmaak/ngx-gallery';
+import { ControlComponent } from './pages/control/control.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { GalleryComponent } from '@daelmaak/ngx-gallery';
     DirectorateMembersComponent,
     NewComponent,
     RecomendationsComponent,
-    ProfileComponent,
+    ControlComponent,
   ],
   imports: [
     CommonModule,

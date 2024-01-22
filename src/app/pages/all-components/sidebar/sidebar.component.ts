@@ -11,6 +11,7 @@ import { PublicationService } from 'src/app/services/publicationService';
 export class SidebarComponent {
   misionFlag: boolean = false;
   visionFlag: boolean = false;
+  controlFlag: boolean = false;
   orgFlag: boolean = false;
   valoresFlag: boolean = false;
 
@@ -45,13 +46,20 @@ export class SidebarComponent {
   }
 
   fullscreen = false;
+
   toggleMision(): boolean {
     this.misionFlag = !this.misionFlag
     return this.misionFlag
   }
+
   toggleVision(): boolean {
     this.visionFlag = !this.visionFlag
     return this.visionFlag
+  }
+
+  toggleControl(): boolean {
+    this.controlFlag = !this.controlFlag
+    return this.controlFlag
   }
 
   toggleOrg(): boolean {
