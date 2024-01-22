@@ -19,7 +19,7 @@ export class AssistsComponent {
   perfilFlag:boolean=false;
   dni: string = "";
   dependencia: string = "";
-
+  usuarioFicha=new Usuario();
   months = [
     { label: 'Enero', value: '1' },
     { label: 'Febrero', value: '2' },
@@ -74,6 +74,23 @@ export class AssistsComponent {
     this.assistantService.getPersonalByDependencia(this.dependencia).subscribe({
       next: (data) => {
         this.personal = data;
+      },
+      error: (_error) => {
+        console.log(_error);
+      }
+    });
+  }
+  getPersonaByDNI(){
+    this.assistantService.getPersonalByDNI(this.dni).subscribe({
+      next: (data) => {
+
+        console.log(data)
+        console.log(data[0].vnombres)
+        this.usuarioFicha.nombres = data[0].vnombres
+        this.usuarioFicha.apellidos = data[0].vapepat + ' '+ data[0].vapemat
+        this.usuarioFicha.dni=data[0].vnumdocu
+        this.usuarioFicha.fechaIngreso=data[0].dfechaingreso.split('T')[0];
+        console.log(this.usuarioFicha)
       },
       error: (_error) => {
         console.log(_error);
@@ -150,6 +167,8 @@ export class AssistsComponent {
     this.router.navigate(['/', 'profile']);
   }
   togglePerfil(dni:string): boolean {
+    this.getPersonaByDNI()
+
     this.perfilFlag = !this.perfilFlag
     return this.perfilFlag
   }
