@@ -39,16 +39,6 @@
     </ul>
   </div>
 
-  <div class="rounded-md border-2 mt-4">
-    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2 select-none">Control Interno</div>
-    <ul class="py-2 list-disc list-inside">
-      <li class="font-montserrat cursor-pointer py-1 px-4  transition duration-200 ease-in-out hover:text-blue-700 hover:bg-blue-100 select-none " (click)="toggleControl()">¿Qué es el Control Interno?</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Marco')">Marco Normativo</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Orientaciones')">Orientaciones Prácticas</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none " (click)="goDocuments('Cronograma')">Cronograma de presentación</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Preguntas')">Preguntas frecuentes</li>
-    </ul>
-  </div>
 
   <div class="rounded-md border-2 mt-4">
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Próximos eventos</div>
@@ -121,29 +111,6 @@
     </div>
   </div>
 </div>
-
-
-<div *ngIf="controlFlag" class="modal fixed inset-0 flex items-center justify-center">
-  <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
-    <div
-      class="modal-container font-montserrat bg-white w-7/12 py-12 px-8 rounded-xl shadow-lg text-center pointer-events-auto items-center relative">
-      <!-- Contenido del modal -->
-      <div class="absolute top-0 right-0 p-2">
-        <button
-          class="bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
-          (click)="toggleControl()">X</button>
-      </div>
-      <div class="flex items-center">
-        <img src="../../../../assets/vision.jpg" class="rounded-md" />
-        <div>
-          <h2 class="text-3xl font-montserrat mb-4 font-bold">¿Qué es el Control Interno?</h2>
-          <div class="text-lg text-justify  font-montserrat mt-16 mx-8">Es el conjunto de acciones, actividades, planes, políticas, normas, registros, organización, procedimientos y métodos, incluyendo las actitudes de las autoridades y el personal, organizadas e instituidas en cada entidad del Estado, que contribuyen al cumplimiento de los objetivos institucionales y promueven una gestión eficaz, eficiente, ética y transparente.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 
 <div *ngIf="valoresFlag" class="modal fixed inset-0 flex items-center justify-center">

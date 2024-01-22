@@ -23,12 +23,6 @@ export class DocumentsComponent {
       this.id = params.get('id') || '';
       this.publicationService.obtenerPublicacionesPorTipo(this.id).subscribe({
         next: (data) => {
-          switch(this.id) {
-            case 'Marco': this.id = 'Marco Normativo'; break;
-            case 'Orientaciones': this.id = 'Orientaciones Prácticas'; break;
-            case 'Cronograma': this.id = 'Cronograma de presentación'; break;
-            case 'Preguntas': this.id = 'Preguntas frecuentes'; break;
-          }
           this.publications = data;
         },
         error: (_error) => {

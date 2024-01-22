@@ -42,6 +42,7 @@ export class HeaderComponent {
     setTimeout(() => {
       localStorage.setItem("Token", "");
       localStorage.setItem("Usuario", "");
+      localStorage.setItem("DateTime", "0");
       window.location.reload();
     }, 1000);
   }

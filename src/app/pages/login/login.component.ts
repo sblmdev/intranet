@@ -20,8 +20,10 @@ export class LoginComponent {
   sendUsernamePassword() {
     this.loginService.login(this.username, this.password).subscribe({
       next: (usuario: Usuario) => {
+        let fecha = new Date();
         localStorage.setItem("Token", "tokenNew");
         localStorage.setItem("Usuario", JSON.stringify(usuario));
+        localStorage.setItem("DateTime", JSON.stringify(fecha.getTime()));
         this.toastr.success(usuario.usuario + ', bienvenido a la INTRANET', 'Ingreso correcto');
         window.location.reload();
       },
