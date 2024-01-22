@@ -29,7 +29,7 @@ export class PublicationComponent {
   
   }
   
-  opciones: string[] = [];
+  opciones: any[] = [];
 
   ngOnInit() {
     this.clearData();
@@ -38,12 +38,54 @@ export class PublicationComponent {
       try {
         let usuario: Usuario = JSON.parse(usuarioString);
         if(usuario.tipo == 1){
-          this.opciones = ["Comunicaciones", "Eventos", "Galería","Acuerdos", "Códigos", "Directivas", "Leyes", "Lineamientos", "Manuales", "Planes", "Políticas", "Procedimientos", "Reglamentos", "Resoluciones"];
+          this.opciones = [
+            { option: "Comunicaciones", value: "Comunicaciones" },
+            { option: "Eventos", value: "Eventos" },
+            { option: "Galería", value: "Galería" },
+            { option: "Acuerdos", value: "Acuerdos" },
+            { option: "Códigos", value: "Códigos" },
+            { option: "Marco", value: "Control Interno - Marco Normativo" },
+            { option: "Orientaciones", value: "Control Interno - Orientaciones Prácticas" },
+            { option: "Cronograma", value: "Control Interno - Cronograma de Presentación" },
+            { option: "Preguntas", value: "Control Interno - Preguntas Frecuentes" },
+            { option: "Directivas", value: "Directivas" },
+            { option: "Leyes", value: "Leyes" },
+            { option: "Lineamientos", value: "Lineamientos" },
+            { option: "Manuales", value: "Manuales" },
+            { option: "Planes", value: "Planes" },
+            { option: "Políticas", value: "Políticas" },
+            { option: "Procedimientos", value: "Procedimientos" },
+            { option: "Reglamentos", value: "Reglamentos" },
+            { option: "Resoluciones", value: "Resoluciones" }
+          ];          
         }
         else{
           switch(usuario.dependencia) {
-            case 'GAF': this.opciones = ["Comunicaciones", "Eventos", "Galería"]; break;
-            case 'GPD': this.opciones = ["Acuerdos", "Códigos", "Directivas", "Leyes", "Lineamientos", "Manuales", "Planes", "Políticas", "Procedimientos", "Reglamentos", "Resoluciones"];break;
+            case 'GAF': 
+            this.opciones = [
+              { option: "Comunicaciones", value: "Comunicaciones" },
+              { option: "Eventos", value: "Eventos" },
+              { option: "Galería", value: "Galería" }
+            ]; break;
+            case 'GPD': 
+            this.opciones = [
+              { option: "Acuerdos", value: "Acuerdos" },
+              { option: "Códigos", value: "Códigos" },
+              { option: "Marco", value: "Control Interno - Marco Normativo" },
+              { option: "Orientaciones", value: "Control Interno - Orientaciones Prácticas" },
+              { option: "Cronograma", value: "Control Interno - Cronograma de Presentación" },
+              { option: "Preguntas", value: "Control Interno - Preguntas Frecuentes" },
+              { option: "Directivas", value: "Directivas" },
+              { option: "Leyes", value: "Leyes" },
+              { option: "Lineamientos", value: "Lineamientos" },
+              { option: "Manuales", value: "Manuales" },
+              { option: "Planes", value: "Planes" },
+              { option: "Políticas", value: "Políticas" },
+              { option: "Procedimientos", value: "Procedimientos" },
+              { option: "Reglamentos", value: "Reglamentos" },
+              { option: "Resoluciones", value: "Resoluciones" }
+            ];
+            ;break;
           }
         }
       } catch (error) {
