@@ -35,6 +35,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { GalleryComponent } from '@daelmaak/ngx-gallery';
 import { ControlComponent } from './pages/control/control.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
