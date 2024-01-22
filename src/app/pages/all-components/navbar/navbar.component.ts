@@ -22,14 +22,22 @@ export class NavbarComponent {
     this.ruta = '/news';
     this.router.navigate(['/', 'news']);
   }
+
   goToAssists() {
     this.ruta = '/assists';
     this.router.navigate(['/', 'assists']);
   }
+
+  goToControl() {
+    this.ruta = '/control';
+    this.router.navigate(['/', 'control']);
+  }
+
   goToEvaluations() {
     this.ruta = '/evaluations';
     this.router.navigate(['/', 'evaluations']);
   }
+
   goToGraveyards() {
     this.ruta = '/graveyards';
     this.router.navigate(['/', 'graveyards']);

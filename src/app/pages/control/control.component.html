@@ -1,1 +1,54 @@
-<p>control works!</p>
+<div class="bg-white p-4">
+    <h1 class="text-2xl font-bold font-montserrat">¿Qué es el Control Interno?</h1>
+
+    <h1 class="text-base text-justify font-montserrat mt-4">
+        Es el conjunto de acciones, actividades, planes, políticas, normas, registros, organización, procedimientos y
+        métodos, incluyendo las actitudes de las autoridades y el personal, organizadas e instituidas en cada entidad
+        del Estado, que contribuyen al cumplimiento de los objetivos institucionales y promueven una gestión eficaz,
+        eficiente, ética y transparente.
+    </h1>
+
+    <!-- Marco Normativo -->
+    <h1 class="text-xl font-bold font-montserrat mt-4">Marco Normativo</h1>
+    <ul *ngIf="marcos && marcos.length > 0; else noDocumentos">
+        <li *ngFor="let marco of marcos">
+            <a [href]="marco.urlDocumento" target="_blank" class="font-montserrat">{{ marco.titulo }}</a>
+        </li>
+    </ul>
+    <ng-template #noDocumentos>
+        <p class="text-sm font-montserrat">No se tienen documentos para mostrar.</p>
+    </ng-template>
+
+    <!-- Orientaciones Prácticas -->
+    <h1 class="text-xl font-bold font-montserrat mt-4">Orientaciones Prácticas</h1>
+    <ul *ngIf="orientaciones && orientaciones.length > 0; else noDocumentos">
+        <li *ngFor="let orientacion of orientaciones">
+            <a [href]="orientacion.urlDocumento" target="_blank" class="font-montserrat">{{ orientacion.titulo }}</a>
+        </li>
+    </ul>
+    <ng-template #noDocumentos>
+        <p class="text-sm font-montserrat">No se tienen documentos para mostrar.</p>
+    </ng-template>
+
+    <!-- Cronograma de Presentación -->
+    <h1 class="text-xl font-bold font-montserrat mt-4">Cronograma de Presentación</h1>
+    <ul *ngIf="cronogramas && cronogramas.length > 0; else noDocumentos">
+        <li *ngFor="let cronograma of cronogramas">
+            <a [href]="cronograma.urlDocumento" target="_blank" class="font-montserrat">{{ cronograma.titulo }}</a>
+        </li>
+    </ul>
+    <ng-template #noDocumentos>
+        <p class="text-sm font-montserrat">No se tienen documentos para mostrar.</p>
+    </ng-template>
+
+    <!-- Preguntas Frecuentes -->
+    <h1 class="text-xl font-bold font-montserrat mt-4">Preguntas Frecuentes</h1>
+    <ul *ngIf="preguntas && preguntas.length > 0; else noDocumentos">
+        <li *ngFor="let pregunta of preguntas">
+            <a [href]="pregunta.urlDocumento" target="_blank" class="font-montserrat">{{ pregunta.titulo }}</a>
+        </li>
+    </ul>
+    <ng-template #noDocumentos>
+        <p class="text-sm font-montserrat">No se tienen documentos para mostrar.</p>
+    </ng-template>
+</div>
