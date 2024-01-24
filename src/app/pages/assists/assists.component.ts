@@ -89,7 +89,6 @@ export class AssistsComponent {
         this.usuarioFicha.nombres = data[0].vnombres
         this.usuarioFicha.apellidos = data[0].vapepat + ' '+ data[0].vapemat
         this.usuarioFicha.dni=data[0].vnumdocu
-        this.usuarioFicha.fechaIngreso=data[0].dfechaingreso.split('T')[0];
         console.log(this.usuarioFicha)
       },
       error: (_error) => {

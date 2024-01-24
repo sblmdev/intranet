@@ -17,6 +17,7 @@ import { DirectorateMembersComponent } from './pages/directorate-members/directo
 import { NewComponent } from './pages/new/new.component';
 import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
 import { ControlComponent } from './pages/control/control.component';
+import { RecomendationFormComponent } from './pages/recomendation-form/recomendation-form.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'new/:id', component: NewComponent },
   { path: 'plans', component: PlansComponent },
   { path: 'recomendations/:id', component: RecomendationsComponent},
+  { path: 'recomendation/:id', component: RecomendationFormComponent},
   { path: 'burials', component: BurialsComponent},
   { path: 'assists', component: AssistsComponent },
   { path: 'treasury', component: TreasuryComponent},

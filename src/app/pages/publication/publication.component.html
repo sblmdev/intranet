@@ -21,10 +21,10 @@
     <tbody>
       <tr *ngFor="let item of publications | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" class="odd:bg-white even:bg-blue-50">
         <td class="text-center">{{ i + 1 }}</td>
-        <td class="text-center">{{ item.fechaPublicacion.substring(8,10) }}-{{ item.fechaPublicacion.substring(5,7) }}-{{item.fechaPublicacion.substring(0,4) }}</td>
+        <td class="text-center" width="10%">{{ item.fechaPublicacion.substring(8,10) }}-{{ item.fechaPublicacion.substring(5,7) }}-{{item.fechaPublicacion.substring(0,4) }}</td>
         <td>{{ item.titulo }}</td>
-        <td class="text-center">{{ item.tipoPublicacion }}</td>
-        <td class="text-center">{{ item.gerencia }}</td>
+        <td class="text-center"  width="15%">{{ item.tipoPublicacion }}</td>
+        <td class="text-center"  width="10%">{{ item.gerencia }}</td>
         <td class="text-center">
           <button class="px-2 py-2 bg-red-300 ml-2"> <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
               viewBox="0 0 448 512" (click)="deletePublication(item.id)">

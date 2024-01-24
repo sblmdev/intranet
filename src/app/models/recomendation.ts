@@ -13,6 +13,7 @@ export class Recomendation {
     dniResponsable: string;
     nombresResponsable: string;
     observacionRiesgos: string;
+    estado: boolean;
   
     constructor(
       id: number = 0,
@@ -28,7 +29,8 @@ export class Recomendation {
       documentoUnidadResponsable: string = '',
       dniResponsable: string = '',
       nombresResponsable: string = '',
-      observacionRiesgos: string = ''
+      observacionRiesgos: string = '',
+      estado: boolean = true,
     ) {
       this.id = id;
       this.idPlan = idPlan;
@@ -44,6 +46,7 @@ export class Recomendation {
       this.dniResponsable = dniResponsable;
       this.nombresResponsable = nombresResponsable;
       this.observacionRiesgos = observacionRiesgos;
+      this.estado = estado;
     }
   }
   

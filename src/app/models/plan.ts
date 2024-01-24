@@ -6,6 +6,7 @@ export class Plan {
     fechaInforme: string;
     tipoAuditoria: string;
     entidadAuditora: string;
+    titularEntidadAuditora: string;
   
     constructor(
       id: number = 0,
@@ -14,7 +15,8 @@ export class Plan {
       informe: string = '',
       fechaInforme: string = '',
       tipoAuditoria: string = '',
-      entidadAuditora: string = ''
+      entidadAuditora: string = '',
+      titularEntidadAuditora: string = ''
     ) {
       this.id = id;
       this.nombre = nombre;
@@ -23,5 +25,6 @@ export class Plan {
       this.fechaInforme = fechaInforme;
       this.tipoAuditoria = tipoAuditoria;
       this.entidadAuditora = entidadAuditora;
+      this.titularEntidadAuditora = titularEntidadAuditora;
     }
 }  
