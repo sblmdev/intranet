@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CanvasJS } from '@canvasjs/angular-charts';
 import { ToastrService } from 'ngx-toastr';
+import { Plan } from 'src/app/models/plan';
 import { Recomendation } from 'src/app/models/recomendation';
+import { PlanService } from 'src/app/services/plan.service';
 import { RecomendationService } from 'src/app/services/recomendation.service';
 
 @Component({
@@ -12,8 +15,10 @@ import { RecomendationService } from 'src/app/services/recomendation.service';
 export class RecomendationsComponent {
   id: number;
   recomendations: Recomendation[] = [];
+  recomendationsFilter: Recomendation[] = [];
   nuevoFlag: boolean=false;
   recomendation: Recomendation = new Recomendation();
+  plan: Plan = new Plan();
   p:any;
 
   altas: number = 0;
@@ -37,8 +42,18 @@ export class RecomendationsComponent {
 
   graficos: boolean = false;
 
-  constructor(private route: ActivatedRoute, 
-    private router: Router, 
+  filtroAreas: string[] = [];
+  filtroRiesgo: string[] = ["Alto", "Medio", "Bajo"];
+  filtroFecha: string[] = ["En proceso", "Por vencer", "Vencido"];
+
+  areaSeleccionada: string = '';
+  riesgoSeleccionado: string = '';
+  fechaSeleccionada: string = '';
+  graficoSeleccionado: number = 1;
+
+  constructor(private router: Router,
+    private route: ActivatedRoute, 
+    private planService: PlanService, 
     private recomendationService: RecomendationService,
     private toastr: ToastrService) {
     this.id = 0;
@@ -104,8 +119,15 @@ export class RecomendationsComponent {
 
     this.recomendationService.getRecomendationesByIdPlan(this.id).subscribe({
       next: (data) => {
-        this.recomendations = data;
+        this.recomendations = JSON.parse(JSON.stringify(data));
+        this.recomendationsFilter = JSON.parse(JSON.stringify(data));
+        this.filtroAreas = [];
         for (const recomendacion of this.recomendations) {
+          let areasAux = recomendacion.unidadResponsable.split('/');
+          for(const areaAux of areasAux){
+            this.filtroAreas.push(areaAux);
+          }
+
           switch(recomendacion.nivelRiesgo) {
             case 1: this.bajas++; break;
             case 2: this.medias++; break;
@@ -141,23 +163,27 @@ export class RecomendationsComponent {
           }
         }
 
+        this.filtroAreas = Array.from(new Set(this.filtroAreas)).sort();
+
+        CanvasJS.addColorSet("colorRiesgos",["rgb(220 38 38)","rgb(252 211 77)","rgb(74 222 128)"]);
         this.chartOptions = {
           animationEnabled: true,
+          colorSet: "colorRiesgos",
           title: {
-          text: "Niveles de riesgo - " + this.recomendations.length + " Recomendaciones"
+            text: "Observaciones por nivel de riesgo - " + this.recomendations.length + " Observaciones"
           },
           data: [{
-          type: "pie",
-          startAngle: -90,
-          indexLabel: "{name}: {y}",
-          yValueFormatString: "#,###.##'%'",
-          dataPoints: [
-            { y: this.altas*100/this.recomendations.length, name: "Alta (" + this.altas + "/" +  this.recomendations.length + ")"},
-            { y: this.medias*100/this.recomendations.length, name: "Media (" + this.medias + "/" +  this.recomendations.length + ")"},
-            { y: this.bajas*100/this.recomendations.length, name: "Baja (" + this.bajas + "/" +  this.recomendations.length + ")"},
-          ]
+            type: "pie",
+            startAngle: -90,
+            indexLabel: "{name}: {y}",
+            yValueFormatString: "#,###.##'%'",
+            dataPoints: [
+              { y: this.altas * 100 / this.recomendations.length, name: "Alta (" + this.altas + "/" + this.recomendations.length + ")" },
+              { y: this.medias * 100 / this.recomendations.length, name: "Media (" + this.medias + "/" + this.recomendations.length + ")" },
+              { y: this.bajas * 100 / this.recomendations.length, name: "Baja (" + this.bajas + "/" + this.recomendations.length + ")" },
+            ]
           }]
-        }
+        };
 
         this.chartOptions2 = {
           animationEnabled: true,
@@ -215,6 +241,16 @@ export class RecomendationsComponent {
         console.log(_error);
       }
     });
+
+    this.planService.getPlanById(this.id).subscribe({
+      next: (datplan) => {
+        this.plan = datplan;
+      },
+      error: (_er) =>{
+        this.plan = new Plan();
+        console.log(_er);
+      }
+    });
   }
 
   deleteRecomendation(id: number) {
@@ -226,6 +262,34 @@ export class RecomendationsComponent {
         console.log(_error);
       }
     });
+  }
+
+  navegarARecomendacion(itemId: number): void {
+    const nuevaVentana = window.open('', '_blank');
+    this.router.navigate(['/recomendation', itemId], { state: { nuevaVentana } });
+  }
+
+  filtrar() {
+    if(this.areaSeleccionada.length == 0 && this.riesgoSeleccionado.length == 0 && this.fechaSeleccionada.length == 0){
+      this.recomendations = JSON.parse(JSON.stringify(this.recomendationsFilter));
+    }
+    else{
+      this.recomendations = JSON.parse(JSON.stringify(this.recomendationsFilter));
+      if(this.areaSeleccionada.length != 0){
+        this.recomendations = this.recomendationsFilter.filter(r => r.unidadResponsable.includes(this.areaSeleccionada));
+      }
+      if(this.riesgoSeleccionado.length != 0){
+        switch(this.riesgoSeleccionado) {
+          case 'Alto': this.recomendations = this.recomendations.filter(r => r.nivelRiesgo==3); break;
+          case 'Medio': this.recomendations = this.recomendations.filter(r => r.nivelRiesgo==2); break;
+          case 'Bajo': this.recomendations = this.recomendations.filter(r => r.nivelRiesgo==1); break;
+        }
+      }
+    }
+  }
+
+  cambiarGrafico(item: number) {
+    this.graficoSeleccionado = item;
   }
 
 }

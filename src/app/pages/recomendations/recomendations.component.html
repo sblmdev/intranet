@@ -1,8 +1,53 @@
 <div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
-    <div class="flex items-center">
+
+    <h1 class="text-2xl text-center font-montserrat font-bold mx-20">{{plan.nombre}}</h1>
+    <div class="w-full bg-gray-200 px-4 py-2 mt-4 rounded-md">
+        <table class="text-base font-montserrat w-full">
+            <tr>
+                <td width="30%" class="font-bold">Entidad:</td>
+                <td>{{plan.entidad}}</td>
+            </tr>
+            <tr>
+                <td width="30%"  class="font-bold">Número del Informe de Alerta de Control:</td>
+                <td>{{plan.informe}}</td>
+            </tr>
+            <tr>
+                <td width="30%"  class="font-bold">Tipo de Auditoría:</td>
+                <td>{{plan.tipoAuditoria}}</td>
+            </tr>
+            <tr>
+                <td width="30%"  class="font-bold">Entidad Auditora:</td>
+                <td>{{plan.entidadAuditora}}</td>
+            </tr>
+            <tr>
+                <td width="30%"  class="font-bold">Titular de la Entidad Auditora:</td>
+                <td>{{plan.titularEntidadAuditora}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="flex items-center mt-4">
         <div class="font-montserrat text-2xl font-bold">Recomendaciones</div>
+        <select class="w-48 ml-auto rounded-3xl border border-gray-300 p-2"
+            name="areas" id="areas" [(ngModel)]="areaSeleccionada" (change)="filtrar()">
+            <option value="">Filtro por área</option>
+            <option *ngFor="let area of filtroAreas" value="{{area}}">{{ area }}</option>
+        </select>
+
+        <select class="w-48 ml-2 rounded-3xl border border-gray-300 p-2"
+            name="riesgos" id="riesgos" [(ngModel)]="riesgoSeleccionado" (change)="filtrar()">
+            <option value="">Filtro por riesgo</option>
+            <option *ngFor="let riesgo of filtroRiesgo" value="{{riesgo}}">{{ riesgo }}</option>
+        </select>
+
+        <select class="w-48 ml-2 rounded-3xl border border-gray-300 p-2"
+            name="fechas" id="fechas" [(ngModel)]="fechaSeleccionada" (change)="filtrar()">
+            <option value="">Filtro por Vencimiento</option>
+            <option *ngFor="let fecha of filtroFecha" value="{{fecha}}">{{ fecha }}</option>
+        </select>
+
         <button
-            class="ml-auto rounded-3xl my-4 bg-green-400 text-white font-bold py-2 px-8 flex items-center"
+            class="ml-2 rounded-3xl my-4 bg-green-400 text-white font-bold py-2 px-8 flex items-center"
             (click)="openGrafico()">
             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                 viewBox="0 0 448 512">
@@ -12,11 +57,9 @@
             <span class="ml-2">Abrir Gráficos</span>
         </button>
 
-        <button
-            class="ml-2 rounded-3xl my-4 bg-indigo-800 text-white font-bold py-2 px-8 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
-            (click)="toggleNuevo()">
+        <a href="/recomendation/0" target="_blank" class="button ml-2 rounded-3xl my-4 bg-indigo-800 text-white font-bold py-2 px-8 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300">
             Nueva Recomendación
-        </button>
+        </a>
     </div>
 
     <table class="w-full table-auto font-montserrat border mt-4">
@@ -25,42 +68,51 @@
                 <th width="5%" class="text-center">#</th>
                 <th class="text-left">Observación</th>
                 <th width="5%" class="text-center">Riesgo</th>
-                <th width="15%" class="text-center">Unidad Responsable</th>
-                <th width="22%" class="text-center">Responsable</th>
+                <th width="20%" class="text-center">Unidad Responsable</th>
+                <th width="20%" class="text-center">Responsable</th>
                 <th width="8%" class="text-center">Fecha final</th>
                 <th width="8%" class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="text-sm"
-                *ngFor="let item of recomendations | paginate: { itemsPerPage: 6, currentPage: p }; let i = index"
-                class="odd:bg-white even:bg-blue-50">
+            <tr *ngFor="let item of recomendations | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+                class="odd:bg-white even:bg-blue-50 text-sm">
                 <td width="5%" class="text-center">{{item.numero}}</td>
                 <td class="text-left">{{item.observacion}}</td>
                 <td class="text-center align-middle" [ngSwitch]="item.nivelRiesgo">
                     <ng-container *ngSwitchCase="1"><span
-                            class="bg-green-400 px-4 py-2 text-white font-bold font-montserrat">BAJO</span></ng-container>
+                            class="bg-green-400 px-4 py-2 text-white font-bold font-montserrat rounded">BAJO</span></ng-container>
                     <ng-container *ngSwitchCase="2"><span
-                            class="bg-amber-300 px-2.5 py-2 text-white font-bold font-montserrat">MEDIO</span></ng-container>
+                            class="bg-amber-300 px-2.5 py-2 text-white font-bold font-montserrat rounded">MEDIO</span></ng-container>
                     <ng-container *ngSwitchCase="3"><span
-                            class="bg-red-600 px-4 py-2 text-white font-bold font-montserrat">ALTO</span></ng-container>
+                            class="bg-red-600 px-4 py-2 text-white font-bold font-montserrat rounded">ALTO</span></ng-container>
                 </td>
-                <td class="text-center">{{item.unidadResponsable}}</td>
+                <td class="text-center"[innerHTML]="item.unidadResponsable.split('/').join('<br>')"></td>
                 <td class="text-center" [innerHTML]="item.nombresResponsable.split('/').join('<br>')"></td>
                 <td class="text-center">{{item.fechaFinal.substring(8,10) }}-{{item.fechaFinal.substring(5,7)
                     }}-{{item.fechaFinal.substring(0,4) }}</td>
                 <td class="text-center">
-                    <button class="px-2 py-2 bg-red-300 ml-2" title="Eliminar Plan de acción"
+                    <button class="px-2 py-2 bg-blue-300 rounded" title="Editar información" (click)="navegarARecomendacion(item.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 512 512">
+                            <path
+                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                        </svg>
+                    </button>
+                    
+
+
+                    <!--<button class="px-2 py-2 bg-red-300 ml-2" title="Eliminar Plan de acción"
                         (click)="deleteRecomendation(item.id)">
                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                             <path
                                 d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                         </svg>
-                    </button>
+                    </button>-->
                 </td>
             </tr>
         </tbody>
     </table>
+
     <div class="flex justify-center font-bold mt-6 font-montserrat ">
         <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior"
             nextLabel="Siguiente">
@@ -68,7 +120,7 @@
     </div>
 </div>
 
-<div *ngIf="graficos" class="modal fixed inset-0 flex items-center justify-center z-10">
+<div *ngIf="graficos" class="w-96 modal fixed inset-0 flex items-center justify-center z-10">
     <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
         <div class="modal-container font-montserrat bg-white w-3/5 h-auto p-4 rounded-xl shadow-lg ">
             <!-- pointer-events-auto overflow-auto -->
@@ -81,12 +133,27 @@
 
             <div class="mx-8 mb-4">
                 <div class="flex mb-8">
-                    <div class="w-full grid grid-cols-2">
+                    <div class="w-full grid grid-cols-2 items-center">
+                        <div>
+                            <h1 class="text-xl font-montserrat font-bold">Listado de gráficos</h1>
+                            <ul class="mt-4">
+                                <li class="underline cursor-pointer text-blue-600 font-montserrat" (click)="cambiarGrafico(1)">Observaciones por niveles de riesgo</li>
+                                <li class="underline cursor-pointer text-blue-600 font-montserrat" (click)="cambiarGrafico(2)">Observaciones por Área asignada</li>
+                                <li class="underline cursor-pointer text-blue-600 font-montserrat" (click)="cambiarGrafico(3)">Observaciones por fecha asignada</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 1" [options]="chartOptions" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 2" [options]="chartOptions2" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 3" [options]="chartOptions3" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
+                        </div>
+                    </div>
+                    <!--<div class="w-full grid grid-cols-2">
                         <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'300px'}"></canvasjs-chart>
                         <canvasjs-chart [options]="chartOptions2" [styles]="{width: '100%', height:'300px'}"></canvasjs-chart>
                         <canvasjs-chart [options]="chartOptions3" [styles]="{width: '100%', height:'300px'}"></canvasjs-chart>
                         <canvasjs-chart [options]="chartOptions4" [styles]="{width: '100%', height:'300px'}"></canvasjs-chart>
-                    </div>  
+                    </div>-->  
                 </div>
 
             </div>

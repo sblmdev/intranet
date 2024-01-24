@@ -10,9 +10,9 @@
 
     <!-- Marco Normativo -->
     <h1 class="text-xl font-bold font-montserrat mt-4">Marco Normativo</h1>
-    <ul *ngIf="marcos && marcos.length > 0; else noDocumentos">
-        <li *ngFor="let marco of marcos">
-            <a [href]="marco.urlDocumento" target="_blank" class="font-montserrat">{{ marco.titulo }}</a>
+    <ul *ngIf="marcos && marcos.length > 0; else noDocumentos" class="mt-1">
+        <li *ngFor="let marco of marcos;  let i = index;">
+            <a [href]="marco.urlDocumento" target="_blank" class="text-sm font-montserrat underline text-blue-400">{{ i+1 }}.- {{ marco.titulo }}</a>
         </li>
     </ul>
     <ng-template #noDocumentos>
@@ -21,9 +21,9 @@
 
     <!-- Orientaciones Prácticas -->
     <h1 class="text-xl font-bold font-montserrat mt-4">Orientaciones Prácticas</h1>
-    <ul *ngIf="orientaciones && orientaciones.length > 0; else noDocumentos">
-        <li *ngFor="let orientacion of orientaciones">
-            <a [href]="orientacion.urlDocumento" target="_blank" class="font-montserrat">{{ orientacion.titulo }}</a>
+    <ul *ngIf="orientaciones && orientaciones.length > 0; else noDocumentos" class="mt-1">
+        <li *ngFor="let orientacion of orientaciones; let i = index;">
+            <a [href]="orientacion.urlDocumento" target="_blank" class="text-sm font-montserrat underline text-blue-400">{{ i+1 }}.-  {{ orientacion.titulo }}</a>
         </li>
     </ul>
     <ng-template #noDocumentos>
@@ -32,9 +32,9 @@
 
     <!-- Cronograma de Presentación -->
     <h1 class="text-xl font-bold font-montserrat mt-4">Cronograma de Presentación</h1>
-    <ul *ngIf="cronogramas && cronogramas.length > 0; else noDocumentos">
-        <li *ngFor="let cronograma of cronogramas">
-            <a [href]="cronograma.urlDocumento" target="_blank" class="font-montserrat">{{ cronograma.titulo }}</a>
+    <ul *ngIf="cronogramas && cronogramas.length > 0; else noDocumentos" class="mt-1">
+        <li *ngFor="let cronograma of cronogramas;  let i = index;">
+            <a [href]="cronograma.urlDocumento" target="_blank" class="text-sm font-montserrat underline text-blue-400">{{ i+1 }}.- {{ cronograma.titulo }}</a>
         </li>
     </ul>
     <ng-template #noDocumentos>
@@ -43,9 +43,9 @@
 
     <!-- Preguntas Frecuentes -->
     <h1 class="text-xl font-bold font-montserrat mt-4">Preguntas Frecuentes</h1>
-    <ul *ngIf="preguntas && preguntas.length > 0; else noDocumentos">
-        <li *ngFor="let pregunta of preguntas">
-            <a [href]="pregunta.urlDocumento" target="_blank" class="font-montserrat">{{ pregunta.titulo }}</a>
+    <ul *ngIf="preguntas && preguntas.length > 0; else noDocumentos" class="mt-1">
+        <li *ngFor="let pregunta of preguntas;  let i = index;">
+            <a [href]="pregunta.urlDocumento" target="_blank" class="text-sm font-montserrat underline text-blue-400">{{ i+1 }}.- {{ pregunta.titulo }}</a>
         </li>
     </ul>
     <ng-template #noDocumentos>

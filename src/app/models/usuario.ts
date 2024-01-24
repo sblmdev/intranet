@@ -8,8 +8,9 @@ export class Usuario {
   tipo: number; //1 ADMIN, 2 PUBLICACIONES, 3 CEMENTERIO, 4 PLANES, 5 PUEBLO, 6 GERENTES
   dependencia: string;
   dependenciaHijo: string;
+  correo: string;
   sede: string;
-  fechaIngreso:string;
+  estado: boolean;
 
   constructor(
     id: number = 0,
@@ -21,8 +22,9 @@ export class Usuario {
     tipo: number = 0,
     dependencia: string = '',
     dependenciaHijo: string = '',
+    correo: string = '',
     sede: string = '',
-    fechaIngreso:string=''
+    estado: boolean = true,
   ) {
     this.id = id;
     this.nombres = nombres;
@@ -33,8 +35,9 @@ export class Usuario {
     this.tipo = tipo;
     this.dependencia = dependencia;
     this.dependenciaHijo = dependenciaHijo;
+    this.correo =  correo;
     this.sede = sede;
-    this.fechaIngreso=fechaIngreso
+    this.estado = estado;
   }
 
 }
