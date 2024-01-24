@@ -75,6 +75,7 @@ export class PlansComponent {
         dniResponsable: item.dniResponsable,
         nombresResponsable: item.nombresResponsable,
         observacionRiesgos: item.observacionRiesgos,
+        estado: true
       }
       console.log('Cargando...', rec);
       this.recomendationService.addRecomendation(rec).subscribe({
