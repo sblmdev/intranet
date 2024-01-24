@@ -36,6 +36,7 @@ import { GalleryComponent } from '@daelmaak/ngx-gallery';
 import { ControlComponent } from './pages/control/control.component';
 import { RecomendationFormComponent } from './pages/recomendation-form/recomendation-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
