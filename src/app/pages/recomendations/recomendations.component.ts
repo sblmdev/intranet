@@ -142,8 +142,7 @@ export class RecomendationsComponent {
   }
 
   navegarARecomendacion(itemId: number): void {
-    const nuevaVentana = window.open('', '_blank');
-    this.router.navigate(['/recomendation', itemId], { state: { nuevaVentana } });
+    this.router.navigate(['/recomendation', itemId]);
   }
 
   filtrar() {
