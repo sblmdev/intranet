@@ -1,6 +1,7 @@
 <div class="mb-4 bg-white px-8 py-8">
     <div class="flex mb-8">
-        <div class="text-2xl mx-auto font-montserrat font-bold text-center underline"><span *ngIf="id==0">Nuevo</span><span *ngIf="id!=0">Editar</span> Recomendación</div>
+        <div class="text-2xl mx-auto font-montserrat font-bold text-center underline"><span
+                *ngIf="id==0">Nueva</span><span *ngIf="id!=0">Editar</span> Recomendación</div>
     </div>
     <form>
         <div class="mb-4">
@@ -11,48 +12,39 @@
 
         <div class="mb-4">
             <label for="recomendacion" class="text-lg font-montserrat block font-bold">Recomendación:</label>
-            <textarea type="text" id="recomendacion" rows="8" name="recomendacion" class="mt-1 p-2 border rounded-md w-full"
-                [(ngModel)]="recomendation.recomendacion"></textarea>
+            <textarea type="text" id="recomendacion" rows="8" name="recomendacion"
+                class="mt-1 p-2 border rounded-md w-full" [(ngModel)]="recomendation.recomendacion"></textarea>
         </div>
 
         <div class="mb-4">
             <label for="unidadResponsable" class="text-lg font-montserrat block font-bold">Unidad Responsable:</label>
-            <input type="text" id="unidadResponsable" name="unidadResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
-                [(ngModel)]="recomendation.unidadResponsable">
-        </div>
-
-        <div class="mb-4">
-                <label for="acciones" class="text-lg font-montserrat block font-bold">Acciones:</label>
-                <textarea type="text" id="acciones"  rows="6" name="acciones" class="mt-1 p-2 border rounded-md w-full"
-                    [(ngModel)]="recomendation.acciones"></textarea>
-
-        </div>
-
-        <div class="mb-4">
-            <label for="medio" class="text-lg font-montserrat block font-bold">Medio:</label>
-                <input type="text" id="medio" name="medio" class="mt-1 p-2 h-10 border rounded-md w-full"
-                    [(ngModel)]="recomendation.medio">
+            <input type="text" id="unidadResponsable" name="unidadResponsable"
+                class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="recomendation.unidadResponsable">
         </div>
 
         <div class="mb-4 flex items-center">
             <div class="w-1/2 pr-2">
-                <label for="nombresResponsable" class="text-lg font-montserrat block font-bold">Nombre del Responsable:</label>
-                <input type="text" id="nombresResponsable" name="nombresResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
-                    [(ngModel)]="recomendation.nombresResponsable">
+                <label for="nombresResponsable" class="text-lg font-montserrat block font-bold">Nombre del
+                    Responsable:</label>
+                <input type="text" id="nombresResponsable" name="nombresResponsable"
+                    class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="recomendation.nombresResponsable">
             </div>
             <div class="w-1/2 pr-2">
                 <label for="dniResponsable" class="text-lg font-montserrat block font-bold">DNI del Responsable:</label>
-                <input type="text" id="dniResponsable" name="dniResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
-                    [(ngModel)]="recomendation.dniResponsable">
+                <input type="text" id="dniResponsable" name="dniResponsable"
+                    class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="recomendation.dniResponsable">
             </div>
         </div>
 
         <div class="mb-4 flex items-center">
             <div class="w-1/2 pr-2">
-                <label for="documentoUnidadResponsable" class="text-lg font-montserrat block font-bold">Documento Unidad Responsable:</label>
-                <input type="text" id="documentoUnidadResponsable" name="documentoUnidadResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
+                <label for="documentoUnidadResponsable" class="text-lg font-montserrat block font-bold">Documento Unidad
+                    Responsable:</label>
+                <input type="text" id="documentoUnidadResponsable" name="documentoUnidadResponsable"
+                    class="mt-1 p-2 h-10 border rounded-md w-full"
                     [(ngModel)]="recomendation.documentoUnidadResponsable">
             </div>
+
             <div class="w-1/2 pr-2">
                 <label for="nivelRiesgo" class="text-lg font-montserrat block font-bold">Nivel de Riesgo:</label>
                 <select name="listaTipos"
@@ -63,7 +55,29 @@
                     <option value="3">Alto</option>
                 </select>
             </div>
+
+            <div class="w-1/2 pr-2">
+                <label for="fechaEvento" class="text-lg font-montserrat block font-bold">Fecha Final:</label>
+                <input type="date" id="fecha" name="fecha" [(ngModel)]="recomendation.fechaFinal"
+                    class="p-2 border border-gray-300 rounded-md w-full h-10">
+            </div>
         </div>
+
+
+
+        <div class="mb-4">
+            <label for="acciones" class="text-lg font-montserrat block font-bold">Acciones:</label>
+            <textarea type="text" id="acciones" rows="6" name="acciones" class="mt-1 p-2 border rounded-md w-full"
+                [(ngModel)]="recomendation.acciones"></textarea>
+
+        </div>
+
+        <div class="mb-4">
+            <label for="medio" class="text-lg font-montserrat block font-bold">Medio:</label>
+            <input type="text" id="medio" name="medio" class="mt-1 p-2 h-10 border rounded-md w-full"
+                [(ngModel)]="recomendation.medio">
+        </div>
+
         <div class=" flex mt-12">
             <button
                 class="bg-indigo-900 text-white font-bold rounded-md ml-auto px-12 py-2 text-base hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300">
