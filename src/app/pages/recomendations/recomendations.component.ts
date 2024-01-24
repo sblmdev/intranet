@@ -247,7 +247,7 @@ export class RecomendationsComponent {
       animationEnabled: true,
       colorSet: "colorSino",
       title: {
-      text: "Observaciones por asignación de áreas - " + this.recomendations.length + " Observaciones"
+      text: "Observaciones por asignación de responsables - " + this.recomendations.length + " Observaciones"
       },
       data: [{
       type: "pie",

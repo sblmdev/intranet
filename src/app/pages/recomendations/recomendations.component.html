@@ -41,7 +41,7 @@
         </select>
 
         <select class="w-48 ml-2 rounded-3xl border border-gray-300 p-2"
-            name="fechas" id="fechas" [(ngModel)]="fechaSeleccionada" (change)="filtrar()">
+            name="fechas" id="fechas" [(ngModel)]="fechaSeleccionada" (change)="filtrar()" disabled>
             <option value="">Filtro por Vencimiento</option>
             <option *ngFor="let fecha of filtroFecha" value="{{fecha}}">{{ fecha }}</option>
         </select>
@@ -65,19 +65,20 @@
     <table class="w-full table-auto font-montserrat border mt-4">
         <thead class="bg-indigo-800">
             <tr class="text-white">
-                <th width="5%" class="text-center">#</th>
+                <th width="3%" class="text-center">#</th>
                 <th class="text-left">Observación</th>
                 <th width="5%" class="text-center">Riesgo</th>
                 <th width="20%" class="text-center">Unidad Responsable</th>
                 <th width="20%" class="text-center">Responsable</th>
                 <th width="8%" class="text-center">Fecha final</th>
+                <th width="8%" class="text-center">Últ. Act.</th>
                 <th width="8%" class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of recomendations | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
                 class="odd:bg-white even:bg-blue-50 text-sm">
-                <td width="5%" class="text-center">{{item.numero}}</td>
+                <td width="5%" class="text-center">{{i + 1}}</td>
                 <td class="text-left">{{item.observacion}}</td>
                 <td class="text-center align-middle" [ngSwitch]="item.nivelRiesgo">
                     <ng-container *ngSwitchCase="1"><span
@@ -87,10 +88,12 @@
                     <ng-container *ngSwitchCase="3"><span
                             class="bg-red-600 px-4 py-2 text-white font-bold font-montserrat rounded">ALTO</span></ng-container>
                 </td>
-                <td class="text-center"[innerHTML]="item.unidadResponsable.split('/').join('<br>')"></td>
-                <td class="text-center" [innerHTML]="item.nombresResponsable.split('/').join('<br>')"></td>
+                <td class="text-center"[innerHTML]="item.unidadResponsable.split('/').join('<br><hr>')"></td>
+                <td class="text-center" [innerHTML]="item.nombresResponsable.split('/').join('<br><hr>')"></td>
                 <td class="text-center">{{item.fechaFinal.substring(8,10) }}-{{item.fechaFinal.substring(5,7)
                     }}-{{item.fechaFinal.substring(0,4) }}</td>
+                <td class="text-center">{{item.fechaModificacion.substring(8,10) }}-{{item.fechaModificacion.substring(5,7)
+                }}-{{item.fechaModificacion.substring(0,4) }}</td>
                 <td class="text-center">
                     <button class="px-2 py-2 bg-blue-300 rounded" title="Editar información" (click)="navegarARecomendacion(item.id)">
                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 512 512">
@@ -138,7 +141,7 @@
                             <h1 class="text-xl font-montserrat font-bold">Listado de gráficos {{areaSeleccionada}}</h1>
                             <ul class="mt-4">
                                 <li class="underline cursor-pointer text-blue-600 font-montserrat" (click)="cambiarGrafico(1)">Observaciones por niveles de riesgo</li>
-                                <li class="underline cursor-pointer text-blue-600 font-montserrat" (click)="cambiarGrafico(2)" *ngIf="areaSeleccionada.length == 0">Observaciones por asignación de áreas</li>
+                                <li class="underline cursor-pointer text-blue-600 font-montserrat" (click)="cambiarGrafico(2)" *ngIf="areaSeleccionada.length == 0">Observaciones por asignación de responsables</li>
                                 <li class="underline cursor-pointer text-blue-600 font-montserrat" (click)="cambiarGrafico(3)">Observaciones por asignación de fechas</li>
                             </ul>
                         </div>

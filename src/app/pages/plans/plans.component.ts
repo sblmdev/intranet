@@ -40,7 +40,7 @@ export class PlansComponent {
     this.plan.entidad = "SOCIEDAD DE BENEFICENCIA DE LIMA METROPOLITANA";
   }
 
-  onFileSelected(event: any): void {
+  /*onFileSelected(event: any): void {
     this.archivoSeleccionado = event.target.files[0];
   }
 
@@ -87,7 +87,7 @@ export class PlansComponent {
         }
       });
     });
-  }
+  }*/
 
   closetoggleNuevo() {
     this.clearData();

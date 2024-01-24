@@ -4,25 +4,33 @@
                 *ngIf="id==0">Nueva</span><span *ngIf="id!=0">Editar</span> Recomendación</div>
     </div>
     <form>
-        <div class="mb-4">
+        <div class="mb-6">
             <label for="observacion" class="text-lg font-montserrat block font-bold">Observación:</label>
             <textarea id="observacion" name="observacion" rows="3" class="mt-1 p-2 border rounded-md w-full"
                 [(ngModel)]="recomendation.observacion"></textarea>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-6">
             <label for="recomendacion" class="text-lg font-montserrat block font-bold">Recomendación:</label>
             <textarea type="text" id="recomendacion" rows="8" name="recomendacion"
                 class="mt-1 p-2 border rounded-md w-full" [(ngModel)]="recomendation.recomendacion"></textarea>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-6">
             <label for="unidadResponsable" class="text-lg font-montserrat block font-bold">Unidad Responsable:</label>
             <input type="text" id="unidadResponsable" name="unidadResponsable"
                 class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="recomendation.unidadResponsable">
         </div>
 
-        <div class="mb-4 flex items-center">
+        <div class="mb-6">
+            <label for="documentoUnidadResponsable" class="text-lg font-montserrat block font-bold">Documento Unidad
+                Responsable:</label>
+            <input type="text" id="documentoUnidadResponsable" name="documentoUnidadResponsable"
+                class="mt-1 p-2 h-10 border rounded-md w-full"
+                [(ngModel)]="recomendation.documentoUnidadResponsable">
+        </div>
+
+        <div class="mb-6 flex items-center">
             <div class="w-1/2 pr-2">
                 <label for="nombresResponsable" class="text-lg font-montserrat block font-bold">Nombre del
                     Responsable:</label>
@@ -36,15 +44,7 @@
             </div>
         </div>
 
-        <div class="mb-4 flex items-center">
-            <div class="w-1/2 pr-2">
-                <label for="documentoUnidadResponsable" class="text-lg font-montserrat block font-bold">Documento Unidad
-                    Responsable:</label>
-                <input type="text" id="documentoUnidadResponsable" name="documentoUnidadResponsable"
-                    class="mt-1 p-2 h-10 border rounded-md w-full"
-                    [(ngModel)]="recomendation.documentoUnidadResponsable">
-            </div>
-
+        <div class="mb-6 flex items-center">
             <div class="w-1/2 pr-2">
                 <label for="nivelRiesgo" class="text-lg font-montserrat block font-bold">Nivel de Riesgo:</label>
                 <select name="listaTipos"
@@ -63,25 +63,22 @@
             </div>
         </div>
 
-
-
-        <div class="mb-4">
+        <div class="mb-6">
             <label for="acciones" class="text-lg font-montserrat block font-bold">Acciones:</label>
             <textarea type="text" id="acciones" rows="6" name="acciones" class="mt-1 p-2 border rounded-md w-full"
                 [(ngModel)]="recomendation.acciones"></textarea>
-
         </div>
 
-        <div class="mb-4">
+        <div class="mb-6">
             <label for="medio" class="text-lg font-montserrat block font-bold">Medio:</label>
-            <input type="text" id="medio" name="medio" class="mt-1 p-2 h-10 border rounded-md w-full"
-                [(ngModel)]="recomendation.medio">
+            <textarea type="text" id="medio" rows="8" name="medio" class="mt-1 p-2 border rounded-md w-full"
+                [(ngModel)]="recomendation.medio"></textarea>
         </div>
 
-        <div class=" flex mt-12">
+        <div class="flex mt-12">
             <button
-                class="bg-indigo-900 text-white font-bold rounded-md ml-auto px-12 py-2 text-base hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300">
-                Guardar
+                class="bg-indigo-900 text-white font-bold rounded-md ml-auto px-12 py-2 text-base hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
+                (click)="guardar()">Guardar
             </button>
         </div>
     </form>
