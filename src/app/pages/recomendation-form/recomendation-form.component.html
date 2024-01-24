@@ -1,1 +1,76 @@
-<p>recomendation-form works!</p>
+<div class="mx-8 mb-4">
+    <div class="flex mb-8">
+        <div class="text-2xl mx-auto font-montserrat font-bold text-center underline">Nuevo Recomendación</div>
+    </div>
+    <form>
+        <div class="mb-4">
+            <label for="observacion" class="text-lg font-montserrat block font-bold">Observación:</label>
+            <textarea id="observacion" name="observacion" class="mt-1 p-2 border rounded-md w-full"
+                [(ngModel)]="recomendation.observacion"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="recomendacion" class="text-lg font-montserrat block font-bold">Recomendación:</label>
+            <textarea type="text" id="recomendacion" name="recomendacion" class="mt-1 p-2 h-10 border rounded-md w-full"
+                [(ngModel)]="recomendation.recomendacion"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="unidadResponsable" class="text-lg font-montserrat block font-bold">Unidad Responsable:</label>
+            <input type="text" id="unidadResponsable" name="unidadResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
+                [(ngModel)]="recomendation.unidadResponsable">
+        </div>
+
+        <div class="mb-4 flex items-center">
+            <div class="w-1/2 pr-2">
+                <label for="acciones" class="text-lg font-montserrat block font-bold">Entidad:</label>
+                <input type="text" id="acciones" name="acciones" class="mt-1 p-2 h-10 border rounded-md w-full"
+                    [(ngModel)]="recomendation.acciones">
+            </div>
+            <div class="w-1/2 pr-2">
+                <label for="medio" class="text-lg font-montserrat block font-bold">Medio:</label>
+                <input type="text" id="medio" name="medio" class="mt-1 p-2 h-10 border rounded-md w-full"
+                    [(ngModel)]="recomendation.medio">
+            </div>
+        </div>
+
+        <div class="mb-4 flex items-center">
+            <div class="w-1/2 pr-2">
+                <label for="nombresResponsable" class="text-lg font-montserrat block font-bold">Nombre del Responsable:</label>
+                <input type="text" id="nombresResponsable" name="nombresResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
+                    [(ngModel)]="recomendation.nombresResponsable">
+            </div>
+            <div class="w-1/2 pr-2">
+                <label for="dniResponsable" class="text-lg font-montserrat block font-bold">DNI del Responsable:</label>
+                <input type="text" id="dniResponsable" name="dniResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
+                    [(ngModel)]="recomendation.dniResponsable">
+            </div>
+        </div>
+
+        <div class="mb-4 flex items-center">
+            <div class="w-1/2 pr-2">
+                <label for="documentoUnidadResponsable" class="text-lg font-montserrat block font-bold">Documento Unidad Responsable:</label>
+                <input type="text" id="documentoUnidadResponsable" name="documentoUnidadResponsable" class="mt-1 p-2 h-10 border rounded-md w-full"
+                    [(ngModel)]="recomendation.documentoUnidadResponsable">
+            </div>
+            <div class="w-1/2 pr-2">
+                <label for="nivelRiesgo" class="text-lg font-montserrat block font-bold">Nivel de Riesgo:</label>
+                <select name="listaTipos"
+                    class="w-full h-10 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+                    [(ngModel)]="recomendation.nivelRiesgo">
+                    <option value="1">Bajo</option>
+                    <option value="2">Medio</option>
+                    <option value="3">Alto</option>
+                </select>
+            </div>
+        </div>
+        <div class=" flex mt-12">
+            <!-- <button
+                class="bg-indigo-900 text-white font-bold rounded-md ml-auto px-12 py-2 text-base hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
+                (click)="savePublication()"
+                [disabled]="recomendation.nombre.length == 0 || recomendation.informe.length == 0 || recomendation.fechaInforme.length == 0 || recomendation.tipoAuditoria.length == 0 || recomendation.entidadAuditora.length == 0">
+                Guardar
+            </button> -->
+        </div>
+    </form>
+</div>

@@ -11,9 +11,9 @@ import { RecomendationService } from 'src/app/services/recomendation.service';
 })
 export class RecomendationFormComponent {
   id: number;
-  recomendacion: Recomendation = new Recomendation();
+  recomendation: Recomendation = new Recomendation();
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private recomendationService: RecomendationService,
     private toastr: ToastrService) {
     this.id = 0;
@@ -25,18 +25,22 @@ export class RecomendationFormComponent {
   }
 
   clearData() {
-    this.recomendacion = new Recomendation();
-    if(this.id != 0){
+    this.recomendation = new Recomendation();
+    if (this.id != 0) {
       this.recomendationService.getRecomendationById(this.id).subscribe({
         next: (data) => {
-          this.recomendacion = data;
+          this.recomendation = data;
         },
         error: (e) => {
           console.log(e);
         }
       });
     }
-    
+  }
+
+  submitForm(): void {
+    // Aquí puedes manejar la lógica cuando se envía el formulario
+    console.log('Formulario enviado:', this.recomendation);
   }
 
 }

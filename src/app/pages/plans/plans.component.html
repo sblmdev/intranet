@@ -1,6 +1,13 @@
 <div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
   <div class="flex items-center">
     <div class="font-montserrat text-2xl font-bold">Planes de Acción</div>
+    <!-- <input type="file" (change)="onFileSelected($event)">
+    <button
+      class="ml-auto rounded-3xl my-4 bg-indigo-800 text-white font-bold py-2 px-8  float-right hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
+      (click)="cargarData()">
+      Cargar Data
+    </button> -->
+
     <button
       class="ml-auto rounded-3xl my-4 bg-indigo-800 text-white font-bold py-2 px-8  float-right hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300"
       (click)="toggleNuevo()">
@@ -19,7 +26,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of plans | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" class="odd:bg-white even:bg-blue-50">
+      <tr *ngFor="let item of plans | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+        class="odd:bg-white even:bg-blue-50">
         <td width="5%" class="text-center">{{ i + 1 }}</td>
         <td class="text-left">{{item.nombre}}</td>
         <td width="20%" class="text-center">{{ item.informe }}</td>
