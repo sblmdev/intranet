@@ -31,5 +31,4 @@ export class PlanService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  
 }

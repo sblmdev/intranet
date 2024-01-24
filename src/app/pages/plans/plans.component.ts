@@ -26,9 +26,8 @@ export class PlansComponent {
 
   constructor(private router: Router,
     private planService: PlanService,
-    private rec: RecomendationService,
+    private recomendationService: RecomendationService,
     private toastr: ToastrService) {
-
   }
 
   ngOnInit() {
@@ -40,8 +39,6 @@ export class PlansComponent {
     this.plan = new Plan();
     this.plan.entidad = "SOCIEDAD DE BENEFICENCIA DE LIMA METROPOLITANA";
   }
-
-
 
   onFileSelected(event: any): void {
     this.archivoSeleccionado = event.target.files[0];
@@ -61,13 +58,8 @@ export class PlansComponent {
   }
 
   procesarData(fileContent: string): void {
-    // Tu lógica para procesar el contenido del archivo
     const dataArray: any[] = JSON.parse(fileContent);
-
-
     dataArray.forEach((item) => {
-      // Tu lógica para llamar al servicio aquí
-
       const rec: Recomendation = {
         id: item.id,
         idPlan: item.idPlan,
@@ -85,16 +77,14 @@ export class PlansComponent {
         observacionRiesgos: item.observacionRiesgos,
       }
       console.log('Cargando...', rec);
-     this.rec.addRecomendation(rec).subscribe(
-        (respuesta) => {
-          // Manejar la respuesta exitosa del servicio
+      this.recomendationService.addRecomendation(rec).subscribe({
+        next: (respuesta) => {
           console.log('Respuesta del servicio:', respuesta);
         },
-        (error) => {
-          // Manejar el error del servicio
+        error: (error) => {
           console.error('Error en el servicio:', error);
         }
-      );
+      });
     });
   }
 
