@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Publication } from 'src/app/models/publications';
-import { PublicationService } from 'src/app/services/publicationService';
+import { PublicationService } from 'src/app/services/publication.service';
 
 @Component({
   selector: 'app-documents',

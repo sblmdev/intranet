@@ -1,41 +1,82 @@
 <div class="rounded-md bg-white ml-4 p-4">
 
-  <div class="rounded-md border-2" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.tipo == 4)">
+  <div class="rounded-md border-2"
+    *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.accesos != '0')">
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2 select-none">Administración</div>
     <ul class=" py-2 list-disc list-inside">
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none" (click)="abrirPublicaciones()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2)">Publicaciones</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none " *ngIf="(usuario.tipo == 1 || usuario.tipo == 3)">Cementerios</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none " (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 4)">Planes de acción</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none"
+        (click)="abrirPublicaciones()" *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('1'))">Publicaciones</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('2'))">Cementerios</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.accesos.includes('3'))">Planes de acción</li>
     </ul>
   </div>
 
-  <div class="rounded-md border-2" [ngClass]="{'mt-4': (usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.tipo == 4)}">
+  <div class="rounded-md border-2"
+    [ngClass]="{'mt-4': (usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.accesos != '0')}">
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2 select-none">Acerca de la SBLM</div>
     <ul class=" py-2 list-disc list-inside">
-      <li class="font-montserrat cursor-pointer py-1 px-4  transition duration-200 ease-in-out hover:text-blue-700 hover:bg-blue-100 select-none " (click)="toggleMision()">Misión</li>
-      <li class="font-montserrat cursor-pointer py-1  px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none " (click)="toggleVision()">Visión</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4  transition duration-200 ease-in-out hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="toggleMision()">Misión</li>
+      <li
+        class="font-montserrat cursor-pointer py-1  px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="toggleVision()">Visión</li>
       <!--<li class="font-montserrat cursor-pointer" (click)="toggleValores()">Valores institucionales</li>-->
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "><a  href="http://192.168.1.6/media/Generales/Organigrama%20SBLM.pdf" target="_blank">Organigrama</a> </li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none " (click)="goPhoneBook()">Directorio Telefónico</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDirectorateMembers()">Miembros del directorio</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none ">
+        <a href="http://192.168.1.6/media/Generales/Organigrama%20SBLM.pdf" target="_blank">Organigrama</a> </li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goPhoneBook()">Directorio Telefónico</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDirectorateMembers()">Miembros del directorio</li>
     </ul>
   </div>
 
   <div class="rounded-md border-2 mt-4">
-    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2 select-none">Información Institucional</div>
+    <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2 select-none">Información Institucional
+    </div>
     <ul class="py-2 list-disc list-inside">
       <!--<li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "><a href="http://192.168.1.6/media/Generales/RP%20N%c2%b0%20057-2002-P-SBLM%20MOF%20SBLM%202002.pdf" target="_blank">M.O.F.</a></li>-->
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Acuerdos')">Acuerdos</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Códigos')">Códigos</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none " (click)="goDocuments('Directivas')">Directivas</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Leyes')">Leyes</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Lineamientos')">Lineamientos</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Manuales')">Manuales</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Planes')">Planes</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none " (click)="goDocuments('Políticas')">Políticas</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Procedimientos')">Procedimientos</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Reglamentos')">Reglamentos</li>
-      <li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none" (click)="goDocuments('Resoluciones')">Resoluciones</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Acuerdos')">Acuerdos</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Códigos')">Códigos</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goDocuments('Directivas')">Directivas</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Leyes')">Leyes</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Lineamientos')">Lineamientos</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Manuales')">Manuales</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Planes')">Planes</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goDocuments('Políticas')">Políticas</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Procedimientos')">Procedimientos</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Reglamentos')">Reglamentos</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Resoluciones')">Resoluciones</li>
     </ul>
   </div>
 
@@ -58,20 +99,18 @@
           <ng-container *ngSwitchCase="'11'">NOV</ng-container>
           <ng-container *ngSwitchCase="'12'">DIC</ng-container>
           <ng-container *ngSwitchDefault>MES DESCONOCIDO</ng-container>
-      </span>
-      
+        </span>
+
       </div>
       <div class="ml-2 text-xs font-montserrat">{{item.titulo}}</div>
     </div>
   </div>
 
   <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="my-modal"></div>
-  <!-- MODALES -->
   <div *ngIf="misionFlag" class="modal fixed inset-0 flex items-center justify-center">
     <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
       <div
         class="modal-container font-montserrat bg-white w-7/12 py-12 px-8 rounded-xl shadow-lg text-center pointer-events-auto items-center relative">
-        <!-- Contenido del modal -->
         <div class="absolute top-0 right-0 p-2">
           <button
             class="bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
@@ -81,7 +120,9 @@
           <img src="../../../../assets/mision.jpg" class="rounded-md" />
           <div>
             <h2 class="text-4xl font-montserrat mb-4 font-bold">MISIÓN</h2>
-            <div class="text-xl text-justify font-montserrat mx-8 mt-16">Prestar servicios especializados de protección social a la población objetivo de Lima Metropolitana con el propósito de reducir los niveles de riesgo y/o vulnerabilidad.</div>
+            <div class="text-xl text-justify font-montserrat mx-8 mt-16">Prestar servicios especializados de protección
+              social a la población objetivo de Lima Metropolitana con el propósito de reducir los niveles de riesgo y/o
+              vulnerabilidad.</div>
           </div>
         </div>
       </div>
@@ -94,7 +135,6 @@
   <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
     <div
       class="modal-container font-montserrat bg-white w-7/12 py-12 px-8 rounded-xl shadow-lg text-center pointer-events-auto items-center relative">
-      <!-- Contenido del modal -->
       <div class="absolute top-0 right-0 p-2">
         <button
           class="bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
@@ -104,83 +144,10 @@
         <img src="../../../../assets/vision.jpg" class="rounded-md" />
         <div>
           <h2 class="text-4xl font-montserrat mb-4 font-bold">Visión</h2>
-          <div class="text-xl text-justify  font-montserrat mt-16 mx-8">Tener capacidad de captar y generar fondos para sostener programas de protección y desarrollo social en Lima Metropolitana.</div>
+          <div class="text-xl text-justify  font-montserrat mt-16 mx-8">Tener capacidad de captar y generar fondos para
+            sostener programas de protección y desarrollo social en Lima Metropolitana.</div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-<div *ngIf="valoresFlag" class="modal fixed inset-0 flex items-center justify-center">
-  <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
-    <div
-      class="modal-container font-montserrat bg-white w-3/5 h-5/6 p-4 rounded-xl shadow-lg text-center pointer-events-auto items-center ">
-      <div class="text-4xl font-montserrat mb-4 ">VALORES INSTITUCIONALES</div>
-      <div
-        class="modal-container font-montserrat bg-white w-auto h-auto  rounded-xl shadow-lg text-center pointer-events-auto grid grid-cols-3 gap-4">
-
-
-        <div>
-          <h1 class="text-lg font-bold">Vocación de servicio</h1>
-
-          <body class="text-sm">Poseemos elevada sensibilidad social y espíritu generoso, dispuestos a ayudar a
-            los beneficiarios de nuestros servicios y centros residenciales; mostrando para ello
-            una actitud empática con el albergado y/o beneficiario, esforzándonos por lograr
-            un alto grado de satisfacción de los mismos.</body>
-        </div>
-
-        <div>
-          <h1 class="text-lg font-bold">Honestidad y Transparencia</h1>
-
-          <body class="text-sm">Comprendemos y practicamos la honestidad como el respeto a la verdad en
-            relación con los hechos y las personas que nos rodean y la transparencia como el
-            reflejo de la honestidad.</body>
-        </div>
-
-        <div>
-          <h1 class="text-lg font-bold">Tolerancia</h1>
-
-          <body class="text-sm">Somos tolerantes con las ideas, costumbres, creencias y acciones de todos los
-            que nos rodean; sean éstas iguales, parecidas o diferentes a las nuestras.</body>
-        </div>
-        <div>
-          <h1 class="text-lg font-bold">Compromiso</h1>
-
-          <body class="text-sm">Nuestro compromiso e identificación es con nuestra institución, hacia la búsqueda
-            de la mejora de la calidad de vida de los beneficiarios de los servicios sociales.</body>
-        </div>
-        <div>
-          <h1 class="text-lg font-bold">Responsabilidad</h1>
-
-          <body class="text-sm">La responsabilidad la practicamos en cumplimiento de nuestras funciones, con un
-            trato adecuado a nuestros beneficiarios y trabajadores, asumiendo las
-            consecuencias de nuestros actos.</body>
-        </div>
-
-        <div>
-          <h1 class="text-lg font-bold">Excelencia</h1>
-
-          <body class="text-sm">Perseguimos la calidad en el cumplimiento de nuestra misión institucional.
-            Buscamos la mejora continua en la prestación de nuestros servicios.</body>
-        </div>
-        <button
-          class="mt-4 bg-green-500 text-white rounded-md px-4 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-          (click)="toggleValores()">Aceptar</button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- <div *ngIf="orgFlag" class="modal fixed inset-0 flex items-center justify-center">
-    <div class="fixed overflow-y-auto overflow-x-hidden left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none flex over">
-      <div class="modal-container mb-16 font-montserrat bg-white w-auto mx-8 h-full mt-8 p-4 rounded-xl shadow-lg text-center pointer-events-auto relative">
-        <div class="text-4xl font-montserrat mb-4 ">ORGANIGRAMA</div>
-        <div class="flex justify-center items-center">
-          <img src="..//assets/organigrama.jpg" class="h-auto w-auto border-2 border-black">
-        </div>
-        <button class="mt-4 bg-green-500 text-white rounded-md px-4 py-2 text-base font-medium hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300" (click)="toggleOrg()">Aceptar</button>
-      </div>
-    </div>
-  </div>
-   -->

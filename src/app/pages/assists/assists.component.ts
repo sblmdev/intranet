@@ -114,10 +114,9 @@ export class AssistsComponent {
           console.log(_error);
         }
       });
-    }
-
-    
+    } 
   }
+
   calculateIndividualLateMinutes(assistant: any): number {
     const entradaPlaneada = moment('08:20', 'HH:mm');
     const llegadaReal = moment(assistant.dhoraingre_entrada.timestamp.slice(11, 16), 'HH:mm');

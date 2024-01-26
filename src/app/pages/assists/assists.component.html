@@ -6,10 +6,8 @@
         
         <div class="flex items-center mb-4">
             
-            
-
              <select class="cursor-pointer transition duration-200 ease-in-out h-10 px-4 border border-gray-300 shadow-sm focus:outline-none hover:ring focus:border-blue-500"
-                 *ngIf="(usuario.tipo == 1 || usuario.tipo == 6)" name="personale" id="personale" [(ngModel)]="selectedPersonal">
+                 *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3)" name="personale" id="personale" [(ngModel)]="selectedPersonal">
                 <option value="">Seleccionar personal</option>
                 <option *ngFor="let per of personal" [value]="per.dni">{{ per.nombres }}</option>
             </select> 

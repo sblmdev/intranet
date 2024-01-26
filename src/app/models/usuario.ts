@@ -5,7 +5,8 @@ export class Usuario {
   dni: string;
   usuario: string;
   contrasena: string;
-  tipo: number; //1 ADMIN, 2 PUBLICACIONES, 3 CEMENTERIO, 4 PLANES, 5 PUEBLO, 6 GERENTES
+  tipo: number; //1 ADMIN, 2 ALTA DIRECCIÓN Y/O GERENTES, 3 SUG GERENTES, 4 JEFES Y/O COORDINADORES, 5 PUEBLO EN GENERAL
+  accesos: string; //1 PUBLICACIONES, 2 CEMENTERIOS, 3 PLANES DE ACCION
   dependencia: string;
   dependenciaHijo: string;
   correo: string;
@@ -20,6 +21,7 @@ export class Usuario {
     usuario: string = '',
     contrasena: string = '',
     tipo: number = 0,
+    accesos: string = '',
     dependencia: string = '',
     dependenciaHijo: string = '',
     correo: string = '',
@@ -33,6 +35,7 @@ export class Usuario {
     this.usuario = usuario;
     this.contrasena = contrasena;
     this.tipo = tipo;
+    this.accesos = accesos;
     this.dependencia = dependencia;
     this.dependenciaHijo = dependenciaHijo;
     this.correo =  correo;

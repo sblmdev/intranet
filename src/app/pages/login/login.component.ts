@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/models/usuario';
-import { LoginService } from 'src/app/services/LoginService';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',

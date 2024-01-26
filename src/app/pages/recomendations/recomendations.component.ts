@@ -4,6 +4,8 @@ import { CanvasJS } from '@canvasjs/angular-charts';
 import { ToastrService } from 'ngx-toastr';
 import { Plan } from 'src/app/models/plan';
 import { Recomendation } from 'src/app/models/recomendation';
+import { Usuario } from 'src/app/models/usuario';
+import { AppService } from 'src/app/services/app.service';
 import { PlanService } from 'src/app/services/plan.service';
 import { RecomendationService } from 'src/app/services/recomendation.service';
 
@@ -51,17 +53,21 @@ export class RecomendationsComponent {
   fechaSeleccionada: string = '';
   graficoSeleccionado: number = 1;
 
+  usuario: Usuario = new Usuario();
+
   constructor(private router: Router,
     private route: ActivatedRoute, 
     private planService: PlanService, 
     private recomendationService: RecomendationService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService, 
+    private appService: AppService) {
     this.id = 0;
   }
 
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id') || '');
     this.clearData();
+    this.usuario = this.appService.getUsuario();
   }
 
   toggleNuevo() {

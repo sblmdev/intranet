@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Publication } from 'src/app/models/publications';
-import { PublicationService } from 'src/app/services/publicationService';
+import { PublicationService } from 'src/app/services/publication.service';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
