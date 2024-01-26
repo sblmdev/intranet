@@ -16,10 +16,10 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AssistsComponent {
 
   usuario: Usuario = new Usuario();
-  perfilFlag:boolean=false;
+  perfilFlag: boolean = false;
   dni: string = "";
   dependencia: string = "";
-  usuarioFicha=new Usuario();
+  usuarioFicha = new Usuario();
   months = [
     { label: 'Enero', value: '1' },
     { label: 'Febrero', value: '2' },
@@ -56,9 +56,10 @@ export class AssistsComponent {
 
   selectedPersonal: string = '';
 
-  constructor(private assistantService: AssistsService,private toastr: ToastrService,private router: Router) { }
+  constructor(private assistantService: AssistsService, private toastr: ToastrService, private router: Router) { }
   ngOnInit() {
     const usuarioString = localStorage.getItem("Usuario");
+    console.log('usuario', usuarioString);
     if (usuarioString) {
       this.usuario = JSON.parse(usuarioString);
       this.dni = this.usuario.dni;
@@ -69,8 +70,8 @@ export class AssistsComponent {
   errorConsulta() {
     this.toastr.error('Seleccione un usuario', 'Usuario no seleccionado');
   }
-  
-  getPersonalByOficina(){
+
+  getPersonalByOficina() {
     this.assistantService.getPersonalByDependencia(this.dependencia).subscribe({
       next: (data) => {
         this.personal = data;
@@ -80,15 +81,15 @@ export class AssistsComponent {
       }
     });
   }
-  getPersonaByDNI(){
+  getPersonaByDNI() {
     this.assistantService.getPersonalByDNI(this.dni).subscribe({
       next: (data) => {
 
         console.log(data)
         console.log(data[0].vnombres)
         this.usuarioFicha.nombres = data[0].vnombres
-        this.usuarioFicha.apellidos = data[0].vapepat + ' '+ data[0].vapemat
-        this.usuarioFicha.dni=data[0].vnumdocu
+        this.usuarioFicha.apellidos = data[0].vapepat + ' ' + data[0].vapemat
+        this.usuarioFicha.dni = data[0].vnumdocu
         console.log(this.usuarioFicha)
       },
       error: (_error) => {
@@ -98,10 +99,8 @@ export class AssistsComponent {
   }
 
   searchAssistants() {
-    if(this.selectedPersonal.length == 0) {
-      this.errorConsulta()
-    } else {
-      this.assistantService.searchAsistant(this.selectedPersonal, this.selectedMonth, this.selectedYear).subscribe({
+    if (this.usuario.tipo == 5) {
+      this.assistantService.searchAsistant(this.dni, this.selectedMonth, this.selectedYear).subscribe({
         next: (data) => {
           this.assistans = data.map((assistant: any) => {
             const fecha = new Date(assistant.fecha);
@@ -114,7 +113,25 @@ export class AssistsComponent {
           console.log(_error);
         }
       });
-    } 
+    } else {
+      if (this.selectedPersonal.length == 0) {
+        this.errorConsulta()
+      } else {
+        this.assistantService.searchAsistant(this.selectedPersonal, this.selectedMonth, this.selectedYear).subscribe({
+          next: (data) => {
+            this.assistans = data.map((assistant: any) => {
+              const fecha = new Date(assistant.fecha);
+              assistant.day = this.obtenerNombreDia(fecha.getDay());
+              return assistant;
+            });
+            this.updateHeader();
+          },
+          error: (_error) => {
+            console.log(_error);
+          }
+        });
+      }
+    }
   }
 
   calculateIndividualLateMinutes(assistant: any): number {
@@ -160,11 +177,11 @@ export class AssistsComponent {
     return diasSemana[numeroDia];
   }
 
-  goToProfile(dni:string) {
+  goToProfile(dni: string) {
 
     this.router.navigate(['/', 'profile']);
   }
-  togglePerfil(dni:string): boolean {
+  togglePerfil(dni: string): boolean {
     this.getPersonaByDNI()
 
     this.perfilFlag = !this.perfilFlag
