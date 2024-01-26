@@ -99,8 +99,15 @@ export class AssistsComponent {
   }
 
   searchAssistants() {
-    if (this.usuario.tipo == 5) {
-      this.assistantService.searchAsistant(this.dni, this.selectedMonth, this.selectedYear).subscribe({
+    const selectedParams = this.usuario.tipo === 5 ? this.dni : this.selectedPersonal;
+
+    if (!selectedParams.length) {
+      this.errorConsulta();
+      return;
+    }
+
+    this.assistantService.searchAsistant(selectedParams, this.selectedMonth, this.selectedYear)
+      .subscribe({
         next: (data) => {
           this.assistans = data.map((assistant: any) => {
             const fecha = new Date(assistant.fecha);
@@ -109,30 +116,12 @@ export class AssistsComponent {
           });
           this.updateHeader();
         },
-        error: (_error) => {
-          console.log(_error);
+        error: (error) => {
+          console.log(error);
         }
       });
-    } else {
-      if (this.selectedPersonal.length == 0) {
-        this.errorConsulta()
-      } else {
-        this.assistantService.searchAsistant(this.selectedPersonal, this.selectedMonth, this.selectedYear).subscribe({
-          next: (data) => {
-            this.assistans = data.map((assistant: any) => {
-              const fecha = new Date(assistant.fecha);
-              assistant.day = this.obtenerNombreDia(fecha.getDay());
-              return assistant;
-            });
-            this.updateHeader();
-          },
-          error: (_error) => {
-            console.log(_error);
-          }
-        });
-      }
-    }
   }
+
 
   calculateIndividualLateMinutes(assistant: any): number {
     const entradaPlaneada = moment('08:20', 'HH:mm');
