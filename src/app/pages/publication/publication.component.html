@@ -138,12 +138,8 @@
                 <span  class="text-white " *ngIf="submit==true && publicacion.fechaPublicacion.length==0" >___________</span>
             
             </div>
-            
           </div>
           
-          
-            
-
           <div class="mb-4">
             <label for="descripcion" class="text-lg font-montserrat block font-bold">Descripción:</label>
             <textarea id="descripcion" name="descripcion" rows="3"
@@ -152,8 +148,6 @@
             </textarea>
             <span  class="text-red-500 " *ngIf="submit==true && publicacion.contenido.length==0" >*Complete este campo*</span>
           </div>
-
-          
 
           <!-- <div class="mb-8"
             *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
@@ -170,7 +164,6 @@
             </button>
           </div> -->
           <div class=" flex mt-12">
-            
             <div *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos' && publicacion.tipoPublicacion!='Galería'">
               <label for="documento" class="text-lg font-montserrat block font-bold">Documento (PDF):</label>
               <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="application/pdf">

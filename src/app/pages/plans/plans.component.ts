@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RecomendationService } from 'src/app/services/recomendation.service';
 import { Recomendation } from 'src/app/models/recomendation';
+import { Usuario } from 'src/app/models/usuario';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-plans',
@@ -23,15 +25,18 @@ export class PlansComponent {
     "TIPO DE AUDITORIA 4"
   ];
   archivoSeleccionado: File | undefined;
+  usuario: Usuario = new Usuario();
 
   constructor(private router: Router,
     private planService: PlanService,
+    private appService: AppService,
     private recomendationService: RecomendationService,
     private toastr: ToastrService) {
   }
 
   ngOnInit() {
     this.clearData();
+    this.usuario = this.appService.getUsuario();
   }
 
   toggleNuevo() {

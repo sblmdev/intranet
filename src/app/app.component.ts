@@ -28,7 +28,7 @@ export class AppComponent {
 
     setInterval(() => {
       this.evaluarDiferenciaDeTiempo();
-    },  5 * 60 * 1000);
+    },  1 * 60 * 1000);
   }
   mostrar(){
     this.show = !(this.isLoggedIn && (this.router.url == '/publication' || this.router.url == '/plans' || this.router.url.startsWith('/recomendations/')));

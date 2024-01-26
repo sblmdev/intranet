@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Publication } from 'src/app/models/publications';
-import { PublicationService } from 'src/app/services/publicationService';
+import { PublicationService } from 'src/app/services/publication.service';
 import { forkJoin } from 'rxjs';
 
 @Component({

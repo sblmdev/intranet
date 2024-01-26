@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Publication } from 'src/app/models/publications';
 import { ChangeDetectorRef } from '@angular/core';
-import { PublicationService } from 'src/app/services/publicationService';
+import { PublicationService } from 'src/app/services/publication.service';
 import { Usuario } from 'src/app/models/usuario';
 import { FileService } from 'src/app/services/file.service';
 import { ToastrService } from 'ngx-toastr';
@@ -23,10 +23,11 @@ export class PublicationComponent {
   contador: number = 0;
   p:any;
   submit:boolean=false;
-  constructor(private publicationService: PublicationService,private cdRef: ChangeDetectorRef, private fileService: FileService, private toastr: ToastrService) {
+  constructor(private publicationService: PublicationService,
+    private cdRef: ChangeDetectorRef, 
+    private fileService: FileService, 
+    private toastr: ToastrService) {
 
-    
-  
   }
   
   opciones: any[] = [];
@@ -131,7 +132,7 @@ export class PublicationComponent {
         this.toastr.success('La Publicación se guardó correctamente', 'Éxito');
         for(let i = 0; i < this.files.length; i++){
           if (this.files[i]) {
-            this.fileService.uploadFile(this.files[i], this.publicacion.tipoPublicacion, data2.id).subscribe({
+            this.fileService.uploadFilePublication(this.files[i], this.publicacion.tipoPublicacion, data2.id).subscribe({
               next: (data: string) => {
                 this.contador++;
                 if(this.contador == this.files.length){

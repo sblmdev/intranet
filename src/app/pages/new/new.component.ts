@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Publication } from 'src/app/models/publications';
-import { PublicationService } from 'src/app/services/publicationService';
+import { PublicationService } from 'src/app/services/publication.service';
 import { GalleryItem } from '@daelmaak/ngx-gallery';
 import { DocumentService } from 'src/app/services/document.service';
 

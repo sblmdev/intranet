@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Publication } from 'src/app/models/publications';
 import { Usuario } from 'src/app/models/usuario';
-import { PublicationService } from 'src/app/services/publicationService';
+import { AppService } from 'src/app/services/app.service';
+import { PublicationService } from 'src/app/services/publication.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -20,7 +21,7 @@ export class SidebarComponent {
 
   usuario: Usuario = new Usuario();
 
-  constructor(private router: Router, private publicationService: PublicationService) {
+  constructor(private router: Router, private publicationService: PublicationService, private appService: AppService) {
   }
 
   ngOnInit() {
@@ -32,17 +33,8 @@ export class SidebarComponent {
         console.log(_error);
       }
     });
-
-    const usuarioString = localStorage.getItem("Usuario");
-    if (usuarioString !== null) {
-      try {
-        this.usuario = JSON.parse(usuarioString);
-      } catch (error) {
-        console.error("Error al parsear el objeto Usuario:", error);
-      }
-    } else {
-      console.warn("No se encontró la clave 'Usuario' en localStorage.");
-    }
+    
+    this.usuario = this.appService.getUsuario();
   }
 
   fullscreen = false;
