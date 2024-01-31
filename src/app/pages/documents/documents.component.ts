@@ -23,6 +23,10 @@ export class DocumentsComponent {
       this.id = params.get('id') || '';
       this.publicationService.obtenerPublicacionesPorTipo(this.id).subscribe({
         next: (data) => {
+          switch(this.id) {
+            case 'Planes': this.id = 'Planes de Gestión'; break;
+            case 'PlanesAccion': this.id = 'Planes de Acción'; break;
+          }
           this.publications = data;
         },
         error: (_error) => {
