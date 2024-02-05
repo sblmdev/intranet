@@ -37,10 +37,14 @@ export class RecomendationsComponent {
   contadorPorExpirar: number = 0;
   contadorOk: number = 0;
 
-  chartOptions: any;
-  chartOptions2: any;
-  chartOptions3: any;
-  chartOptions4: any;
+  chartOptionsPye1: any;
+  chartOptionsPye2: any;
+  chartOptionsPye3: any;
+  chartOptionsPye4: any;
+  chartOptionsBar1: any;
+  chartOptionsBar2: any;
+  chartOptionsBar3: any;
+  chartOptionsBar4: any;
 
   graficos: boolean = false;
 
@@ -52,6 +56,7 @@ export class RecomendationsComponent {
   riesgoSeleccionado: string = '';
   fechaSeleccionada: string = '';
   graficoSeleccionado: number = 1;
+  tipoGrafico: number = 1;
 
   usuario: Usuario = new Usuario();
 
@@ -230,7 +235,8 @@ export class RecomendationsComponent {
 
     CanvasJS.addColorSet("colorRiesgos",["rgb(220 38 38)","rgb(252 211 77)","rgb(74 222 128)"]);
     CanvasJS.addColorSet("colorSino",["rgb(74 222 128)","rgb(220 38 38)"]);
-    this.chartOptions = {
+
+    this.chartOptionsPye1 = {
       animationEnabled: true,
       colorSet: "colorRiesgos",
       title: {
@@ -248,8 +254,23 @@ export class RecomendationsComponent {
         ]
       }]
     };
+    this.chartOptionsBar1 = {
+      title: {
+        text: "Observaciones por nivel de riesgo - " + this.recomendations.length + " Observaciones"
+      },
+      colorSet: "colorRiesgos",
+      animationEnabled: true,
+      data: [{        
+        type: "column",
+        dataPoints: [
+          { label: "Altas (" + this.altas + "/" + this.recomendations.length + ")", y: this.altas * 100 / this.recomendations.length, name: "Alta (" + this.altas + "/" + this.recomendations.length + ")" },
+          { label: "Medias (" + this.medias + "/" + this.recomendations.length + ")", y: this.medias * 100 / this.recomendations.length, name: "Media (" + this.medias + "/" + this.recomendations.length + ")" },
+          { label: "Bajas (" + this.bajas + "/" + this.recomendations.length + ")", y: this.bajas * 100 / this.recomendations.length, name: "Baja (" + this.bajas + "/" + this.recomendations.length + ")" },
+        ]
+      }]
+    }
 
-    this.chartOptions2 = {
+    this.chartOptionsPye2 = {
       animationEnabled: true,
       colorSet: "colorSino",
       title: {
@@ -266,8 +287,22 @@ export class RecomendationsComponent {
       ]
       }]
     }
+    this.chartOptionsBar2 = {
+      title: {
+        text: "Observaciones por asignación de responsables - " + this.recomendations.length + " Observaciones"
+      },
+      colorSet: "colorSino",
+      animationEnabled: true,
+      data: [{        
+        type: "column",
+        dataPoints: [
+          { label: "Asignadas (" + this.asignadas + "/" +  this.recomendations.length + ")", y: this.asignadas*100/this.recomendations.length, name: "Asignadas (" + this.asignadas + "/" +  this.recomendations.length + ")" },
+          { label: "Sin asignar (" + this.sinAsignar + "/" +  this.recomendations.length + ")", y: this.sinAsignar*100/this.recomendations.length, name: "Sin asignar (" + this.sinAsignar + "/" +  this.recomendations.length + ")" },
+        ]
+      }]
+    }
 
-    this.chartOptions3 = {
+    this.chartOptionsPye3 = {
       animationEnabled: true,
       colorSet: "colorSino",
       title: {
@@ -284,8 +319,22 @@ export class RecomendationsComponent {
       ]
       }]
     }
+    this.chartOptionsBar3 = {
+      title: {
+        text: "Observaciones por asignación de fechas - " + this.recomendations.length + " Observaciones"
+      },
+      colorSet: "colorSino",
+      animationEnabled: true,
+      data: [{        
+        type: "column",
+        dataPoints: [
+          { label: "Con fecha final (" + this.fechas + "/" +  this.recomendations.length + ")", y: this.fechas*100/this.recomendations.length, name: "Con fecha final (" + this.fechas + "/" +  this.recomendations.length + ")"},
+          { label: "Sin fecha final (" + this.sinFechas + "/" +  this.recomendations.length + ")", y: this.sinFechas*100/this.recomendations.length, name: "Sin fecha final (" + this.sinFechas + "/" +  this.recomendations.length + ")"},
+        ]
+      }]
+    }
 
-    this.chartOptions4 = {
+    this.chartOptionsPye4 = {
       animationEnabled: true,
       title: {
       text: "Estado de fechas - " + this.fechas + " Recomendaciones"
@@ -302,10 +351,29 @@ export class RecomendationsComponent {
       ]
       }]
     }
+    this.chartOptionsBar4 = {
+      title: {
+        text: "Estado de fechas - " + this.fechas + " Recomendaciones"
+      },
+      colorSet: "colorRiesgos",
+      animationEnabled: true,
+      data: [{        
+        type: "column",
+        dataPoints: [
+          { label: "En proceso (" + this.contadorOk + "/" +  this.fechas + ")", y: this.contadorOk*100/this.fechas,name: "En proceso (" + this.contadorOk + "/" +  this.fechas + ")"},
+          { label: "Vencidos (" + this.contadorVencido + "/" +  this.fechas + ")", y: this.contadorVencido*100/this.fechas, name: "Vencidos (" + this.contadorVencido + "/" +  this.fechas + ")"},
+          { label: "Por expirar (" + this.contadorPorExpirar + "/" +  this.fechas + ")", y: this.contadorPorExpirar*100/this.fechas, name: "Por expirar (" + this.contadorPorExpirar + "/" +  this.fechas + ")"},
+        ]
+      }]
+    }
   }
 
   cambiarGrafico(item: number) {
     this.graficoSeleccionado = item;
+  }
+
+  cambiarTipoGrafico(item: number) {
+    this.tipoGrafico = item;
   }
 
 }

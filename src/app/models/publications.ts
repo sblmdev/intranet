@@ -16,7 +16,7 @@ export class Publication {
         contenido: string = '',
         fechaPublicacion: string = '',
         fechaEvento: string = '',
-        urlDocumento: string = ''
+        urlDocumento: string = '',
     ) {
         this.id = id;
         this.gerencia = gerencia;

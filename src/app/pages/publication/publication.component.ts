@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Publication } from 'src/app/models/publications';
-import { ChangeDetectorRef } from '@angular/core';
+import { Document } from 'src/app/models/documento';
 import { PublicationService } from 'src/app/services/publication.service';
 import { Usuario } from 'src/app/models/usuario';
 import { FileService } from 'src/app/services/file.service';
 import { ToastrService } from 'ngx-toastr';
+import { EmailService } from 'src/app/services/email.service';
+import { DocumentService } from 'src/app/services/document.service';
 
 @Component({
   selector: 'app-publication',
@@ -14,8 +16,11 @@ import { ToastrService } from 'ngx-toastr';
 export class PublicationComponent {
 [x: string]: any;
   nuevoFlag: boolean=false;
+  portadaFlag: boolean=false;
   publicacion: Publication = new Publication();
+  publicationCover: Publication = new Publication();
   publications: Publication[] = [];
+  documents: Document[] = [];
   opcionSeleccionada: string="";
   mostrarCampoFecha: boolean = false;
   fechaSeleccionada: Date=  new Date();
@@ -23,10 +28,12 @@ export class PublicationComponent {
   contador: number = 0;
   p:any;
   submit:boolean=false;
+  docSelect: string = '';
   constructor(private publicationService: PublicationService,
-    private cdRef: ChangeDetectorRef, 
-    private fileService: FileService, 
-    private toastr: ToastrService) {
+    private fileService: FileService,
+    private emailService: EmailService, 
+    private toastr: ToastrService,
+    private documentService: DocumentService) {
 
   }
   
@@ -107,7 +114,6 @@ export class PublicationComponent {
 
   closetoggleNuevo(): boolean{
     this.nuevoFlag=!this.nuevoFlag
-    //this.cdRef.detectChanges();
     this.clearData()
     return this.nuevoFlag
   }
@@ -121,7 +127,6 @@ export class PublicationComponent {
 
   savePublication(){
     this.submit=true
-    console.log(this.publicacion.fechaEvento)
     if (this.files.length==0 || this.publicacion.titulo.length==0 || this.publicacion.contenido.length==0 || this.publicacion.fechaPublicacion.length==0
        || this.publicacion.tipoPublicacion.length==0 || (this.publicacion.fechaEvento.length==0 && this.publicacion.tipoPublicacion=='Eventos'))
        {this.toastr.error('Complete los campos faltantes', 'Error');}
@@ -138,6 +143,7 @@ export class PublicationComponent {
                 if(this.contador == this.files.length){
                   this.toastr.success('Documentos guardados correctamente', 'Éxito');
                   this.clearData();
+                  //this.emailService.sendEmail(data2.id).subscribe();
                 }
               },
               error: (error:any) => {
@@ -145,6 +151,7 @@ export class PublicationComponent {
                 if(this.contador == this.files.length){
                   this.toastr.success('Documentos guardados correctamente', 'Éxito');
                   this.clearData();
+                  //this.emailService.sendEmail(data2.id).subscribe();
                 }
               }
             });
@@ -152,7 +159,6 @@ export class PublicationComponent {
             console.log('Error: El archivo es undefined');
           }
         }
-        this.clearData();
       },
       error: (error2) => {
         this.toastr.error('La Publicación no se guardó correctamente', 'Error');
@@ -196,6 +202,55 @@ export class PublicationComponent {
         console.log(_error);
       }
     });
+  }
+
+  openSelectCover(pub: Publication) {
+    this.portadaFlag = true;
+    this.publicationCover = JSON.parse(JSON.stringify(pub));
+    this.documents = [];
+    this.docSelect = '';
+    this.publicationService.getPublicationById(this.publicationCover.id).subscribe({
+      next: (data) => {
+        this.publicationCover = data;
+        this.documentService.getDocumentsByIdPublication(this.publicationCover.id).subscribe({
+          next: (data2) => {
+            this.documents = data2;
+          },
+          error: (_e2) => {
+            console.log(_e2)
+          }
+        });
+      },
+      error: (_e) => {
+        console.log(_e);
+      }
+    });
+  }
+
+  closeSelectCover() {
+    this.portadaFlag = false;
+  }
+
+  selectCover(doc: Document) {
+    this.docSelect =  doc.urlDocumento;
+  }
+
+  saveCover(){
+    if(this.docSelect.length == 0){
+      this.toastr.error('Debe seleccionar una imagen como portada', 'Error');
+    }
+    else{
+      this.publicationCover.urlDocumento = this.docSelect;
+      this.publicationService.updatePublication(this.publicationCover.id, this.publicationCover).subscribe({
+        next: (data) => {
+          this.portadaFlag = false;
+          this.toastr.success('La portada se guardó correctamente', 'Éxito');
+        },
+        error: (e_) => {
+          this.toastr.error('La portada no se guardó correctamente', 'Error');
+        }
+      });
+    }
   }
   
 }
