@@ -123,9 +123,9 @@
     </div>
 </div>
 
-<div *ngIf="graficos" class="w-96 modal fixed inset-0 flex items-center justify-center z-10">
+<div *ngIf="graficos" class="modal fixed inset-0 flex items-center justify-center z-10">
     <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
-        <div class="modal-container font-montserrat bg-white w-3/5 h-auto p-4 rounded-xl shadow-lg ">
+        <div class="modal-container font-montserrat bg-white w-5/6 h-auto p-4 rounded-xl shadow-lg ">
             <!-- pointer-events-auto overflow-auto -->
             <div class="flex ">
                 <button
@@ -137,7 +137,7 @@
             <div class="mx-8 mb-4">
                 <div class="flex mb-8">
                     
-                    <div class="w-full grid grid-cols-2 items-center">
+                    <div class="w-full grid grid-cols-3 items-center">
                         <div>
                             <div class=" text-center border-b border-gray-200">
                                 <ul class="flex flex-wrap -mb-px items-center">
@@ -151,22 +151,32 @@
                                        [ngClass]="{'text-blue-600': tipoGrafico === 2, 'border-blue-500': tipoGrafico === 2}"
                                        (click)="cambiarTipoGrafico(2)">Barras</a>
                                   </li>
+                                  <li class="me-2">
+                                    <a class="font-montserrat text-base inline-block p-4 border-b-2 rounded-t-lg cursor-pointer"
+                                       [ngClass]="{'text-blue-600': tipoGrafico === 3, 'border-blue-500': tipoGrafico === 3}"
+                                       (click)="cambiarTipoGrafico(3)">Comparativo</a>
+                                  </li>
                                 </ul>
                               </div>
                             <h1 class="text-xl font-montserrat font-bold mt-20">Listado de gráficos {{areaSeleccionada}}</h1>
-                            <ul class="mt-4">
+                            <ul class="mt-4" *ngIf="tipoGrafico == 1 || tipoGrafico == 2">
                                 <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 1" [class.text-blue-600]="graficoSeleccionado == 1" (click)="cambiarGrafico(1)">Observaciones por niveles de riesgo</li>
                                 <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 2"  [class.text-blue-600]="graficoSeleccionado == 2" (click)="cambiarGrafico(2)" *ngIf="areaSeleccionada.length == 0">Observaciones por asignación de responsables</li>
                                 <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 3"  [class.text-blue-600]="graficoSeleccionado == 3" (click)="cambiarGrafico(3)">Observaciones por asignación de fechas</li>
                             </ul>
+                            <div *ngIf="tipoGrafico == 3">
+                                <input type="date" />
+                                <input type="date" />
+                                
+                            </div>
                         </div>
-                        <div>
-                            <canvasjs-chart *ngIf="graficoSeleccionado == 1 && tipoGrafico == 1" [options]="chartOptionsPye1" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
-                            <canvasjs-chart *ngIf="graficoSeleccionado == 2 && tipoGrafico == 1 && areaSeleccionada.length == 0" [options]="chartOptionsPye2" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
-                            <canvasjs-chart *ngIf="graficoSeleccionado == 3 && tipoGrafico == 1" [options]="chartOptionsPye3" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
-                            <canvasjs-chart *ngIf="graficoSeleccionado == 1 && tipoGrafico == 2" [options]="chartOptionsBar1" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
-                            <canvasjs-chart *ngIf="graficoSeleccionado == 2 && tipoGrafico == 2 && areaSeleccionada.length == 0" [options]="chartOptionsBar2" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
-                            <canvasjs-chart *ngIf="graficoSeleccionado == 3 && tipoGrafico == 2" [options]="chartOptionsBar3" [styles]="{width: '100%', height:'400px'}"></canvasjs-chart>
+                        <div class="col-span-2">
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 1 && tipoGrafico == 1" [options]="chartOptionsPye1" [styles]="{width: '100%', height:'500px'}"></canvasjs-chart>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 2 && tipoGrafico == 1 && areaSeleccionada.length == 0" [options]="chartOptionsPye2" [styles]="{width: '100%', height:'500px'}"></canvasjs-chart>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 3 && tipoGrafico == 1" [options]="chartOptionsPye3" [styles]="{width: '100%', height:'500px'}"></canvasjs-chart>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 1 && tipoGrafico == 2" [options]="chartOptionsBar1" [styles]="{width: '100%', height:'500px'}"></canvasjs-chart>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 2 && tipoGrafico == 2 && areaSeleccionada.length == 0" [options]="chartOptionsBar2" [styles]="{width: '100%', height:'500px'}"></canvasjs-chart>
+                            <canvasjs-chart *ngIf="graficoSeleccionado == 3 && tipoGrafico == 2" [options]="chartOptionsBar3" [styles]="{width: '100%', height:'500px'}"></canvasjs-chart>
                         </div>
                     </div>
                     <!--<div class="w-full grid grid-cols-2">

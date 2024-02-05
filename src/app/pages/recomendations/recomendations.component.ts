@@ -240,7 +240,7 @@ export class RecomendationsComponent {
       animationEnabled: true,
       colorSet: "colorRiesgos",
       title: {
-        text: "Observaciones por nivel de riesgo - " + this.recomendations.length + " Observaciones"
+        text: "Observaciones / Nivel de riesgo"
       },
       data: [{
         type: "pie",
@@ -256,12 +256,13 @@ export class RecomendationsComponent {
     };
     this.chartOptionsBar1 = {
       title: {
-        text: "Observaciones por nivel de riesgo - " + this.recomendations.length + " Observaciones"
+        text: "Observaciones / Nivel de riesgo"
       },
       colorSet: "colorRiesgos",
       animationEnabled: true,
       data: [{        
         type: "column",
+        yValueFormatString: "#,###.##'%'",
         dataPoints: [
           { label: "Altas (" + this.altas + "/" + this.recomendations.length + ")", y: this.altas * 100 / this.recomendations.length, name: "Alta (" + this.altas + "/" + this.recomendations.length + ")" },
           { label: "Medias (" + this.medias + "/" + this.recomendations.length + ")", y: this.medias * 100 / this.recomendations.length, name: "Media (" + this.medias + "/" + this.recomendations.length + ")" },
@@ -274,7 +275,7 @@ export class RecomendationsComponent {
       animationEnabled: true,
       colorSet: "colorSino",
       title: {
-      text: "Observaciones por asignación de responsables - " + this.recomendations.length + " Observaciones"
+      text: "Observaciones / Asignación de responsables"
       },
       data: [{
       type: "pie",
@@ -289,12 +290,13 @@ export class RecomendationsComponent {
     }
     this.chartOptionsBar2 = {
       title: {
-        text: "Observaciones por asignación de responsables - " + this.recomendations.length + " Observaciones"
+        text: "Observaciones / Asignación de responsables"
       },
       colorSet: "colorSino",
       animationEnabled: true,
       data: [{        
         type: "column",
+        yValueFormatString: "#,###.##'%'",
         dataPoints: [
           { label: "Asignadas (" + this.asignadas + "/" +  this.recomendations.length + ")", y: this.asignadas*100/this.recomendations.length, name: "Asignadas (" + this.asignadas + "/" +  this.recomendations.length + ")" },
           { label: "Sin asignar (" + this.sinAsignar + "/" +  this.recomendations.length + ")", y: this.sinAsignar*100/this.recomendations.length, name: "Sin asignar (" + this.sinAsignar + "/" +  this.recomendations.length + ")" },
@@ -306,7 +308,7 @@ export class RecomendationsComponent {
       animationEnabled: true,
       colorSet: "colorSino",
       title: {
-      text: "Observaciones por asignación de fechas - " + this.recomendations.length + " Observaciones"
+      text: "Observaciones / Asignación de fechas"
       },
       data: [{
       type: "pie",
@@ -321,12 +323,13 @@ export class RecomendationsComponent {
     }
     this.chartOptionsBar3 = {
       title: {
-        text: "Observaciones por asignación de fechas - " + this.recomendations.length + " Observaciones"
+        text: "Observaciones / Asignación de fechas"
       },
       colorSet: "colorSino",
       animationEnabled: true,
       data: [{        
         type: "column",
+        yValueFormatString: "#,###.##'%'",
         dataPoints: [
           { label: "Con fecha final (" + this.fechas + "/" +  this.recomendations.length + ")", y: this.fechas*100/this.recomendations.length, name: "Con fecha final (" + this.fechas + "/" +  this.recomendations.length + ")"},
           { label: "Sin fecha final (" + this.sinFechas + "/" +  this.recomendations.length + ")", y: this.sinFechas*100/this.recomendations.length, name: "Sin fecha final (" + this.sinFechas + "/" +  this.recomendations.length + ")"},
@@ -337,7 +340,7 @@ export class RecomendationsComponent {
     this.chartOptionsPye4 = {
       animationEnabled: true,
       title: {
-      text: "Estado de fechas - " + this.fechas + " Recomendaciones"
+      text: "Observaciones / Vencimiento"
       },
       data: [{
       type: "pie",
@@ -353,12 +356,13 @@ export class RecomendationsComponent {
     }
     this.chartOptionsBar4 = {
       title: {
-        text: "Estado de fechas - " + this.fechas + " Recomendaciones"
+        text: "Observaciones / Vencimiento"
       },
       colorSet: "colorRiesgos",
       animationEnabled: true,
       data: [{        
         type: "column",
+        yValueFormatString: "#,###.##'%'",
         dataPoints: [
           { label: "En proceso (" + this.contadorOk + "/" +  this.fechas + ")", y: this.contadorOk*100/this.fechas,name: "En proceso (" + this.contadorOk + "/" +  this.fechas + ")"},
           { label: "Vencidos (" + this.contadorVencido + "/" +  this.fechas + ")", y: this.contadorVencido*100/this.fechas, name: "Vencidos (" + this.contadorVencido + "/" +  this.fechas + ")"},
