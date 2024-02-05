@@ -24,6 +24,7 @@ export class AppComponent {
     let token = localStorage.getItem("Token");
     if(token != null && token != undefined && token!=""){
       this.isLoggedIn = true;
+      this.evaluarDiferenciaDeTiempo();
     }
 
     setInterval(() => {

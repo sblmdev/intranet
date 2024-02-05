@@ -143,7 +143,7 @@ export class PublicationComponent {
                 if(this.contador == this.files.length){
                   this.toastr.success('Documentos guardados correctamente', 'Éxito');
                   this.clearData();
-                  //this.emailService.sendEmail(data2.id).subscribe();
+                  this.emailService.sendEmail(data2.id).subscribe();
                 }
               },
               error: (error:any) => {
@@ -151,7 +151,7 @@ export class PublicationComponent {
                 if(this.contador == this.files.length){
                   this.toastr.success('Documentos guardados correctamente', 'Éxito');
                   this.clearData();
-                  //this.emailService.sendEmail(data2.id).subscribe();
+                  this.emailService.sendEmail(data2.id).subscribe();
                 }
               }
             });
