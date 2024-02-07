@@ -45,6 +45,7 @@ export class RecomendationFormComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id') || '');
     this.clearData();
     this.usuario = this.appService.getUsuario();
+    console.log(this.usuario);
   }
 
   clearData() {

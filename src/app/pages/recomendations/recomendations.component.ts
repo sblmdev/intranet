@@ -45,8 +45,16 @@ export class RecomendationsComponent {
   chartOptionsBar2: any;
   chartOptionsBar3: any;
   chartOptionsBar4: any;
+  chartOptions: any;
+
+  fechaOrigen: string = '2023-01-01';
+  fechaDestino: Date = new Date(); 
+  diferenciaMeses: number = 0;
+  opcionesMeses: number[] = [];
+  ultimos: number = 2;
 
   graficos: boolean = false;
+  comparativo: boolean = false;
 
   filtroAreas: string[] = [];
   filtroRiesgo: string[] = ["Alto", "Medio", "Bajo"];
@@ -73,6 +81,14 @@ export class RecomendationsComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id') || '');
     this.clearData();
     this.usuario = this.appService.getUsuario();
+    this.calcularDiferenciaMeses();
+  }
+
+  calcularDiferenciaMeses() {
+    const fechaOrigenObj: Date = new Date(this.fechaOrigen);
+    const diferenciaAnios: number = this.fechaDestino.getFullYear() - fechaOrigenObj.getFullYear();
+    this.diferenciaMeses = (diferenciaAnios * 12) + this.fechaDestino.getMonth() - fechaOrigenObj.getMonth();
+    this.opcionesMeses = Array.from({ length: this.diferenciaMeses - 1 }, (_, index) => index + 2);
   }
 
   toggleNuevo() {
@@ -88,8 +104,16 @@ export class RecomendationsComponent {
     this.graficos = true;
   }
 
+  openGraficoComparativo() {
+    this.comparativo = true;
+  }
+
   closeGrafico(){
     this.graficos = false;
+  }
+
+  closeGraficoComparativo(){
+    this.comparativo = false;
   }
 
   saveRecomendation(){
@@ -139,6 +163,8 @@ export class RecomendationsComponent {
         console.log(_er);
       }
     });
+
+    this.definirGraficosComparativos(this.ultimos);
   }
 
   deleteRecomendation(id: number) {
@@ -174,6 +200,13 @@ export class RecomendationsComponent {
       }
     }
     this.definirGraficos();
+  }
+
+  formatearFecha(fecha: Date): string {
+    const año = fecha.getFullYear();
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    return `${año}-${mes}-${dia}`;
   }
 
   definirGraficos() {
@@ -370,6 +403,119 @@ export class RecomendationsComponent {
         ]
       }]
     }
+  }
+
+  definirGraficosComparativos(months: number) {
+    const fechas: string[] = [];
+    const fechaActual: Date = new Date();
+    fechas.push(this.formatearFecha(fechaActual));
+  
+    for (let i = 1; i < months; i++) {
+      const fechaAnterior = new Date();
+      fechaAnterior.setMonth(fechaActual.getMonth() - i);
+      fechas.push(this.formatearFecha(fechaAnterior));
+    }
+    fechas.reverse();
+
+    const respuestas: any[] = [];
+    let llenos = 0;
+    fechas.forEach((fecha, index) => {
+      this.recomendationService.getRecomendationesToDate(fecha, this.id).subscribe({
+        next: (data) => {
+          respuestas[index] = data;
+          llenos = llenos + 1;
+          if(llenos == fechas.length){
+            this.completarDataGraficosComparativos(fechas, respuestas);
+          }
+        },
+        error: (e) => {
+          console.error(`Error para la fecha ${fecha}: ${e}`);
+        }
+      });
+    });
+  }
+
+  completarDataGraficosComparativos(fechas: string[], respuestas: any[]){
+    let altas = 0;
+    let medias = 0;
+    let bajas = 0;
+
+    let dataPointsAltas = [];
+    let dataPointsMedias = [];
+    let dataPointsBajas = [];
+
+    for(let i = 0; i < respuestas.length; i++){
+      let recoms: Recomendation[] = respuestas[i];
+      altas = 0;
+      medias = 0;
+      bajas = 0;
+      for(const recomendacion of recoms) {
+        switch(recomendacion.nivelRiesgo) {
+          case 1: bajas++; break;
+          case 2: medias++; break;
+          case 3: altas++; break;
+        }
+      }
+      let dataPointAlta = {label: fechas[i].substring(8,10) + "-" + fechas[i].substring(5,7) + "-" + fechas[i].substring(0,4), y: altas};
+      let dataPointMedia = {label: fechas[i].substring(8,10) + "-" + fechas[i].substring(5,7) + "-" + fechas[i].substring(0,4), y: medias};
+      let dataPointBaja = {label: fechas[i].substring(8,10) + "-" + fechas[i].substring(5,7) + "-" + fechas[i].substring(0,4), y: bajas};
+
+      dataPointsAltas.push(dataPointAlta);
+      dataPointsMedias.push(dataPointMedia);
+      dataPointsBajas.push(dataPointBaja);
+    }
+
+    this.chartOptions = {
+      animationEnabled: true,
+      colorSet: "colorRiesgos",
+      title: {
+        text: "Observaciones Vs Nivel de riesgo"
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor: "pointer",
+        itemclick: function (e: any) {
+          if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+          }
+          else {
+            e.dataSeries.visible = true;
+          }
+          e.chart.render();
+        }
+      },
+      data: [{
+        type: "column",
+        name: "Altas",
+        legendText: "Riesgo Alto",
+        showInLegend: true,
+        dataPoints: dataPointsAltas
+      },
+      {
+        type: "column",
+        name: "Medias",
+        legendText: "Riesgo Medio",
+        axisYType: "secondary",
+        showInLegend: true,
+        dataPoints: dataPointsMedias
+      },
+      {
+        type: "column",
+        name: "Bajas",
+        legendText: "Riesgo Bajo",
+        axisYType: "secondary",
+        showInLegend: true,
+        dataPoints: dataPointsBajas
+      }
+      ]
+    }
+  }
+
+  changeValueUltimos(e: any) {
+    this.ultimos = e.target.value;
+    this.definirGraficosComparativos(this.ultimos);
   }
 
   cambiarGrafico(item: number) {

@@ -19,6 +19,10 @@ export class RecomendationService {
     return this.http.get<Recomendation[]>(`${this.apiUrl}/getByPlan/${idPlan}`);
   }
 
+  getRecomendationesToDate(date: string, idPlan: number): Observable<Recomendation[]> {
+    return this.http.get<Recomendation[]>(`${this.apiUrl}/getByDate/${date}/${idPlan}`);
+  }
+
   getRecomendationById(id: number): Observable<Recomendation> {
     return this.http.get<Recomendation>(`${this.apiUrl}/${id}`);
   }

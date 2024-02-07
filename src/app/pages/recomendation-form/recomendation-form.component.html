@@ -112,7 +112,7 @@
 
         <div class="flex mt-12">
             <button
-                *ngId="usuario.tipo == 1"
+                *ngIf="usuario.tipo == 1 || usuario.accesos.includes('3')"
                 class="bg-indigo-900 text-white font-bold rounded-md ml-auto px-12 py-2 text-base hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
                 (click)="guardar()">Guardar
             </button>

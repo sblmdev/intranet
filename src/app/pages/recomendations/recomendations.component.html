@@ -26,43 +26,56 @@
         </table>
     </div>
 
-    <div class="flex items-center mt-4">
-        <div class="font-montserrat text-2xl font-bold">Recomendaciones</div>
-        <select class="w-48 ml-auto rounded-3xl border border-gray-300 p-2"
+    <div class="font-montserrat text-center text-2xl font-bold mt-4">RECOMENDACIONES</div>
+
+    <div class="flex items-center py-2">
+        <select class="w-40 ml-auto rounded-3xl border border-gray-300 p-2"
             name="areas" id="areas" [(ngModel)]="areaSeleccionada" (change)="filtrar()">
-            <option value="">Filtro por área</option>
+            <option value="">Filtro área</option>
             <option *ngFor="let area of filtroAreas" value="{{area}}">{{ area }}</option>
         </select>
 
-        <select class="w-48 ml-2 rounded-3xl border border-gray-300 p-2"
+        <select class="w-40 ml-2 rounded-3xl border border-gray-300 p-2"
             name="riesgos" id="riesgos" [(ngModel)]="riesgoSeleccionado" (change)="filtrar()">
-            <option value="">Filtro por riesgo</option>
+            <option value="">Filtro riesgo</option>
             <option *ngFor="let riesgo of filtroRiesgo" value="{{riesgo}}">{{ riesgo }}</option>
         </select>
 
         <select class="w-48 ml-2 rounded-3xl border border-gray-300 p-2"
             name="fechas" id="fechas" [(ngModel)]="fechaSeleccionada" (change)="filtrar()" disabled>
-            <option value="">Filtro por Vencimiento</option>
+            <option value="">Filtro Vencimiento</option>
             <option *ngFor="let fecha of filtroFecha" value="{{fecha}}">{{ fecha }}</option>
         </select>
 
+        <input class="w-40 ml-2 rounded-3xl border border-gray-300 p-2" type="date" disabled/>
+
         <button
-            class="ml-2 rounded-3xl my-4 bg-green-400 text-white font-bold py-2 px-8 flex items-center"
+            class="ml-2 rounded-3xl bg-green-400 text-white font-bold py-2 px-8 flex items-center"
             (click)="openGrafico()">
             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                 viewBox="0 0 448 512">
                 <path
                     d="M160 80c0-26.5 21.5-48 48-48h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V80zM0 272c0-26.5 21.5-48 48-48H80c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V272zM368 96h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H368c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48z" />
             </svg>
-            <span class="ml-2">Abrir Gráficos</span>
+            <span class="ml-2">Gráficos</span>
         </button>
 
-        <button *ngIf="usuario.tipo == 1" (click)="navegarARecomendacion(0)" class="button ml-2 rounded-3xl my-4 bg-indigo-800 text-white font-bold py-2 px-8 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300">
+        <button
+            class="ml-2 rounded-3xl bg-green-400 text-white font-bold py-2 px-4 flex items-center"
+            (click)="openGraficoComparativo()">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                viewBox="0 0 512 512"><path 
+                d="M320 488c0 9.5-5.6 18.1-14.2 21.9s-18.8 2.3-25.8-4.1l-80-72c-5.1-4.6-7.9-11-7.9-17.8s2.9-13.3 7.9-17.8l80-72c7-6.3 17.2-7.9 25.8-4.1s14.2 12.4 14.2 21.9v40h16c35.3 0 64-28.7 64-64V153.3C371.7 141 352 112.8 352 80c0-44.2 35.8-80 80-80s80 35.8 80 80c0 32.8-19.7 61-48 73.3V320c0 70.7-57.3 128-128 128H320v40zM456 80a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM192 24c0-9.5 5.6-18.1 14.2-21.9s18.8-2.3 25.8 4.1l80 72c5.1 4.6 7.9 11 7.9 17.8s-2.9 13.3-7.9 17.8l-80 72c-7 6.3-17.2 7.9-25.8 4.1s-14.2-12.4-14.2-21.9V128H176c-35.3 0-64 28.7-64 64V358.7c28.3 12.3 48 40.5 48 73.3c0 44.2-35.8 80-80 80s-80-35.8-80-80c0-32.8 19.7-61 48-73.3V192c0-70.7 57.3-128 128-128h16V24zM56 432a24 24 0 1 0 48 0 24 24 0 1 0 -48 0z"/>
+            </svg>
+            <span class="ml-2">Comparativo</span>
+        </button>
+
+        <button *ngIf="usuario.tipo == 1" (click)="navegarARecomendacion(0)" class="button ml-2 rounded-3xl bg-indigo-800 text-white font-bold py-2 px-4 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-green-300">
             Nueva Recomendación
         </button>
     </div>
 
-    <table class="w-full table-auto font-montserrat border mt-4">
+    <table class="w-full table-auto font-montserrat border">
         <thead class="bg-indigo-800">
             <tr class="text-white">
                 <th width="3%" class="text-center">#</th>
@@ -151,23 +164,15 @@
                                        [ngClass]="{'text-blue-600': tipoGrafico === 2, 'border-blue-500': tipoGrafico === 2}"
                                        (click)="cambiarTipoGrafico(2)">Barras</a>
                                   </li>
-                                  <li class="me-2">
-                                    <a class="font-montserrat text-base inline-block p-4 border-b-2 rounded-t-lg cursor-pointer"
-                                       [ngClass]="{'text-blue-600': tipoGrafico === 3, 'border-blue-500': tipoGrafico === 3}"
-                                       (click)="cambiarTipoGrafico(3)">Comparativo</a>
-                                  </li>
                                 </ul>
                               </div>
                             <h1 class="text-xl font-montserrat font-bold mt-20">Listado de gráficos {{areaSeleccionada}}</h1>
-                            <ul class="mt-4" *ngIf="tipoGrafico == 1 || tipoGrafico == 2">
-                                <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 1" [class.text-blue-600]="graficoSeleccionado == 1" (click)="cambiarGrafico(1)">Observaciones por niveles de riesgo</li>
-                                <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 2"  [class.text-blue-600]="graficoSeleccionado == 2" (click)="cambiarGrafico(2)" *ngIf="areaSeleccionada.length == 0">Observaciones por asignación de responsables</li>
-                                <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 3"  [class.text-blue-600]="graficoSeleccionado == 3" (click)="cambiarGrafico(3)">Observaciones por asignación de fechas</li>
-                            </ul>
-                            <div *ngIf="tipoGrafico == 3">
-                                <input type="date" />
-                                <input type="date" />
-                                
+                            <div class="mt-4">
+                                <ul>
+                                    <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 1" [class.text-blue-600]="graficoSeleccionado == 1" (click)="cambiarGrafico(1)">Observaciones por niveles de riesgo</li>
+                                    <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 2"  [class.text-blue-600]="graficoSeleccionado == 2" (click)="cambiarGrafico(2)" *ngIf="areaSeleccionada.length == 0">Observaciones por asignación de responsables</li>
+                                    <li class="cursor-pointer font-montserrat" [class.underline]="graficoSeleccionado == 3"  [class.text-blue-600]="graficoSeleccionado == 3" (click)="cambiarGrafico(3)">Observaciones por asignación de fechas</li>
+                                </ul>
                             </div>
                         </div>
                         <div class="col-span-2">
@@ -187,6 +192,36 @@
                     </div>-->  
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="comparativo" class="modal fixed inset-0 flex items-center justify-center z-10">
+    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+        <div class="modal-container font-montserrat bg-white w-5/6 h-auto p-4 rounded-xl shadow-lg ">
+            <div class="flex ">
+                <button
+                    class="ml-auto bg-red-500 text-white rounded-md py-1 px-3 font-bold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                    (click)="closeGraficoComparativo()">X
+                </button>
+            </div>
+
+            <div class="mx-8 mb-4">
+                <div class="flex mb-8">
+                    <div class="w-full items-center">
+                        <div *ngIf="diferenciaMeses > 1" class="text-2xl font-bold font-montserrat">
+                            <span>Seleccionar últimos&nbsp;</span>
+                            <select [(ngModel)]="ultimos" name="ultimos" (change)="changeValueUltimos($event)">
+                              <option *ngFor="let n of opcionesMeses" [value]="n">{{ n }}</option>
+                            </select>
+                            <span>&nbsp;meses</span>
+                        </div>
+                        <div class="col-span-2">
+                            <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'500px'}"></canvasjs-chart>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
