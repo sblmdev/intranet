@@ -212,7 +212,7 @@
                     <div class="w-full items-center">
                         <div *ngIf="diferenciaMeses > 1" class="text-2xl font-bold font-montserrat">
                             <span>Seleccionar últimos&nbsp;</span>
-                            <select [(ngModel)]="ultimos" name="ultimos" (change)="changeValueUltimos($event)">
+                            <select [(ngModel)]="ultimos" name="ultimos" (change)="changeValueUltimos()">
                               <option *ngFor="let n of opcionesMeses" [value]="n">{{ n }}</option>
                             </select>
                             <span>&nbsp;meses</span>

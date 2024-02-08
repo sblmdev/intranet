@@ -513,8 +513,7 @@ export class RecomendationsComponent {
     }
   }
 
-  changeValueUltimos(e: any) {
-    this.ultimos = e.target.value;
+  changeValueUltimos() {
     this.definirGraficosComparativos(this.ultimos);
   }
 
