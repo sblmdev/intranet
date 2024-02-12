@@ -85,7 +85,7 @@
 
   <div class="rounded-md border-2 mt-4">
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2">Próximos eventos</div>
-    <div class="flex items-center p-2 w-full" *ngFor="let item of publicationsEventos; let i = index">
+    <div class="flex items-center p-2 w-full cursor-pointer" *ngFor="let item of publicationsEventos; let i = index" (click)="goToNewsDetail(item.id)">
       <div class="w-3/10 text-center font-montserrat font-bold bg-red-200 py-1 px-3 rounded-md">
         <span class="text-md">{{item.fechaEvento.substring(8,10)}}</span><br>
         <span class="text-xs" [ngSwitch]="item.fechaEvento.substring(5,7)">

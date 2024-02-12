@@ -84,4 +84,8 @@ export class SidebarComponent {
     this.router.navigate(['/plans']);
   }
 
+  goToNewsDetail(id: number) {
+    this.router.navigate([`/new/${id}`]);
+  }
+
 }
