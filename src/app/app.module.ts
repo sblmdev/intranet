@@ -75,7 +75,7 @@ import { RecomendationFormComponent } from './pages/recomendation-form/recomenda
     HttpClientModule ,
     NgxPaginationModule,
     CanvasJSAngularChartsModule,
-    GalleryComponent,
+    GalleryComponent, 
   ],
   providers: [],
   bootstrap: [AppComponent]

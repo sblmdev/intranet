@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CanvasJS } from '@canvasjs/angular-charts';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ToastrService } from 'ngx-toastr';
 import { Plan } from 'src/app/models/plan';
 import { Recomendation } from 'src/app/models/recomendation';
@@ -137,6 +137,7 @@ export class RecomendationsComponent {
       next: (data) => {
         this.recomendations = JSON.parse(JSON.stringify(data));
         this.recomendationsFilter = JSON.parse(JSON.stringify(data));
+        console.log(this.recomendations );
         this.filtroAreas = [];
         for (const recomendacion of this.recomendations) {
           let areasAux = recomendacion.unidadResponsable.split('/');
@@ -146,7 +147,7 @@ export class RecomendationsComponent {
         }
 
         this.filtroAreas = Array.from(new Set(this.filtroAreas)).sort();
-
+        console.log(this.filtroAreas);
         this.definirGraficos();
       },
       error: (_error) => {
@@ -266,12 +267,9 @@ export class RecomendationsComponent {
       }
     }
 
-    CanvasJS.addColorSet("colorRiesgos",["rgb(220 38 38)","rgb(252 211 77)","rgb(74 222 128)"]);
-    CanvasJS.addColorSet("colorSino",["rgb(74 222 128)","rgb(220 38 38)"]);
-
     this.chartOptionsPye1 = {
       animationEnabled: true,
-      colorSet: "colorRiesgos",
+      colorSet: ["rgb(220 38 38)","rgb(252 211 77)","rgb(74 222 128)"],
       title: {
         text: "Observaciones / Nivel de riesgo"
       },
@@ -291,7 +289,7 @@ export class RecomendationsComponent {
       title: {
         text: "Observaciones / Nivel de riesgo"
       },
-      colorSet: "colorRiesgos",
+      colorSet: ["rgb(220 38 38)","rgb(252 211 77)","rgb(74 222 128)"],
       animationEnabled: true,
       data: [{        
         type: "column",
@@ -306,7 +304,7 @@ export class RecomendationsComponent {
 
     this.chartOptionsPye2 = {
       animationEnabled: true,
-      colorSet: "colorSino",
+      colorSet: ["rgb(74 222 128)","rgb(220 38 38)"],
       title: {
       text: "Observaciones / Asignación de responsables"
       },
@@ -325,7 +323,7 @@ export class RecomendationsComponent {
       title: {
         text: "Observaciones / Asignación de responsables"
       },
-      colorSet: "colorSino",
+      colorSet: ["rgb(74 222 128)","rgb(220 38 38)"],
       animationEnabled: true,
       data: [{        
         type: "column",
@@ -339,7 +337,7 @@ export class RecomendationsComponent {
 
     this.chartOptionsPye3 = {
       animationEnabled: true,
-      colorSet: "colorSino",
+      colorSet: ["rgb(74 222 128)","rgb(220 38 38)"],
       title: {
       text: "Observaciones / Asignación de fechas"
       },
@@ -358,7 +356,7 @@ export class RecomendationsComponent {
       title: {
         text: "Observaciones / Asignación de fechas"
       },
-      colorSet: "colorSino",
+      colorSet: ["rgb(74 222 128)","rgb(220 38 38)"],
       animationEnabled: true,
       data: [{        
         type: "column",
@@ -391,7 +389,7 @@ export class RecomendationsComponent {
       title: {
         text: "Observaciones / Vencimiento"
       },
-      colorSet: "colorRiesgos",
+      colorSet: ["rgb(220 38 38)","rgb(252 211 77)","rgb(74 222 128)"],
       animationEnabled: true,
       data: [{        
         type: "column",
