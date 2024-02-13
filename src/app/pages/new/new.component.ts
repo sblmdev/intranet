@@ -21,32 +21,34 @@ export class NewComponent {
 
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id') || '');
-
-    this.publicationService.getPublicationById(this.id).subscribe({
-      next: (data) => {
-        this.publication = data;
-        if(this.publication.tipoPublicacion == 'Galería'){
-          this.documentService.getDocumentsByIdPublication(this.publication.id).subscribe({
-            next: (data2) => {
-              this.items = [];
-              let documents = data2;
-              for(let i=0; i<documents.length; i++) {
-                let image = {
-                  src: documents[i].urlDocumento.toString(),
-                  thumbSrc: documents[i].urlDocumento.toString(),
+    this.route.paramMap.subscribe((params) => {
+      this.id = Number(params.get('id') || '');
+      this.publicationService.getPublicationById(this.id).subscribe({
+        next: (data) => {
+          this.publication = data;
+          if(this.publication.tipoPublicacion == 'Galería'){
+            this.documentService.getDocumentsByIdPublication(this.publication.id).subscribe({
+              next: (data2) => {
+                this.items = [];
+                let documents = data2;
+                for(let i=0; i<documents.length; i++) {
+                  let image = {
+                    src: documents[i].urlDocumento.toString(),
+                    thumbSrc: documents[i].urlDocumento.toString(),
+                  }
+                  this.items.push(image);
                 }
-                this.items.push(image);
+              },
+              error: (_error2) => {
+                console.log(_error2);
               }
-            },
-            error: (_error2) => {
-              console.log(_error2);
-            }
-          })
+            })
+          }
+        },
+        error: (_error) => {
+          console.log(_error);
         }
-      },
-      error: (_error) => {
-        console.log(_error);
-      }
+      });
     });
   }
 

@@ -8,6 +8,7 @@ import { AppService } from 'src/app/services/app.service';
 import { DocumentRecomendationService } from 'src/app/services/documentRecomendation.service';
 import { FileService } from 'src/app/services/file.service';
 import { RecomendationService } from 'src/app/services/recomendation.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-recomendation-form',
@@ -24,12 +25,16 @@ export class RecomendationFormComponent {
 
   fechaDoc: string = '';
   medio: string = '';
+  dniBuscado = '';
 
   submit:boolean=false;
   documentFlag: boolean = false;
   medioFlag: boolean = false;
+  userFlag: boolean = false;
 
   usuario: Usuario = new Usuario();
+  usuarios: Usuario[] = [];
+  usuariosSeleccionados: Usuario[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -37,7 +42,8 @@ export class RecomendationFormComponent {
     private appService: AppService, 
     private recomendationService: RecomendationService,
     private documentRecomendacionService: DocumentRecomendationService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private usuarioService: UsuarioService) {
     this.id = 0;
   }
 
@@ -45,23 +51,37 @@ export class RecomendationFormComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id') || '');
     this.clearData();
     this.usuario = this.appService.getUsuario();
-    console.log(this.usuario);
   }
 
   clearData() {
     this.recomendation = new Recomendation();
-    if (this.id != 0) {
-      this.recomendationService.getRecomendationById(this.id).subscribe({
-        next: (data) => {
-          this.recomendation = JSON.parse(JSON.stringify(data));
-          this.recomendationOld = JSON.parse(JSON.stringify(data));
-        },
-        error: (e) => {
-          console.log(e);
+    this.usuarioService.obtenerTodosUsuarios().subscribe({
+      next: (data) => {
+        this.usuarios = data.filter(u =>  u.estado);
+        if (this.id != 0) {
+          this.recomendationService.getRecomendationById(this.id).subscribe({
+            next: (data) => {
+              this.recomendation = JSON.parse(JSON.stringify(data));
+              this.recomendationOld = JSON.parse(JSON.stringify(data));
+              let array = this.recomendation.dniResponsable.split("/");
+              for(let j = 0; j < array.length; j++){  
+                let us = this.usuarios.find(n => n.dni ==  array[j]);
+                if(us != undefined){
+                  this.usuariosSeleccionados.push(us);
+                }
+              }
+            },
+            error: (e) => {
+              console.log(e);
+            }
+          });
+          this.getDocuments();
         }
-      });
-      this.getDocuments();
-    }
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    });
   }
 
   guardar() {
@@ -188,4 +208,43 @@ export class RecomendationFormComponent {
     }
   }
 
+  closeNewUser() {
+    this.userFlag = false;
+    this.recomendation.dniResponsable = '';
+    this.recomendation.nombresResponsable = '';
+    if(this.usuariosSeleccionados.length != 0){
+      for(let i = 0; i < this.usuariosSeleccionados.length; i++){
+        if(i != 0){
+          this.recomendation.dniResponsable = this.recomendation.dniResponsable + "/" + this.usuariosSeleccionados[i].dni;
+          this.recomendation.nombresResponsable = this.recomendation.nombresResponsable + "/" + this.usuariosSeleccionados[i].nombres + " " + this.usuariosSeleccionados[i].apellidos;
+        }
+        else{
+          this.recomendation.dniResponsable = this.usuariosSeleccionados[i].dni;
+          this.recomendation.nombresResponsable = this.usuariosSeleccionados[i].nombres + " " + this.usuariosSeleccionados[i].apellidos;
+        }
+      }
+    }
+  }
+
+  openNewUser() {
+    this.userFlag = true;
+  }
+
+  searchUser() {
+    if(this.dniBuscado.length != 0){
+      let usuario = this.usuarios.find(u => u.dni ==  this.dniBuscado);
+      if(usuario == undefined){
+        this.toastr.error('No se encontró información', 'Error');
+      }
+      else{
+        this.toastr.success('Se encontró una coincidencia', 'Éxito');
+        this.dniBuscado = '';
+        this.usuariosSeleccionados.push(usuario);
+      }
+    }
+  }
+
+  deleteUser(index: number){
+    this.usuariosSeleccionados.splice(index, 1);
+  }
 }

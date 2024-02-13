@@ -18,6 +18,7 @@ import { NewComponent } from './pages/new/new.component';
 import { RecomendationsComponent } from './pages/recomendations/recomendations.component';
 import { ControlComponent } from './pages/control/control.component';
 import { RecomendationFormComponent } from './pages/recomendation-form/recomendation-form.component';
+import { InfoPlansComponent } from './pages/info-plans/info-plans.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'questionnaire', component: QuestionnaireComponent},
   { path: 'directorate', component: DirectorateMembersComponent},
   { path: 'control', component: ControlComponent},
+  { path: 'infoPlans', component: InfoPlansComponent},
 ];
 
 @NgModule({

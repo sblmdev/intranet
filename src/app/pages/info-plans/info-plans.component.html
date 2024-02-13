@@ -1,0 +1,111 @@
+<div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
+    <div class="flex items-center">
+        <div class="font-montserrat text-2xl font-bold">Planes de Acción</div>
+    </div>
+
+    <table class="w-full table-auto font-montserrat border mt-4 mb-60 text-sm">
+        <thead class="bg-indigo-800 ">
+            <tr class="text-white">
+                <th width="5%" class="text-center">#</th>
+                <th class="text-left">Nombre</th>
+                <th width="20%" class="text-center">Informe</th>
+                <th width="15%" class="text-center">Fecha Informe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of plans; let i = index" class="odd:bg-white even:bg-blue-50 cursor-pointer"
+                (click)="openRecomendations(item.id)">
+                <td width="5%" class="text-center">{{ i + 1 }}</td>
+                <td class="text-left">{{item.nombre}}</td>
+                <td width="20%" class="text-center">{{ item.informe }}</td>
+                <td width="10%" class="text-center">{{ item.fechaInforme }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="recomendacionesFlag" class="modal fixed inset-0 overflow-y-auto flex items-center justify-center z-10">
+    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+      <div class="modal-container font-montserrat bg-white w-11/12 h-auto p-4 rounded-xl shadow-lg">
+        <div class="flex">
+          <button
+            class="ml-auto bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+            (click)="closeRecomendations()">X</button>
+        </div>
+  
+        <div class="mx-8 mb-4">
+            <h1 class="text-2xl text-center font-montserrat font-bold mx-20">{{plan.nombre}}</h1>
+            <div class="w-full bg-gray-200 px-4 py-2 mt-4 rounded-md">
+                <table class="text-base font-montserrat w-full">
+                    <tr>
+                        <td width="30%" class="font-bold">Entidad:</td>
+                        <td>{{plan.entidad}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%"  class="font-bold">Número del Informe de Alerta de Control:</td>
+                        <td>{{plan.informe}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%"  class="font-bold">Tipo de Auditoría:</td>
+                        <td>{{plan.tipoAuditoria}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%"  class="font-bold">Entidad Auditora:</td>
+                        <td>{{plan.entidadAuditora}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%"  class="font-bold">Titular de la Entidad Auditora:</td>
+                        <td>{{plan.titularEntidadAuditora}}</td>
+                    </tr>
+                </table>
+            </div>
+        
+            <div class="font-montserrat text-center text-2xl font-bold mt-4">RECOMENDACIONES</div>
+        
+            <table class="w-full table-auto font-montserrat border">
+                <thead class="bg-indigo-800">
+                    <tr class="text-white">
+                        <th width="3%" class="text-center">#</th>
+                        <th class="text-left">Observación</th>
+                        <th width="5%" class="text-center">Riesgo</th>
+                        <th width="20%" class="text-center">Unidad Responsable</th>
+                        <th width="20%" class="text-center">Responsable</th>
+                        <th width="8%" class="text-center">Fecha final</th>
+                        <th width="8%" class="text-center">Últ. Act.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item2 of recomendations | paginate: { itemsPerPage: 6, currentPage: p }; let i = index"
+                        class="odd:bg-white even:bg-blue-50 text-sm">
+                        <td width="5%" class="text-center">{{ (p ? (p - 1) * 6 : 0) + i + 1 }}</td>
+                        <td class="text-left">{{item2.observacion}}</td>
+                        <td class="text-center align-middle" [ngSwitch]="item2.nivelRiesgo">
+                            <ng-container *ngSwitchCase="1"><span
+                                    class="bg-green-400 px-4 py-2 text-white font-bold font-montserrat rounded">BAJO</span></ng-container>
+                            <ng-container *ngSwitchCase="2"><span
+                                    class="bg-amber-300 px-2.5 py-2 text-white font-bold font-montserrat rounded">MEDIO</span></ng-container>
+                            <ng-container *ngSwitchCase="3"><span
+                                    class="bg-red-600 px-4 py-2 text-white font-bold font-montserrat rounded">ALTO</span></ng-container>
+                        </td>
+                        <td class="text-center"[innerHTML]="item2.unidadResponsable.split('/').join('<br><hr>')"></td>
+                        <td class="text-center" [innerHTML]="item2.nombresResponsable.split('/').join('<br><hr>')"></td>
+                        <td class="text-center">{{item2.fechaFinal.substring(8,10) }}-{{item2.fechaFinal.substring(5,7)
+                            }}-{{item2.fechaFinal.substring(0,4) }}</td>
+                        <td class="text-center">{{item2.fechaModificacion.substring(8,10) }}-{{item2.fechaModificacion.substring(5,7)
+                        }}-{{item2.fechaModificacion.substring(0,4) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <div class="flex justify-center font-bold mt-6 font-montserrat ">
+                <pagination-controls 
+                    class="my-pagination" 
+                    (pageChange)="p = $event" 
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente">
+                </pagination-controls>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

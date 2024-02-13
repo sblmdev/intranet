@@ -4,7 +4,7 @@
         <h1 class="text-sm text-gray-600 font-montserrat">{{ publication.fechaPublicacion.substring(8,10) }}-{{
             publication.fechaPublicacion.substring(5,7) }}-{{publication.fechaPublicacion.substring(0,4) }}</h1>
         <h1 class="text-base font-semibold font-montserrat mt-1">{{publication.titulo}}</h1>
-        <h1 class="text-sm font-montserrat text-justify mt-1">{{publication.contenido}}</h1>
+        <h1 class="text-sm font-montserrat text-justify mt-1">{{publication.contenido.length > 280 ? publication.contenido.substring(0,280) + "..." : publication.contenido }}</h1>
     </div>
 
     <h1 class="text-base text-center font-bold font-montserrat mt-4">Historial de noticias</h1>
@@ -18,7 +18,7 @@
                     <h1 class="text-xs text-gray-600 font-montserrat">{{ item.fechaPublicacion.substring(8,10) }}-{{
                         item.fechaPublicacion.substring(5,7) }}-{{item.fechaPublicacion.substring(0,4) }}</h1>
                     <h1 class="text-sm font-semibold font-montserrat mt-1">{{item.titulo}}</h1>
-                    <h1 class="text-xs font-montserrat text-justify mt-1">{{item.contenido}}</h1>
+                    <h1 class="text-xs font-montserrat text-justify mt-1">{{item.contenido.length > 280 ? item.contenido.substring(0,280) + "..." : item.contenido }}</h1>
                 </div>
             </div>
         </div>

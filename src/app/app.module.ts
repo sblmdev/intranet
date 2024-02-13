@@ -35,6 +35,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { GalleryComponent } from '@daelmaak/ngx-gallery';
 import { ControlComponent } from './pages/control/control.component';
 import { RecomendationFormComponent } from './pages/recomendation-form/recomendation-form.component';
+import { InfoPlansComponent } from './pages/info-plans/info-plans.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { RecomendationFormComponent } from './pages/recomendation-form/recomenda
     RecomendationsComponent,
     ControlComponent,
     RecomendationFormComponent,
+    InfoPlansComponent,
   ],
   imports: [
     CommonModule,
