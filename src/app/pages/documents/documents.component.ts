@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Plan } from 'src/app/models/plan';
 import { Publication } from 'src/app/models/publications';
+import { Recomendation } from 'src/app/models/recomendation';
+import { PlanService } from 'src/app/services/plan.service';
 import { PublicationService } from 'src/app/services/publication.service';
+import { RecomendationService } from 'src/app/services/recomendation.service';
 
 @Component({
   selector: 'app-documents',
@@ -13,7 +17,12 @@ export class DocumentsComponent {
   publications: Publication[] = [];
   publication: Publication = new Publication();
   p:any;
-  constructor(private route: ActivatedRoute, private router: Router, private publicationService: PublicationService) {
+
+  constructor(private route: ActivatedRoute, 
+    private router: Router, 
+    private publicationService: PublicationService,
+    private planService: PlanService,
+    private recomendationService: RecomendationService) {
     this.id = '';
   }
 
@@ -36,4 +45,7 @@ export class DocumentsComponent {
     });
   }
 
+  goPlans(){
+    this.router.navigate(['/infoPlans']);
+  }
 }

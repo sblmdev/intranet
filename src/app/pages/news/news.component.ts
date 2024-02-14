@@ -21,6 +21,7 @@ export class NewsComponent {
     this.publicationService.obtenerPublicacionesPorTipo("Comunicaciones").subscribe({
       next: (data) => {
         this.publications = data;
+        this.publications = this.publications.sort((a,b) => b.id - a.id);
         this.publication = this.publications[0];
         if(this.publication == undefined){
           this.publication = new Publication();

@@ -34,14 +34,22 @@
 
         <div class="mb-6 flex items-center">
             <div class="w-1/2 pr-2">
-                <label for="nombresResponsable" class="text-lg font-montserrat block font-bold">Nombre del
-                    Responsable:</label>
-                <input type="text" id="nombresResponsable" name="nombresResponsable" [disabled]="!(id == 0 || usuario.tipo ==  1)"
+                <div class="flex items-center">
+                    <label for="nombresResponsable" class="text-lg font-montserrat block font-bold">Nombre del Responsable:</label>
+                    <button class="ml-2 p-1 border border-2 border-indigo-800 rounded" *ngIf="usuario.tipo == 1"
+                        title="Agregar documento de sustento" (click)="openNewUser()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 512 512">
+                            <path
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                        </svg>
+                    </button>
+                </div>
+                <input type="text" id="nombresResponsable" name="nombresResponsable" disabled="true"
                     class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="recomendation.nombresResponsable">
             </div>
             <div class="w-1/2 pr-2">
                 <label for="dniResponsable" class="text-lg font-montserrat block font-bold">DNI del Responsable:</label>
-                <input type="text" id="dniResponsable" name="dniResponsable" [disabled]="!(id == 0 || usuario.tipo ==  1)"
+                <input type="text" id="dniResponsable" name="dniResponsable" disabled="true"
                     class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="recomendation.dniResponsable">
             </div>
         </div>
@@ -74,7 +82,8 @@
         <div class="mb-6">
             <div class="flex items-center">
                 <label for="medio" class="text-lg font-montserrat block font-bold">Medio:</label>
-                <button class="ml-2 p-1 border border-2 border-indigo-800 rounded" *ngIf="usuario.tipo == 1 || recomendation.dniResponsable.includes(usuario.dni)"
+                <button class="ml-2 p-1 border border-2 border-indigo-800 rounded"
+                    *ngIf="usuario.tipo == 1 || recomendation.dniResponsable.includes(usuario.dni)"
                     title="Agregar documento de sustento" (click)="openInfo()">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                         <path
@@ -192,6 +201,65 @@
                         </button>
                     </div>        
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="userFlag" class="modal fixed w-60 inset-0 flex items-center justify-center z-10">
+    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+        <div class="modal-container font-montserrat bg-white w-3/5 h-auto p-4 rounded-xl shadow-lg ">
+            <div class="flex ">
+                <button
+                    class="ml-auto bg-red-500 text-white rounded-md py-1 px-3 font-bold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                    (click)="closeNewUser()">X</button>
+            </div>
+
+            <div class="mx-8 mb-4">
+                <div class="flex mb-8">
+                    <div class="text-2xl mx-auto font-montserrat font-bold text-center underline">Agregar/ Eliminar Responsable(s)</div>
+                </div>
+
+                <form>            
+                    <div class="mb-6 flex items-center">
+                        <div class="w-1/4 pr-2">
+                            <label class="text-lg font-montserrat block font-bold">DNI del Responsable:</label>
+                            <input type="text" id="dniResponsable" name="dniResponsable" class="mt-1 p-2 h-10 border rounded-md w-full" [(ngModel)]="dniBuscado">
+                        </div>
+                        <div class="w-1/4 pr-2">
+                            <label class="text-lg font-montserrat block font-bold">&nbsp;</label>
+                            <button class="bg-indigo-900 text-white rounded-md ml-auto px-12 py-2 text-base font-bold hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
+                            (click)="searchUser()">
+                            Buscar
+                        </button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="mt-6 w-full table-auto font-montserrat border">
+                    <thead class="bg-indigo-800">
+                        <tr class="text-white">
+                            <th width="3%" class="text-center">#</th>
+                            <th class="text-center">DNI</th>
+                            <th class="text-left">Nombres y apellidos</th>
+                            <th width="8%" class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let us of usuariosSeleccionados; let i = index">
+                            <td class="text-center">{{i + 1}}</td>
+                            <td class="text-center">{{us.dni}}</td>
+                            <td>{{us.nombres}} {{us.apellidos}}</td>
+                            <td class="text-center">
+                                <button class="px-2 py-2 bg-red-300 rounded ml-2" title="Eliminar publicación"> <svg xmlns="http://www.w3.org/2000/svg" height="16"
+                                    width="14" viewBox="0 0 448 512" (click)="deleteUser(i)">
+                                    <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                                    </svg>
+                                </button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

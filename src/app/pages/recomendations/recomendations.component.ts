@@ -137,7 +137,6 @@ export class RecomendationsComponent {
       next: (data) => {
         this.recomendations = JSON.parse(JSON.stringify(data));
         this.recomendationsFilter = JSON.parse(JSON.stringify(data));
-        console.log(this.recomendations );
         this.filtroAreas = [];
         for (const recomendacion of this.recomendations) {
           let areasAux = recomendacion.unidadResponsable.split('/');
@@ -147,7 +146,6 @@ export class RecomendationsComponent {
         }
 
         this.filtroAreas = Array.from(new Set(this.filtroAreas)).sort();
-        console.log(this.filtroAreas);
         this.definirGraficos();
       },
       error: (_error) => {
