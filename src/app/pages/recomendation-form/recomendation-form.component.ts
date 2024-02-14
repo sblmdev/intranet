@@ -291,20 +291,7 @@ export class RecomendationFormComponent {
 
   openNewUnidad() {
     this.unidadFlag = true;
-  
-    setTimeout(() => {
-      let unids = this.recomendation.unidadResponsable.split("/");
-      for (let k = 0; k < unids.length; k++) {
-        let u = this.unidades.find(n => n.nomUnidad == unids[k]);
-        if (u != undefined) {
-          console.log(u);
-          const miCheckbox = document.getElementById(u.abrUnidad) as HTMLInputElement;
-          if (miCheckbox) {
-            miCheckbox.checked = true;
-          }
-        }
-      }
-    }, 1000); // Ajusta el tiempo de espera según sea necesario
+    this.unidadesSeleccionadas = this.recomendation.unidadResponsable.split("/");
   }
 
   closeNewUnidad() {

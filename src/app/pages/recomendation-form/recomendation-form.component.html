@@ -5,6 +5,12 @@
     </div>
     <form>
         <div class="mb-6">
+            <label for="observacion" class="text-lg font-montserrat block font-bold">Número:</label>
+            <input id="numero" name="numbero" rows="3" class="mt-1 p-2 border rounded-md w-full"
+                [(ngModel)]="recomendation.numero" [disabled]="!(id == 0)"/>
+        </div>
+
+        <div class="mb-6">
             <label for="observacion" class="text-lg font-montserrat block font-bold">Observación:</label>
             <textarea id="observacion" name="observacion" rows="3" class="mt-1 p-2 border rounded-md w-full"
                 [(ngModel)]="recomendation.observacion" [disabled]="!(id == 0 || usuario.tipo ==  1)"></textarea>
@@ -299,7 +305,7 @@
                             <td class="text-center">{{(p ? (p - 1) * 15 : 0) + j + 1}}</td>
                             <td>{{ud.nomUnidad}}</td>
                             <td class="text-center">
-                                <input id={{ud.abrUnidad}} type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" (change)="seleccionarUnidad(ud.nomUnidad, $event)" />
+                                <input [checked]="unidadesSeleccionadas.includes(ud.nomUnidad)" id="{{ ud.abrUnidad }}" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" (change)="seleccionarUnidad(ud.nomUnidad, $event)" />
                             </td>
                         </tr>
                     </tbody>
