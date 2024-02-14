@@ -91,7 +91,7 @@
                 class="w-full h-10 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500"
                 [(ngModel)]="publicacion.tipoPublicacion">
                 <option value="">Seleccionar Tipo de publicación</option>
-                <option *ngFor="let opcion of opciones" [value]="opcion.option">{{ opcion.value }}</option>
+                <option *ngFor="let opcion of tipos" [value]="opcion.nombre">{{ opcion.nombreCompleto }}</option>
               </select>
               <span class="text-red-500 " *ngIf="submit==true && publicacion.tipoPublicacion.length==0">*Complete este
                 campo*</span>
@@ -140,21 +140,6 @@
             <span class="text-red-500 " *ngIf="submit==true && publicacion.contenido.length==0">*Complete este
               campo*</span>
           </div>
-
-          <!-- <div class="mb-8"
-            *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos'">
-            <label for="documento" class="text-lg font-montserrat block font-bold">Documento (PDF):</label>
-            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="application/pdf">
-          </div>
-
-          <div class="mb-4 flex justify-center">
-            <button
-              class="bg-indigo-900 text-white rounded-md px-12 py-2 text-base font-medium hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
-              (click)="savePublication()"
-              [disabled]="publicacion.titulo.length == 0 || publicacion.tipoPublicacion.length == 0 || file == undefined">
-              Guardar
-            </button>
-          </div> -->
           <div class=" flex mt-12">
             <div
               *ngIf="publicacion.tipoPublicacion!='Comunicaciones' &&  publicacion.tipoPublicacion!='Eventos' && publicacion.tipoPublicacion!='Galería'">

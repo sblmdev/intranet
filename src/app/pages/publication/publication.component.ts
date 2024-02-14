@@ -7,6 +7,8 @@ import { FileService } from 'src/app/services/file.service';
 import { ToastrService } from 'ngx-toastr';
 import { EmailService } from 'src/app/services/email.service';
 import { DocumentService } from 'src/app/services/document.service';
+import { TypePublication } from 'src/app/models/typePublication';
+import { TypeTypePublicationService } from 'src/app/services/typePublication.service';
 
 @Component({
   selector: 'app-publication',
@@ -29,75 +31,35 @@ export class PublicationComponent {
   p:any;
   submit:boolean=false;
   docSelect: string = '';
+
   constructor(private publicationService: PublicationService,
     private fileService: FileService,
     private emailService: EmailService, 
     private toastr: ToastrService,
-    private documentService: DocumentService) {
+    private documentService: DocumentService,
+    private typePublicationService: TypeTypePublicationService) {
 
   }
   
   opciones: any[] = [];
+  tipos: TypePublication[] = [];
 
   ngOnInit() {
     this.clearData();
+
     const usuarioString = localStorage.getItem("Usuario");
     if (usuarioString !== null) {
       try {
         let usuario: Usuario = JSON.parse(usuarioString);
-        if(usuario.tipo == 1){
-          this.opciones = [
-            { option: "Comunicaciones", value: "Comunicaciones" },
-            { option: "Eventos", value: "Eventos" },
-            { option: "Galería", value: "Galería" },
-            { option: "Acuerdos", value: "Acuerdos" },
-            { option: "Códigos", value: "Códigos" },
-            { option: "Marco", value: "Control Interno - Marco Normativo" },
-            { option: "Orientaciones", value: "Control Interno - Orientaciones Prácticas" },
-            { option: "Cronograma", value: "Control Interno - Cronograma de Presentación" },
-            { option: "Preguntas", value: "Control Interno - Preguntas Frecuentes" },
-            { option: "Directivas", value: "Directivas" },
-            { option: "Leyes", value: "Leyes" },
-            { option: "Lineamientos", value: "Lineamientos" },
-            { option: "Manuales", value: "Manuales" },
-            { option: "PlanesAccion", value: "Planes de Acción" },
-            { option: "Planes", value: "Planes de Gestión" },
-            { option: "Políticas", value: "Políticas" },
-            { option: "Procedimientos", value: "Procedimientos" },
-            { option: "Reglamentos", value: "Reglamentos" },
-            { option: "Resoluciones", value: "Resoluciones" }
-          ];          
-        }
-        else{
-          switch(usuario.dependencia) {
-            case 'GAF': 
-            this.opciones = [
-              { option: "Comunicaciones", value: "Comunicaciones" },
-              { option: "Eventos", value: "Eventos" },
-              { option: "Galería", value: "Galería" }
-            ]; break;
-            case 'GPD': 
-            this.opciones = [
-              { option: "Acuerdos", value: "Acuerdos" },
-              { option: "Códigos", value: "Códigos" },
-              { option: "Marco", value: "Control Interno - Marco Normativo" },
-              { option: "Orientaciones", value: "Control Interno - Orientaciones Prácticas" },
-              { option: "Cronograma", value: "Control Interno - Cronograma de Presentación" },
-              { option: "Preguntas", value: "Control Interno - Preguntas Frecuentes" },
-              { option: "Directivas", value: "Directivas" },
-              { option: "Leyes", value: "Leyes" },
-              { option: "Lineamientos", value: "Lineamientos" },
-              { option: "Manuales", value: "Manuales" },
-              { option: "PlanesAccion", value: "Planes de Acción" },
-              { option: "Planes", value: "Planes de Gestión" },
-              { option: "Políticas", value: "Políticas" },
-              { option: "Procedimientos", value: "Procedimientos" },
-              { option: "Reglamentos", value: "Reglamentos" },
-              { option: "Resoluciones", value: "Resoluciones" }
-            ];
-            ;break;
+        this.typePublicationService.getTypePublications().subscribe({
+          next: (data) => {
+            this.tipos = data;
+            this.tipos = this.tipos.filter(t => t.accesos.toUpperCase().includes(usuario.dependencia));
+          },
+          error: (e) => {
+            console.log(e);
           }
-        }
+        });
       } catch (error) {
         console.error("Error al parsear el objeto Usuario:", error);
       }
