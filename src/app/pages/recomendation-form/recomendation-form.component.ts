@@ -292,10 +292,14 @@ export class RecomendationFormComponent {
   openNewUnidad() {
     this.unidadFlag = true;
     this.unidadesSeleccionadas = this.recomendation.unidadResponsable.split("/");
+    if(JSON.stringify(this.unidadesSeleccionadas) == '[""]'){
+      this.unidadesSeleccionadas = [];
+    }
   }
 
   closeNewUnidad() {
     this.unidadFlag = false;
+    this.unidadesSeleccionadas = [];
   }
 
   seleccionarUnidad(nombre: string, e: any) {
@@ -314,6 +318,7 @@ export class RecomendationFormComponent {
     this.recomendation.unidadResponsable = '';
     for(let i = 0; i < this.unidadesSeleccionadas.length; i++) {
       if(i == 0){
+        
         this.recomendation.unidadResponsable = this.recomendation.unidadResponsable + this.unidadesSeleccionadas[i]
       }
       else{
