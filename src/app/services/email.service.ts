@@ -8,7 +8,7 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root',
 })
 export class EmailService {
-  private baseUrl = 'http://192.168.1.6:8080/intranet-api/api/email';
+  private baseUrl = 'http://19.168.1.6:8080/intranet-api/api/email';
 
   constructor(private http: HttpClient) { }
 

@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DocumentRecomendation } from 'src/app/models/documentoRecomendacion';
 import { Recomendation } from 'src/app/models/recomendation';
+import { Unidad } from 'src/app/models/unidad';
 import { Usuario } from 'src/app/models/usuario';
 import { AppService } from 'src/app/services/app.service';
 import { DocumentRecomendationService } from 'src/app/services/documentRecomendation.service';
 import { FileService } from 'src/app/services/file.service';
 import { RecomendationService } from 'src/app/services/recomendation.service';
+import { UnidadService } from 'src/app/services/unidad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -21,6 +23,7 @@ export class RecomendationFormComponent {
   recomendationOld: Recomendation = new Recomendation();
   documents: DocumentRecomendation[] = [];
   files: File[] = [];
+  unidades: Unidad[] = [];
   contador: number = 0;
 
   fechaDoc: string = '';
@@ -31,10 +34,12 @@ export class RecomendationFormComponent {
   documentFlag: boolean = false;
   medioFlag: boolean = false;
   userFlag: boolean = false;
+  unidadFlag: boolean = false;
 
   usuario: Usuario = new Usuario();
   usuarios: Usuario[] = [];
   usuariosSeleccionados: Usuario[] = [];
+  unidadesSeleccionadas: string[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -43,7 +48,8 @@ export class RecomendationFormComponent {
     private recomendationService: RecomendationService,
     private documentRecomendacionService: DocumentRecomendationService,
     private toastr: ToastrService,
-    private usuarioService: UsuarioService) {
+    private usuarioService: UsuarioService,
+    private unidadService: UnidadService) {
     this.id = 0;
   }
 
@@ -51,6 +57,15 @@ export class RecomendationFormComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id') || '');
     this.clearData();
     this.usuario = this.appService.getUsuario();
+    this.unidadService.obtenerTodosUnidades().subscribe({
+      next: (data) => {
+        this.unidades = data;
+        console.log(this.unidades);
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    });
   }
 
   clearData() {
@@ -86,7 +101,22 @@ export class RecomendationFormComponent {
 
   guardar() {
     if(this.id == 0){
-
+      let fechaHoy = new Date();
+          let año = fechaHoy.getFullYear();
+          let mes = (fechaHoy.getMonth() + 1).toString().padStart(2, '0');
+          let dia = fechaHoy.getDate().toString().padStart(2, '0');
+          let fechaHoyString = `${año}-${mes}-${dia}`;
+          this.recomendation.fechaCreación = fechaHoyString;
+      this.recomendationService.addRecomendation(this.recomendation).subscribe({
+        next: (data) => {
+          this.toastr.success("Recomendación guardada correctamente", "Éxito");
+          this.router.navigate(['/recomendations', data.idPlan]);
+        },
+        error: (e) => {
+          this.toastr.error("Ocurrio un error al guarda la Recomendación", "Error");
+          console.log(e);
+        }
+      });
     }
     else{
       this.recomendationOld.estado = false;
@@ -101,13 +131,15 @@ export class RecomendationFormComponent {
           this.recomendation.id = 0;
           this.recomendationService.addRecomendation(this.recomendation).subscribe({
             next: (data2) => {
-              //this.router.navigate(['/recomendations', data2.idPlan]);
+              this.toastr.success("Recomendación actualizada correctamente", "Éxito");
+              this.router.navigate(['/recomendations', data2.idPlan]);
               this.recomendation = JSON.parse(JSON.stringify(data2));
               this.recomendationOld = JSON.parse(JSON.stringify(data2));
             }
           });
         },
         error: (e1) => {
+          this.toastr.error("Ocurrio un error al actualizar la Recomendación", "Error");
           console.log(e1);
         }
       });
@@ -238,13 +270,53 @@ export class RecomendationFormComponent {
       }
       else{
         this.toastr.success('Se encontró una coincidencia', 'Éxito');
+        let encontrado = false;
+        for(let i = 0; i < this.usuariosSeleccionados.length; i++){
+          if(this.usuariosSeleccionados[i].dni == this.dniBuscado){
+            encontrado = true;
+          }
+        }
         this.dniBuscado = '';
-        this.usuariosSeleccionados.push(usuario);
+        if(!encontrado){
+          this.usuariosSeleccionados.push(usuario);
+        }
       }
     }
   }
 
   deleteUser(index: number){
     this.usuariosSeleccionados.splice(index, 1);
+  }
+
+  openNewUnidad() {
+    this.unidadFlag = true;
+  }
+
+  closeNewUnidad() {
+    this.unidadFlag = false;
+  }
+
+  seleccionarUnidad(nombre: string, e: any) {
+    if (e.target.checked) {
+      const indice = this.unidadesSeleccionadas.indexOf(nombre);
+      if (indice === -1) {
+        this.unidadesSeleccionadas.push(nombre);
+      }
+    } else {
+      const indice = this.unidadesSeleccionadas.indexOf(nombre);
+      if (indice !== -1) {
+        this.unidadesSeleccionadas.splice(indice, 1);
+      }
+    }
+    
+    this.recomendation.unidadResponsable = '';
+    for(let i = 0; i < this.unidadesSeleccionadas.length; i++) {
+      if(i == 0){
+        this.recomendation.unidadResponsable = this.recomendation.unidadResponsable + this.unidadesSeleccionadas[i]
+      }
+      else{
+        this.recomendation.unidadResponsable = this.recomendation.unidadResponsable + "/" + this.unidadesSeleccionadas[i];
+      }
+    }
   }
 }

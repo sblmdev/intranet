@@ -7,7 +7,7 @@ import { Plan } from '../models/plan';
   providedIn: 'root',
 })
 export class PlanService {
-  private apiUrl = 'http://192.168.1.6:8080/intranet-api/api/planes'; 
+  private apiUrl = 'http://19.168.1.6:8080/intranet-api/api/planes'; 
 
   constructor(private http: HttpClient) {}
 
