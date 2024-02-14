@@ -4,7 +4,7 @@
         <h1 class="text-sm text-gray-600 font-montserrat">{{publication.fechaPublicacion.substring(8,10) }}-{{
             publication.fechaPublicacion.substring(5,7) }}-{{publication.fechaPublicacion.substring(0,4) }}</h1>
         <h1 class="text-base font-semibold font-montserrat mt-2">{{publication.titulo}}</h1>
-        <h1 class="text-sm font-montserrat text-justify mt-4">{{publication.contenido}}</h1>
+        <pre class="text-sm font-montserrat text-justify mt-4">{{publication.contenido}}</pre>
     </div>
 </div>
 <div *ngIf="publication.tipoPublicacion=='Galería'">
@@ -13,6 +13,6 @@
         <h1 class="text-sm text-gray-600 font-montserrat">{{publication.fechaPublicacion.substring(8,10) }}-{{
             publication.fechaPublicacion.substring(5,7) }}-{{publication.fechaPublicacion.substring(0,4) }}</h1>
         <h1 class="text-base font-semibold font-montserrat mt-2">{{publication.titulo}}</h1>
-        <h1 class="text-sm font-montserrat text-justify mt-4">{{publication.contenido}}</h1>
+        <pre class="text-sm font-montserrat text-justify mt-4">{{publication.contenido}}</pre>
     </div>
 </div>
