@@ -41,6 +41,8 @@ export class RecomendationFormComponent {
   usuariosSeleccionados: Usuario[] = [];
   unidadesSeleccionadas: string[] = [];
 
+  p:any = 0;
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private fileService: FileService,
@@ -57,41 +59,40 @@ export class RecomendationFormComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id') || '');
     this.clearData();
     this.usuario = this.appService.getUsuario();
-    this.unidadService.obtenerTodosUnidades().subscribe({
-      next: (data) => {
-        this.unidades = data;
-        console.log(this.unidades);
-      },
-      error: (e) => {
-        console.log(e);
-      }
-    });
   }
 
   clearData() {
     this.recomendation = new Recomendation();
-    this.usuarioService.obtenerTodosUsuarios().subscribe({
+    this.unidadService.obtenerTodosUnidades().subscribe({
       next: (data) => {
-        this.usuarios = data.filter(u =>  u.estado);
-        if (this.id != 0) {
-          this.recomendationService.getRecomendationById(this.id).subscribe({
-            next: (data) => {
-              this.recomendation = JSON.parse(JSON.stringify(data));
-              this.recomendationOld = JSON.parse(JSON.stringify(data));
-              let array = this.recomendation.dniResponsable.split("/");
-              for(let j = 0; j < array.length; j++){  
-                let us = this.usuarios.find(n => n.dni ==  array[j]);
-                if(us != undefined){
-                  this.usuariosSeleccionados.push(us);
+        this.unidades = data;
+        this.usuarioService.obtenerTodosUsuarios().subscribe({
+          next: (data) => {
+            this.usuarios = data.filter(u =>  u.estado);
+            if (this.id != 0) {
+              this.recomendationService.getRecomendationById(this.id).subscribe({
+                next: (data) => {
+                  this.recomendation = JSON.parse(JSON.stringify(data));
+                  this.recomendationOld = JSON.parse(JSON.stringify(data));
+                  let array = this.recomendation.dniResponsable.split("/");
+                  for(let j = 0; j < array.length; j++){  
+                    let us = this.usuarios.find(n => n.dni ==  array[j]);
+                    if(us != undefined){
+                      this.usuariosSeleccionados.push(us);
+                    }
+                  }
+                },
+                error: (e) => {
+                  console.log(e);
                 }
-              }
-            },
-            error: (e) => {
-              console.log(e);
+              });
+              this.getDocuments();
             }
-          });
-          this.getDocuments();
-        }
+          },
+          error: (e) => {
+            console.log(e);
+          }
+        });
       },
       error: (e) => {
         console.log(e);
@@ -290,6 +291,20 @@ export class RecomendationFormComponent {
 
   openNewUnidad() {
     this.unidadFlag = true;
+  
+    setTimeout(() => {
+      let unids = this.recomendation.unidadResponsable.split("/");
+      for (let k = 0; k < unids.length; k++) {
+        let u = this.unidades.find(n => n.nomUnidad == unids[k]);
+        if (u != undefined) {
+          console.log(u);
+          const miCheckbox = document.getElementById(u.abrUnidad) as HTMLInputElement;
+          if (miCheckbox) {
+            miCheckbox.checked = true;
+          }
+        }
+      }
+    }, 1000); // Ajusta el tiempo de espera según sea necesario
   }
 
   closeNewUnidad() {

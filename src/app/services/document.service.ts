@@ -7,7 +7,7 @@ import { Document } from '../models/documento';
   providedIn: 'root',
 })
 export class DocumentService {
-  private apiUrl = 'http://19.168.1.6:8080/intranet-api/api/documentos'; 
+  private apiUrl = 'http://192.168.1.6:8080/intranet-api/api/documentos'; 
 
   constructor(private http: HttpClient) {}
 

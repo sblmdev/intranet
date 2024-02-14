@@ -9,7 +9,7 @@ import { Usuario } from '../models/usuario';
 })
 export class AssistsService {
 
-  private baseUrl = 'http://19.168.1.6:8080/intranet-api/api'; // Reemplaza con la URL de tu backend
+  private baseUrl = 'http://192.168.1.6:8080/intranet-api/api'; // Reemplaza con la URL de tu backend
 
   constructor(private http: HttpClient) { }
 

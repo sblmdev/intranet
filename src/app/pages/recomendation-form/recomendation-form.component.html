@@ -295,8 +295,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let ud of unidades; let j = index">
-                            <td class="text-center">{{j + 1}}</td>
+                        <tr *ngFor="let ud of unidades | paginate: { itemsPerPage: 15, currentPage: p }; let j = index">
+                            <td class="text-center">{{(p ? (p - 1) * 15 : 0) + j + 1}}</td>
                             <td>{{ud.nomUnidad}}</td>
                             <td class="text-center">
                                 <input id={{ud.abrUnidad}} type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" (change)="seleccionarUnidad(ud.nomUnidad, $event)" />
@@ -304,6 +304,14 @@
                         </tr>
                     </tbody>
                 </table>
+                <div  class="flex justify-center font-bold mt-4 font-montserrat ">
+                    <pagination-controls 
+                        class="my-pagination"
+                        (pageChange)="p = $event"
+                        previousLabel="Anterior"
+                        nextLabel="Siguiente">
+                    </pagination-controls>
+                </div>
             </div>
         </div>
     </div>

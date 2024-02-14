@@ -7,7 +7,7 @@ import { DocumentRecomendation } from '../models/documentoRecomendacion';
   providedIn: 'root',
 })
 export class DocumentRecomendationService {
-  private apiUrl = 'http://19.168.1.6:8080/intranet-api/api/documentosRec'; 
+  private apiUrl = 'http://192.168.1.6:8080/intranet-api/api/documentosRec'; 
 
   constructor(private http: HttpClient) {}
 

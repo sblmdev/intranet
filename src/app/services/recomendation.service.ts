@@ -7,7 +7,7 @@ import { Recomendation } from '../models/recomendation';
   providedIn: 'root',
 })
 export class RecomendationService {
-  private apiUrl = 'http://19.168.1.6:8080/intranet-api/api/recomendaciones';
+  private apiUrl = 'http://192.168.1.6:8080/intranet-api/api/recomendaciones';
 
   constructor(private http: HttpClient) {}
 
