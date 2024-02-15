@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'new/:id', component: NewComponent },
   { path: 'plans', component: PlansComponent },
   { path: 'recomendations/:id', component: RecomendationsComponent},
-  { path: 'recomendation/:id', component: RecomendationFormComponent},
+  { path: 'recomendation/:idRec/:idPlan', component: RecomendationFormComponent},
   { path: 'burials', component: BurialsComponent},
   { path: 'assists', component: AssistsComponent },
   { path: 'treasury', component: TreasuryComponent},

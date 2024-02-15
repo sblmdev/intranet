@@ -177,8 +177,8 @@ export class RecomendationsComponent {
     });
   }
 
-  navegarARecomendacion(itemId: number): void {
-    this.router.navigate(['/recomendation', itemId]);
+  navegarARecomendacion(itemId: number, idP: number): void {
+    this.router.navigate(['/recomendation', itemId, idP]);
   }
 
   filtrar() {

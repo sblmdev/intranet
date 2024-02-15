@@ -19,6 +19,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class RecomendationFormComponent {
   id: number;
+  idPlan: number = 0;
   recomendation: Recomendation = new Recomendation();
   recomendationOld: Recomendation = new Recomendation();
   documents: DocumentRecomendation[] = [];
@@ -56,7 +57,8 @@ export class RecomendationFormComponent {
   }
 
   ngOnInit() {
-    this.id = Number(this.route.snapshot.paramMap.get('id') || '');
+    this.id = Number(this.route.snapshot.paramMap.get('idRec') || '');
+    this.idPlan = Number(this.route.snapshot.paramMap.get('idPlan') || '');
     this.clearData();
     this.usuario = this.appService.getUsuario();
   }
@@ -103,11 +105,12 @@ export class RecomendationFormComponent {
   guardar() {
     if(this.id == 0){
       let fechaHoy = new Date();
-          let año = fechaHoy.getFullYear();
-          let mes = (fechaHoy.getMonth() + 1).toString().padStart(2, '0');
-          let dia = fechaHoy.getDate().toString().padStart(2, '0');
-          let fechaHoyString = `${año}-${mes}-${dia}`;
-          this.recomendation.fechaCreación = fechaHoyString;
+      let año = fechaHoy.getFullYear();
+      let mes = (fechaHoy.getMonth() + 1).toString().padStart(2, '0');
+      let dia = fechaHoy.getDate().toString().padStart(2, '0');
+      let fechaHoyString = `${año}-${mes}-${dia}`;
+      this.recomendation.fechaCreación = fechaHoyString;
+      this.recomendation.idPlan = this.idPlan;
       this.recomendationService.addRecomendation(this.recomendation).subscribe({
         next: (data) => {
           this.toastr.success("Recomendación guardada correctamente", "Éxito");
@@ -318,7 +321,7 @@ export class RecomendationFormComponent {
     this.recomendation.unidadResponsable = '';
     for(let i = 0; i < this.unidadesSeleccionadas.length; i++) {
       if(i == 0){
-        
+
         this.recomendation.unidadResponsable = this.recomendation.unidadResponsable + this.unidadesSeleccionadas[i]
       }
       else{
