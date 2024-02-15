@@ -28,6 +28,18 @@ export class SidebarComponent {
     this.publicationService.obtenerPublicacionesPorTipo("Eventos").subscribe({
       next: (data) => {
         this.publicationsEventos = data;
+        let fechaHoy = new Date();
+        let año = fechaHoy.getFullYear();
+        let mes = (fechaHoy.getMonth() + 1).toString().padStart(2, '0');
+        let dia = fechaHoy.getDate().toString().padStart(2, '0');
+        let fechaHoyString = `${año}-${mes}-${dia}`;
+        const fechasPosteriores: Publication[] = [];
+        this.publicationsEventos.forEach((p) => {
+          if (p.fechaEvento > fechaHoyString) {
+            fechasPosteriores.push(p);
+          }
+        })
+        this.publicationsEventos = JSON.parse(JSON.stringify(fechasPosteriores));
       },
       error: (_error) => {
         console.log(_error);
