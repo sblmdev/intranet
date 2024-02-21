@@ -16,7 +16,7 @@ import { TypeTypePublicationService } from 'src/app/services/typePublication.ser
   styleUrls: ['./publication.component.css']
 })
 export class PublicationComponent {
-[x: string]: any;
+  [x: string]: any;
   nuevoFlag: boolean=false;
   portadaFlag: boolean=false;
   publicacion: Publication = new Publication();
@@ -55,6 +55,7 @@ export class PublicationComponent {
           next: (data) => {
             this.tipos = data;
             this.tipos = this.tipos.filter(t => t.accesos.toUpperCase().includes(usuario.dependencia));
+            this.tipos.sort((a, b) => a.nombreCompleto.localeCompare(b.nombreCompleto));
           },
           error: (e) => {
             console.log(e);

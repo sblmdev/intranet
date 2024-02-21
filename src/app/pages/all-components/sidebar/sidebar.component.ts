@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Publication } from 'src/app/models/publications';
+import { TypePublication } from 'src/app/models/typePublication';
 import { Usuario } from 'src/app/models/usuario';
 import { AppService } from 'src/app/services/app.service';
 import { PublicationService } from 'src/app/services/publication.service';
+import { TypeTypePublicationService } from 'src/app/services/typePublication.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -18,10 +20,15 @@ export class SidebarComponent {
 
   publicationsManuales: Publication[] = [];
   publicationsEventos: Publication[] = [];
+  tipos: TypePublication[] = [];
 
   usuario: Usuario = new Usuario();
 
-  constructor(private router: Router, private publicationService: PublicationService, private appService: AppService) {
+
+  constructor(private router: Router, 
+    private publicationService: PublicationService, 
+    private appService: AppService,
+    private typePublicationService: TypeTypePublicationService) {
   }
 
   ngOnInit() {
@@ -43,6 +50,16 @@ export class SidebarComponent {
       },
       error: (_error) => {
         console.log(_error);
+      }
+    });
+
+    this.typePublicationService.getTypePublications().subscribe({
+      next: (data) => {
+        this.tipos = data;
+        this.tipos.sort((a, b) => a.nombreCompleto.localeCompare(b.nombreCompleto));
+      },
+      error: (e) => {
+        console.log(e);
       }
     });
     
@@ -76,7 +93,7 @@ export class SidebarComponent {
     return this.valoresFlag
   }
 
-  abrirPublicaciones(): void {
+  goPublications(): void {
     this.router.navigate(['/publication']);
   }
 
@@ -94,6 +111,10 @@ export class SidebarComponent {
 
   goPlans() {
     this.router.navigate(['/plans']);
+  }
+
+  goRRHH() {
+    this.router.navigate(['/rrhh']);
   }
 
   goToNewsDetail(id: number) {

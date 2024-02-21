@@ -36,6 +36,7 @@ import { GalleryComponent } from '@daelmaak/ngx-gallery';
 import { ControlComponent } from './pages/control/control.component';
 import { RecomendationFormComponent } from './pages/recomendation-form/recomendation-form.component';
 import { InfoPlansComponent } from './pages/info-plans/info-plans.component';
+import { RrhhComponent } from './pages/rrhh/rrhh.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { InfoPlansComponent } from './pages/info-plans/info-plans.component';
     ControlComponent,
     RecomendationFormComponent,
     InfoPlansComponent,
+    RrhhComponent,
   ],
   imports: [
     CommonModule,

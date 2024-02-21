@@ -1,0 +1,570 @@
+<div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
+    <div class="flex items-center">
+        <div class="font-montserrat text-2xl font-bold">Unidades y Colaboradores</div>
+    </div>
+
+    <table class="w-full table-auto font-montserrat border mt-4">
+        <thead class="bg-indigo-800">
+            <tr class="text-white">
+                <th class="text-center">#</th>
+                <th class="text-center">Acrónimo</th>
+                <th class="text-left">Nombre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of padres; let i = index" class="odd:bg-white even:bg-blue-50">
+                <td class="text-center align-top">{{i + 1}}</td>
+                <td class="text-center align-top">{{item.abrUnidad}}</td>
+                <td class="align-top">
+                    {{item.nomUnidad}}
+                    <div *ngIf="unidadSelected == item.abrUnidad" class="py-2">
+                        <ul>
+                            <li title="Ver colaboradores de {{it.nomUnidad}}" class="cursor-pointer"
+                                *ngFor="let it of hijos" (click)="openCollaborators(it.abrUnidad)">- {{it.nomUnidad}}
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td class="align-top">
+                    <button class="px-2 py-2 bg-blue-200 rounded" (click)="showSubUnidades(item.abrUnidad)">
+                        <svg title="Ver Sub Unidades" *ngIf="item.abrUnidad != unidadSelected"
+                            xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 512 512">
+                            <path
+                                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+                        </svg>
+                        <svg title="Ocultar Sub Unidades" *ngIf="item.abrUnidad == unidadSelected"
+                            xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 512 512">
+                            <path
+                                d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="collaboratorsFlag" class="modal fixed inset-0 flex items-center justify-center z-10">
+    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+        <div class="modal-container font-montserrat bg-white w-10/12 h-auto p-4 rounded-xl shadow-lg ">
+            <div class="flex ">
+                <button
+                    class="ml-auto bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                    (click)="closeCollaborators()">X</button>
+            </div>
+
+            <div class="mx-8 mb-4">
+                <div class="flex mb-8">
+                    <div class="text-2xl mx-auto font-montserrat font-bold text-center underline">Colaboradorres -
+                        {{unidadHijoSelected}}</div>
+                </div>
+                <table class="w-full table-auto font-montserrat border mt-4">
+                    <thead class="bg-indigo-800">
+                        <tr class="text-white">
+                            <th class="text-center" width="5%">#</th>
+                            <th class="text-left">Nombre completo</th>
+                            <th class="text-center" width="5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let us of usuarios | paginate: { itemsPerPage: 20, currentPage: p }; let k = index"
+                            class="odd:bg-white even:bg-blue-50">
+                            <td class="text-center" width="5%">{{ (p ? (p - 1) * 20 : 0) + k + 1 }}</td>
+                            <td class="text-left">{{us.apellidos}}, {{us.nombres}}</td>
+                            <td class="text-center" width="5%">
+                                <button class="px-2 py-2 bg-blue-200 rounded" title="Editar información"
+                                    (click)="openInfo(us.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                        viewBox="0 0 512 512">
+                                        <path
+                                            d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="flex justify-center font-bold mt-6 font-montserrat ">
+                    <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior"
+                        nextLabel="Siguiente">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="infoFlag" class="modal fixed inset-0 flex items-center justify-center z-10">
+    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+        <div class="modal-container font-montserrat bg-white w-10/12 h-auto p-4 rounded-xl shadow-lg ">
+            <div class="flex ">
+                <button
+                    class="ml-auto bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                    (click)="closeInfo()">X</button>
+            </div>
+
+            <div class="mx-8 mb-4 font-montserrat">
+                <div class="flex mb-8">
+                    <div class="text-2xl mx-auto font-bold text-center underline">Información Personal
+                    </div>
+                </div>
+                <div class="w-full mx-auto">
+                    <div class="relative right-0">
+                        <ul class="relative flex flex-wrap list-none border-b-2 border-indigo-800" data-tabs="tabs" role="list">
+                            <li class="z-30 flex-auto text-center" (click)="selectInfo('Personal')" [class.bg-indigo-800]="infoSelected=='Personal'" [class.text-white]="infoSelected=='Personal'" [class.rounded-t-md]="infoSelected=='Personal'">
+                                <a class="z-30 flex items-center justify-center w-full px-0 py-2 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer  bg-inherit"
+                                    data-tab-target="" role="tab" aria-selected="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        aria-hidden="true" class="w-5 h-5">
+                                        <path fill-rule="evenodd"
+                                            d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="ml-1">Información Personal</span>
+                                </a>
+                            </li>
+                            <li class="z-30 flex-auto text-center" (click)="selectInfo('Familiar')" [class.bg-indigo-800]="infoSelected=='Familiar'" [class.text-white]="infoSelected=='Familiar'" [class.rounded-t-md]="infoSelected=='Familiar'">
+                                <a class="z-30 flex items-center justify-center w-full px-0 py-2 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer  bg-inherit"
+                                    data-tab-target="" active role="tab" aria-selected="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        aria-hidden="true" class="w-5 h-5">
+                                        <path
+                                            d="M11.644 1.59a.75.75 0 01.712 0l9.75 5.25a.75.75 0 010 1.32l-9.75 5.25a.75.75 0 01-.712 0l-9.75-5.25a.75.75 0 010-1.32l9.75-5.25z">
+                                        </path>
+                                        <path
+                                            d="M3.265 10.602l7.668 4.129a2.25 2.25 0 002.134 0l7.668-4.13 1.37.739a.75.75 0 010 1.32l-9.75 5.25a.75.75 0 01-.71 0l-9.75-5.25a.75.75 0 010-1.32l1.37-.738z">
+                                        </path>
+                                        <path
+                                            d="M10.933 19.231l-7.668-4.13-1.37.739a.75.75 0 000 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 000-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 01-2.134-.001z">
+                                        </path>
+                                    </svg>
+                                    <span class="ml-1">Información Familiar</span>
+                                </a>
+                            </li>
+                            <li class="z-30 flex-auto text-center" (click)="selectInfo('Profesional')" [class.bg-indigo-800]="infoSelected=='Profesional'" [class.text-white]="infoSelected=='Profesional'" [class.rounded-t-md]="infoSelected=='Profesional'">
+                                <a class="z-30 flex items-center justify-center w-full px-0 py-2 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer  bg-inherit"
+                                    data-tab-target="" role="tab" aria-selected="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        aria-hidden="true" class="w-5 h-5">
+                                        <path fill-rule="evenodd"
+                                            d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="ml-1">Información Profesional</span>
+                                </a>
+                            </li>
+                            <li class="z-30 flex-auto text-center" (click)="selectInfo('Laboral')" [class.bg-indigo-800]="infoSelected=='Laboral'" [class.text-white]="infoSelected=='Laboral'" [class.rounded-t-md]="infoSelected=='Laboral'">
+                                <a class="z-30 flex items-center justify-center w-full px-0 py-2 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer  bg-inherit"
+                                    data-tab-target="" role="tab" aria-selected="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        aria-hidden="true" class="w-5 h-5">
+                                        <path fill-rule="evenodd"
+                                            d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="ml-1">Experiencia Laboral</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div *ngIf="infoSelected == 'Personal'">
+                    
+                </div>
+                <div class="text-sm" *ngIf="infoSelected == 'Familiar'">
+                    <div class="mt-2">
+                        <h1 class="font-bold">Datos del Conyuge</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Nombre completo</th>
+                                    <th class="text-left">Fecha Nac.</th>
+                                    <th class="text-left">Sexo</th>
+                                    <th class="text-left">Ocupación</th>
+                                    <th class="text-left">Lugar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">12-12-1990</td>
+                                    <td class="text-left">M</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Sociedad de Beneficencia de Lima Metroolitana</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <h1 class="font-bold">Datos de los hijos</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Nombre completo</th>
+                                    <th class="text-left">Fecha Nac.</th>
+                                    <th class="text-left">Sexo</th>
+                                    <th class="text-left">Ocupación</th>
+                                    <th class="text-left">Lugar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">12-12-1990</td>
+                                    <td class="text-left">M</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Sociedad de Beneficencia de Lima Metroolitana</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">12-12-1990</td>
+                                    <td class="text-left">M</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Sociedad de Beneficencia de Lima Metroolitana</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <h1 class="font-bold">Datos de los padres/hermanos</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Nombre completo</th>
+                                    <th class="text-left">Fecha Nac.</th>
+                                    <th class="text-left">Sexo</th>
+                                    <th class="text-left">Ocupación</th>
+                                    <th class="text-left">Lugar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">12-12-1990</td>
+                                    <td class="text-left">M</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Sociedad de Beneficencia de Lima Metroolitana</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">12-12-1990</td>
+                                    <td class="text-left">M</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Sociedad de Beneficencia de Lima Metroolitana</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">12-12-1990</td>
+                                    <td class="text-left">M</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Sociedad de Beneficencia de Lima Metroolitana</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">12-12-1990</td>
+                                    <td class="text-left">M</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Sociedad de Beneficencia de Lima Metroolitana</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div *ngIf="infoSelected == 'Profesional'">
+                    <div class="mt-2">
+                        <h1 class="font-bold">Educación Básica</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Nivel</th>
+                                    <th class="text-left">Año inicio</th>
+                                    <th class="text-left">Año fin</th>
+                                    <th class="text-left">Centro de estudios</th>
+                                    <th class="text-left">Ciudad/País</th>
+                                    <th class="text-left">Completa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Primaria</td>
+                                    <td class="text-left">1990</td>
+                                    <td class="text-left">1995</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Secundaria</td>
+                                    <td class="text-left">1996</td>
+                                    <td class="text-left">1999</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <h1 class="font-bold">Educación Profesional</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Nivel</th>
+                                    <th class="text-left">Especialidad</th>
+                                    <th class="text-left">Año inicio</th>
+                                    <th class="text-left">Año fin</th>
+                                    <th class="text-left">Fecha grado</th>
+                                    <th class="text-left">Centro de estudios</th>
+                                    <th class="text-left">Ciudad/País</th>
+                                    <th class="text-left">Completa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Doctorado</td>
+                                    <td></td>
+                                    <td class="text-left">1990</td>
+                                    <td class="text-left">1995</td>
+                                    <td class="text-left">02-12-1995</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Maestría</td>
+                                    <td></td>
+                                    <td class="text-left">1990</td>
+                                    <td class="text-left">1995</td>
+                                    <td class="text-left">02-12-1995</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Título Profesional</td>
+                                    <td></td>
+                                    <td class="text-left">1990</td>
+                                    <td class="text-left">1995</td>
+                                    <td class="text-left">02-12-1995</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Bachiller</td>
+                                    <td></td>
+                                    <td class="text-left">1990</td>
+                                    <td class="text-left">1995</td>
+                                    <td class="text-left">02-12-1995</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Título Técnico</td>
+                                    <td></td>
+                                    <td class="text-left">1990</td>
+                                    <td class="text-left">1995</td>
+                                    <td class="text-left">02-12-1995</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Egresado</td>
+                                    <td></td>
+                                    <td class="text-left">1990</td>
+                                    <td class="text-left">1995</td>
+                                    <td class="text-left">02-12-1995</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <h1 class="font-bold">Diplomados, Cursos, Talleres, Seminarios</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Curso</th>
+                                    <th class="text-left">Tema</th>
+                                    <th class="text-left">Fecha Inicio</th>
+                                    <th class="text-left">Fecha fin</th>
+                                    <th class="text-left">Total horas</th>
+                                    <th class="text-left">Centro de estudios</th>
+                                    <th class="text-left">Ciudad/País</th>
+                                    <th class="text-left">Completa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Diplomado</td>
+                                    <td class="text-left">Tema</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">200</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Curso</td>
+                                    <td class="text-left">Tema</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">200</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Taller</td>
+                                    <td class="text-left">Tema</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">200</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Seminario</td>
+                                    <td class="text-left">Tema</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">11-12-1990</td>
+                                    <td class="text-left">200</td>
+                                    <td class="text-left">IE Cesar Vallejo 7049</td>
+                                    <td class="text-left">Lima/Chorrillos</td>
+                                    <td class="text-left">Sí</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div *ngIf="infoSelected == 'Laboral'">
+                    <div class="mt-2">
+                        <h1 class="font-bold">Empresas</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Fecha Inicio</th>
+                                    <th class="text-left">Fecha Cese</th>
+                                    <th class="text-left">Empresa</th>
+                                    <th class="text-left">cargo</th>
+                                    <th class="text-left">Motivo cese</th>
+                                    <th class="text-left">Nro. Teléfono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">10-12-2021</td>
+                                    <td class="text-left">12-01-2024</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Nueva oportunidad</td>
+                                    <td class="text-left">015411420</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">10-12-2021</td>
+                                    <td class="text-left">12-01-2024</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Nueva oportunidad</td>
+                                    <td class="text-left">015411420</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">10-12-2021</td>
+                                    <td class="text-left">12-01-2024</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Nueva oportunidad</td>
+                                    <td class="text-left">015411420</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">10-12-2021</td>
+                                    <td class="text-left">12-01-2024</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">Ingeniero de Sistemas</td>
+                                    <td class="text-left">Nueva oportunidad</td>
+                                    <td class="text-left">015411420</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <h1 class="font-bold">Referencias Laboral</h1>
+                        <table class="w-full">
+                            <thead class="bg-gray-500">
+                                <tr class="text-white">
+                                    <th class="text-center" width="5%">#</th>
+                                    <th class="text-left">Nombre completo</th>
+                                    <th class="text-left">Empresa</th>
+                                    <th class="text-left">Nro. Teléfono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">999999999</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">999999999</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">999999999</td>
+                                </tr>
+                                <tr class="odd:bg-white even:bg-blue-50">
+                                    <td class="text-center" width="5%">1</td>
+                                    <td class="text-left">Roger Davy Caichihua Vergara</td>
+                                    <td class="text-left">Interbank</td>
+                                    <td class="text-left">999999999</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

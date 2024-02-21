@@ -5,14 +5,21 @@
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2 select-none">Administración</div>
     <ul class=" py-2 list-disc list-inside">
       <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('2'))">Cementerios
+      </li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.accesos.includes('3'))">Planes de acción
+      </li>
+      <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none"
-        (click)="abrirPublicaciones()" *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('1'))">Publicaciones</li>
+        (click)="goPublications()" *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('1'))">Publicaciones
+      </li>
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
-        *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('2'))">Cementerios</li>
-      <li
-        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
-        (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.accesos.includes('3'))">Planes de acción</li>
+        (click)="goRRHH()" *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('4'))">Recursos Humanos
+      </li>
     </ul>
   </div>
 
@@ -43,13 +50,20 @@
     <div class="bg-indigo-900 text-white font-bold font-montserrat px-4 py-2 select-none">Información Institucional
     </div>
     <ul class="py-2 list-disc list-inside">
-      <!--<li class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "><a href="http://192.168.1.6/media/Generales/RP%20N%c2%b0%20057-2002-P-SBLM%20MOF%20SBLM%202002.pdf" target="_blank">M.O.F.</a></li>-->
+      <!--<li *ngFor="let tipo of tipos"
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments(tipo.nombre)">
+        {{tipo.nombre}}
+      </li>-->
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
         (click)="goDocuments('Acuerdos')">Acuerdos</li>
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
         (click)="goDocuments('Códigos')">Códigos</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Comités')">Comités</li>
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
         (click)="goDocuments('Directivas')">Directivas</li>
@@ -62,6 +76,9 @@
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
         (click)="goDocuments('Manuales')">Manuales</li>
+        <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
+        (click)="goDocuments('Memorias')">Memorias Anuales</li>
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
         (click)="goDocuments('Planes')">Planes de Gestión</li>
@@ -72,9 +89,6 @@
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
         (click)="goDocuments('Políticas')">Políticas</li>
       <li
-        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
-        (click)="goDocuments('Presentaciones')">Presentaciones</li>
-      <li
              class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
         (click)="goDocuments('Procedimientos')">Procedimientos</li>
       <li
@@ -83,6 +97,9 @@
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100  select-none"
         (click)="goDocuments('Resoluciones')">Resoluciones</li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goDocuments('Transformación')">Transformación Digital</li>
     </ul>
   </div>
 

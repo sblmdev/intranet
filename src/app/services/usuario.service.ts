@@ -15,6 +15,16 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.baseUrl);
   }
 
+  obtenerTodosUsuariosPorUnidad(abrUnidad: string): Observable<Usuario[]> {
+    const url = `${this.baseUrl}/getByDependencia/${abrUnidad}`;
+    return this.http.get<Usuario[]>(url);
+  }
+
+  obtenerTodosUsuariosPorUnidadHijo(abrUnidad: string): Observable<Usuario[]> {
+    const url = `${this.baseUrl}/getByDependenciaHijo/${abrUnidad}`;
+    return this.http.get<Usuario[]>(url);
+  }
+
   obtenerUsuarioPorId(id: number): Observable<Usuario> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<Usuario>(url);
