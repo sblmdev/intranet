@@ -11,8 +11,8 @@ export class DocumentRecomendationService {
 
   constructor(private http: HttpClient) {}
 
-  getDocumentsByIdRecomendacion(id: number): Observable<DocumentRecomendation[]> {
-    return this.http.get<DocumentRecomendation[]>(`${this.apiUrl}/${id}`);
+  getDocumentsByIdNumero(numero: number, idPlan: number): Observable<DocumentRecomendation[]> {
+    return this.http.get<DocumentRecomendation[]>(`${this.apiUrl}/${numero}/${idPlan}`);
   }
 
 }

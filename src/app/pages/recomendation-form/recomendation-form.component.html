@@ -97,7 +97,7 @@
             <div class="flex items-center">
                 <label for="medio" class="text-lg font-montserrat block font-bold">Medio:</label>
                 <button class="ml-2 p-1 border border-2 border-indigo-800 rounded"
-                    *ngIf="usuario.tipo == 1 || recomendation.dniResponsable.includes(usuario.dni)"
+                    *ngIf="id != 0 && (usuario.tipo == 1 || recomendation.dniResponsable.includes(usuario.dni))"
                     title="Agregar documento de sustento" (click)="openInfo()">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                         <path
@@ -112,7 +112,7 @@
         <div class="mb-6">
             <div class="flex items-center">
                 <label for="medio" class="text-lg font-montserrat block font-bold">Documentos de sustento:</label>
-                <button class="ml-2 p-1 border border-2 border-indigo-800 rounded" *ngIf="usuario.tipo == 1 || recomendation.dniResponsable.includes(usuario.dni)"
+                <button class="ml-2 p-1 border border-2 border-indigo-800 rounded" *ngIf="id != 0 && (usuario.tipo == 1 || recomendation.dniResponsable.includes(usuario.dni))"
                     title="Agregar documento de sustento" (click)="openNewDocument()">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                         <path

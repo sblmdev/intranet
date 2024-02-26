@@ -19,6 +19,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class RecomendationFormComponent {
   id: number;
+  recomendationNumber: number;
+  recomendationIdPlan: number;
   idPlan: number = 0;
   recomendation: Recomendation = new Recomendation();
   recomendationOld: Recomendation = new Recomendation();
@@ -54,6 +56,8 @@ export class RecomendationFormComponent {
     private usuarioService: UsuarioService,
     private unidadService: UnidadService) {
     this.id = 0;
+    this.recomendationNumber = 0;
+    this.recomendationIdPlan = 0;
   }
 
   ngOnInit() {
@@ -76,6 +80,8 @@ export class RecomendationFormComponent {
                 next: (data) => {
                   this.recomendation = JSON.parse(JSON.stringify(data));
                   this.recomendationOld = JSON.parse(JSON.stringify(data));
+                  this.recomendationNumber = this.recomendation.numero;
+                  this.recomendationIdPlan = this.recomendation.idPlan;
                   let array = this.recomendation.dniResponsable.split("/");
                   for(let j = 0; j < array.length; j++){  
                     let us = this.usuarios.find(n => n.dni ==  array[j]);
@@ -83,12 +89,12 @@ export class RecomendationFormComponent {
                       this.usuariosSeleccionados.push(us);
                     }
                   }
+                  this.getDocuments();
                 },
                 error: (e) => {
                   console.log(e);
                 }
               });
-              this.getDocuments();
             }
           },
           error: (e) => {
@@ -169,7 +175,7 @@ export class RecomendationFormComponent {
     if(this.fechaDoc.length != 0 && this.files.length != 0){
       for(let i = 0; i < this.files.length; i++){
         if (this.files[i]) {
-          this.fileService.uploadFileRecomendation(this.files[i], "Recomendacion", this.id, this.fechaDoc).subscribe({
+          this.fileService.uploadFileRecomendation(this.files[i], "Recomendacion", this.recomendationNumber, this.recomendationIdPlan, this.fechaDoc).subscribe({
             next: (data: string) => {
               this.contador++;
               if(this.contador == this.files.length){
@@ -195,9 +201,10 @@ export class RecomendationFormComponent {
   }
 
   getDocuments() {
-    this.documentRecomendacionService.getDocumentsByIdRecomendacion(this.id).subscribe({
+    this.documentRecomendacionService.getDocumentsByIdNumero(this.recomendationNumber, this.recomendationIdPlan).subscribe({
       next: (dataDoc) => {
         this.documents = dataDoc;
+        console.log(this.documents);
       },
       error: (_e) => {
         console.log(_e);

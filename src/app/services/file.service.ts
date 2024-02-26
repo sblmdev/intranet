@@ -17,10 +17,10 @@ export class FileService {
     return this.http.post<string>(`${this.baseUrl}/api/files/publication/${tipo}/${idPublicacion}`, formData, { headers });
   }
 
-  uploadFileRecomendation(file: File, tipo: string, idRecomendation: number, fecha: string): Observable<string> {
+  uploadFileRecomendation(file: File, tipo: string, numero: number, idPlan: number, fecha: string): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
     const headers = new HttpHeaders();
-    return this.http.post<string>(`${this.baseUrl}/api/files/recomendation/${tipo}/${idRecomendation}/${fecha}`, formData, { headers });
+    return this.http.post<string>(`${this.baseUrl}/api/files/recomendation/${tipo}/${numero}/${idPlan}/${fecha}`, formData, { headers });
   }
 }
