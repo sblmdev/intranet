@@ -1,0 +1,32 @@
+<div class="container mx-auto w-full h-full bg-white px-4 pt-4 pb-8">
+    <div class="flex items-center">
+      <div class="font-montserrat text-2xl font-bold">Buzón de Sugerencias</div>
+    </div>
+  
+    <table class="w-full table-auto font-montserrat border mt-4">
+      <thead class="bg-indigo-800">
+        <tr class="text-white">
+          <th class="text-center">#</th>
+          <th class="text-center">Fecha</th>
+          <th class="text-left">Usuario</th>
+          <th class="text-left">Unidad</th>
+          <th class="text-left">Contenido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of suggestions | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+          class="odd:bg-white even:bg-blue-50">
+          <td class="text-center" width="4%">{{ (p ? (p - 1) * 10 : 0) + i + 1 }}</td>
+          <td class="text-center" width="10%">{{ item.fecha.substring(8,10) }}-{{item.fecha.substring(5,7) }}-{{item.fecha.substring(0,4) }}</td>
+          <td class="text-left" width="25%">{{ item.usuario }}</td>
+          <td class="text-left" width="30%">{{ item.gerencia }}</td>
+          <td class="text-left">{{ item.contenido }}</td>
+        </tr>
+      </tbody>
+  
+    </table>
+    <div class="flex justify-center font-bold mt-6 font-montserrat ">
+      <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
+    </div>
+  </div>

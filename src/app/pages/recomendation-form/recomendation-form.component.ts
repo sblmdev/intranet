@@ -200,6 +200,19 @@ export class RecomendationFormComponent {
     }
   }
 
+  deleteDocument(document: DocumentRecomendation){
+    this.documentRecomendacionService.deleteDocument(document.id).subscribe({
+      next: (data) => {
+        this.toastr.success('Documento eliminado correctamente', 'Éxito');
+        this.getDocuments();
+      },
+      error: (e) => {
+        this.toastr.error('Error al eliminar el documento', 'Error');
+        console.log(e);
+      }
+    });
+  }
+
   getDocuments() {
     this.documentRecomendacionService.getDocumentsByIdNumero(this.recomendationNumber, this.recomendationIdPlan).subscribe({
       next: (dataDoc) => {

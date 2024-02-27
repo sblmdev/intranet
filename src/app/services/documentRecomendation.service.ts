@@ -15,4 +15,9 @@ export class DocumentRecomendationService {
     return this.http.get<DocumentRecomendation[]>(`${this.apiUrl}/${numero}/${idPlan}`);
   }
 
+  deleteDocument(id: number): Observable<void> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url);
+  }
+
 }

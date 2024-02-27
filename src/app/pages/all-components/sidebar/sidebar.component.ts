@@ -117,6 +117,10 @@ export class SidebarComponent {
     this.router.navigate(['/rrhh']);
   }
 
+  goSuggestions() {
+    this.router.navigate(['/suggestions']);
+  }
+
   goToNewsDetail(id: number) {
     this.router.navigate([`/new/${id}`]);
   }

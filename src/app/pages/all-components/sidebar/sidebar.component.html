@@ -6,6 +6,10 @@
     <ul class=" py-2 list-disc list-inside">
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goSuggestions()" *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('5'))">Buzón de sugerencias
+      </li>
+      <li
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
         *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('2'))">Cementerios
       </li>
       <li

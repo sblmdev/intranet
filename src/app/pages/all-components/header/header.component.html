@@ -1,6 +1,7 @@
 <div class="w-full">
     <div class="flex items-center mx-20 my-4">
-        <img src="https://www.beneficenciadelima.org/public/images/logo.png" class="h-12 w-auto cursor-pointer" (click)="goHome()">
+        <img src="https://www.beneficenciadelima.org/public/images/logo.png" class="h-12 w-auto cursor-pointer"
+            (click)="goHome()">
         <!--<svg class="ml-auto cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="1.2em"
             viewBox="0 0 448 512">
             <path
@@ -11,12 +12,71 @@
             <h1 class="text-sm font-semibold font-montserrat">{{usuario.nombres}}</h1>
             <h1 class="text-xs ">{{usuario.dependencia}}</h1>
         </div>
+        <div title="Buzón de sugerencias" (click)="openModal()">
+            <svg class="ml-4 cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="20" width="24"
+                viewBox="0 0 512 512">
+                <path
+                    d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+            </svg>
+        </div>
+
         <div title="Cerrar sessión" (click)="cerrarSesion()">
-            <svg class="ml-4 cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="16" width="16"
-            viewBox="0 0 512 512">
-            <path
-                d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V256c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM143.5 120.6c13.6-11.3 15.4-31.5 4.1-45.1s-31.5-15.4-45.1-4.1C49.7 115.4 16 181.8 16 256c0 132.5 107.5 240 240 240s240-107.5 240-240c0-74.2-33.8-140.6-86.6-184.6c-13.6-11.3-33.8-9.4-45.1 4.1s-9.4 33.8 4.1 45.1c38.9 32.3 63.5 81 63.5 135.4c0 97.2-78.8 176-176 176s-176-78.8-176-176c0-54.4 24.7-103.1 63.5-135.4z" />
-        </svg>
+            <svg class="ml-4 cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="20" width="20"
+                viewBox="0 0 512 512">
+                <path
+                    d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V256c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM143.5 120.6c13.6-11.3 15.4-31.5 4.1-45.1s-31.5-15.4-45.1-4.1C49.7 115.4 16 181.8 16 256c0 132.5 107.5 240 240 240s240-107.5 240-240c0-74.2-33.8-140.6-86.6-184.6c-13.6-11.3-33.8-9.4-45.1 4.1s-9.4 33.8 4.1 45.1c38.9 32.3 63.5 81 63.5 135.4c0 97.2-78.8 176-176 176s-176-78.8-176-176c0-54.4 24.7-103.1 63.5-135.4z" />
+            </svg>
         </div>
     </div>
 </div>
+
+
+<div *ngIf="flag" class="modal fixed inset-0 flex items-center justify-center z-10">
+    <div class="fixed left-0 top-0 bg-black bg-opacity-60 w-full h-full select-none justify-center items-center flex">
+      <div class="modal-container font-montserrat bg-white w-3/5 h-auto p-4 rounded-xl shadow-lg ">
+        <!-- pointer-events-auto overflow-auto -->
+        <div class="flex ">
+          <button
+            class="ml-auto bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+            (click)="closeModal()">X</button>
+        </div>
+  
+  
+        <div class="mx-8 mb-4">
+          <div class="flex mb-8">
+            <div class="text-2xl mx-auto font-montserrat font-bold text-center underline">Déjanos tu sugerencia</div>
+  
+          </div>
+          <form>
+            <div class="mb-4">
+              <label for="usuario" class="text-lg font-montserrat block font-bold">Usuario:</label>
+              <input type="text" id="usuario" name="usuario" class="mt-1 p-2 h-10 border rounded-md w-full"
+                [disabled]="true" [(ngModel)]="sugerencia.usuario">
+            </div>
+
+            <div class="mb-4">
+                <label for="gerencia" class="text-lg font-montserrat block font-bold">Unidad:</label>
+                <input type="text" id="gerencia" name="gerencia" class="mt-1 p-2 h-10 border rounded-md w-full"
+                  [disabled]="true" [(ngModel)]="sugerencia.gerencia">
+            </div>
+
+            <div class="mb-4">
+                <label for="contenido" class="text-lg font-montserrat block font-bold">contenido:</label>
+                <textarea type="text" id="contenido" name="contenido" class="mt-1 p-2 border rounded-md w-full"
+                  [required]="true" [(ngModel)]="sugerencia.contenido" rows="6" maxlength="999">
+                </textarea>
+            </div>
+  
+            <div>
+              <button
+                class="bg-indigo-900 text-white rounded-md ml-auto px-12 py-2 text-base font-bold hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-green-300"
+                (click)="save()">
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

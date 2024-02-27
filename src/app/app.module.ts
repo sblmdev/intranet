@@ -37,6 +37,7 @@ import { ControlComponent } from './pages/control/control.component';
 import { RecomendationFormComponent } from './pages/recomendation-form/recomendation-form.component';
 import { InfoPlansComponent } from './pages/info-plans/info-plans.component';
 import { RrhhComponent } from './pages/rrhh/rrhh.component';
+import { SuggestionsComponent } from './pages/suggestions/suggestions.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { RrhhComponent } from './pages/rrhh/rrhh.component';
     RecomendationFormComponent,
     InfoPlansComponent,
     RrhhComponent,
+    SuggestionsComponent,
   ],
   imports: [
     CommonModule,
