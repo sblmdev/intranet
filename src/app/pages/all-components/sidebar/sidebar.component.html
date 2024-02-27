@@ -13,12 +13,12 @@
         *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('2'))">Cementerios
       </li>
       <li
-        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
-        (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.accesos.includes('3'))">Planes de acción
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none"
+        (click)="goPublications()" *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('1'))">Comunicación Interna
       </li>
       <li
-        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none"
-        (click)="goPublications()" *ngIf="(usuario.tipo == 1 || usuario.accesos.includes('1'))">Publicaciones
+        class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
+        (click)="goPlans()" *ngIf="(usuario.tipo == 1 || usuario.tipo == 2 || usuario.tipo == 3 || usuario.accesos.includes('3'))">Planes de acción
       </li>
       <li
         class="font-montserrat cursor-pointer py-1 px-4 transition duration-200 ease-in-out  hover:text-blue-700 hover:bg-blue-100 select-none "
